@@ -59,3 +59,6 @@ exports.time = (string) => {
     return chalk.yellow(`${string}`)
 }
 
+exports.err = (string) => {
+    return console.log(chalk.red('[ERROR]'),`${string}`) 
+}
