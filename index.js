@@ -8,7 +8,7 @@ const HandleMsg = require("./HandleMsg");
 const { cacheMessage, groupLimit, botName} = require("./bot-setting.json"); //! Bot Setting
 const {infoFeedback,infoProblem} = require('./msg/msg-temp') //! Massage Template
 
-const start = (bocilClient = new Client()) => {
+const start = (aruga = new Client()) => {
 
   console.log(
     gradient.instagram(
@@ -23,41 +23,41 @@ const start = (bocilClient = new Client()) => {
   console.log(style.bot("I'm ready for my Jobs"));
 
   //!Mempertahankan sesi agar tetap nyala
-  bocilClient.onStateChanged((state) => {
+  aruga.onStateChanged((state) => {
     console.log(style.warn(state));
     if (state === "CONFLICT" || state === "UNLAUNCHED")
-      bocilClient.forceRefocus();
+      aruga.forceRefocus();
   });
 
   // ketika bot diinvite ke dalam group
-  bocilClient.onAddedToGroup(async (chat) => {
-    const groups = await bocilClient.getAllGroups();
+  aruga.onAddedToGroup(async (chat) => {
+    const groups = await aruga.getAllGroups();
     // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
     if (groups.length > groupLimit) {
-      await bocilClient
+      await aruga
         .sendText(
           chat.id,
           `Maaf, saat ini ${botName} mencapai batas maksimum.\nMaksimal grup : ${groupLimit} ` + infoProblem
         )
         .then(() => {
-          bocilClient.leaveGroup(chat.id);
-          bocilClient.deleteChat(chat.id);
+          aruga.leaveGroup(chat.id);
+          aruga.deleteChat(chat.id);
         });
     } else {
       // kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
       if (chat.groupMetadata.participants.length < memberLimit) {
-        await bocilClient
+        await aruga
           .sendText(
             chat.id,
             `Maaf, ${botName} hanya bisa masuk grup yang mempunyai anggota lebih dari ${memberLimit} anggota` + infoProblem
           )
           .then(() => {
-            bocilClient.leaveGroup(chat.id);
-            bocilClient.deleteChat(chat.id);
+            aruga.leaveGroup(chat.id);
+            aruga.deleteChat(chat.id);
           });
       } else {
-        await bocilClient.simulateTyping(chat.id, true).then(async () => {
-          await bocilClient.sendText(
+        await aruga.simulateTyping(chat.id, true).then(async () => {
+          await aruga.sendText(
             chat.id,
             `Hai member ${groupName},  perkenalkan aku *${botName}*\nUntuk melihat perintah pada ketik ${prefix}menu 😘`
           );
@@ -67,11 +67,11 @@ const start = (bocilClient = new Client()) => {
   });
 
   // ketika seseorang masuk/keluar dari group
-  bocilClient.onGlobalParicipantsChanged(async (event) => {
-    const host = (await bocilClient.getHostNumber()) + "@c.us";
+  aruga.onGlobalParicipantsChanged(async (event) => {
+    const host = (await aruga.getHostNumber()) + "@c.us";
     // kondisi ketika seseorang diinvite/join group lewat link
     if (event.action === "add" && event.who !== host) {
-      await bocilClient.sendTextWithMentions(
+      await aruga.sendTextWithMentions(
         event.chat,
         `Hai ${event.who.replace(
           "@c.us",
@@ -81,48 +81,48 @@ const start = (bocilClient = new Client()) => {
     }
     // kondisi ketika seseorang dikick/keluar dari group
     if (event.action === "remove" && event.who !== host) {
-      await bocilClient.sendTextWithMentions(
+      await aruga.sendTextWithMentions(
         event.chat,
         `Jangan rindu @${event.who.replace("@c.us", "")}, Semoga tenang`
       );
     }
   });
 
-  bocilClient.onIncomingCall(async (callData) => {
+  aruga.onIncomingCall(async (callData) => {
     // ketika seseorang menelpon nomor bot akan mengirim pesan
-    await bocilClient
+    await aruga
       .sendText(
         callData.peerJid,
         `Dilarang Keras Menelepon hukuman block.` + infoProblem
       )
       .then(async () => {
         // bot akan memblock nomor itu
-        await bocilClient.contactBlock(callData.peerJid);
+        await aruga.contactBlock(callData.peerJid);
       });
   });
 
   // ketika seseorang mengirim pesan
-  bocilClient.onMessage(async (message) => {
-    bocilClient
+  aruga.onMessage(async (message) => {
+    aruga
       .getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
       .then((msg) => {
         if (msg >= cacheMessage) {
           console.log(
             style.bot(`Loaded Message reach ${msg}, deleting message cache...`),
           );
-          bocilClient.cutMsgCache();
+          aruga.cutMsgCache();
         }
       });
-    HandleMsg(bocilClient, message);
+    HandleMsg(aruga, message);
   });
 
   // Message log for analytic
-  bocilClient.onAnyMessage((anal) => {
+  aruga.onAnyMessage((anal) => {
     messageLog(anal.fromMe, anal.type);
   });
 };
 
 //create session
 create(options(true, start))
-  .then((bocilClient) => start(bocilClient))
+  .then((aruga) => start(aruga))
   .catch((err) => new Error(err));
