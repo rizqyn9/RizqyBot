@@ -1,37 +1,57 @@
 "use strict";
 
-var _require = require('@open-wa/wa-automate'),
+var _require = require("@open-wa/wa-automate"),
     create = _require.create,
     Client = _require.Client;
 
-var figlet = require('figlet');
+var figlet = require("figlet");
 
-var options = require('./utils/options');
+var gradient = require("gradient-string");
 
-var _require2 = require('./utils'),
+var style = require("./custom/console");
+
+var options = require("./utils/options");
+
+var _require2 = require("./utils"),
     color = _require2.color,
     messageLog = _require2.messageLog;
 
-var HandleMsg = require('./HandleMsg');
+var HandleMsg = require("./HandleMsg");
+
+var _require3 = require("./bot-setting.json"),
+    cacheMessage = _require3.cacheMessage,
+    groupLimit = _require3.groupLimit,
+    botName = _require3.botName; //! Bot Setting
+
+
+var _require4 = require('./msg/msg-temp'),
+    infoFeedback = _require4.infoFeedback,
+    infoProblem = _require4.infoProblem; //! Massage Template
+
 
 var start = function start() {
-  var RClient = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Client();
-  console.log(color('[DEV]'), color('RClientZ', 'yellow'));
-  console.log(color('[~>>]'), color('BOT Started!', 'green')); // Mempertahankan sesi agar tetap nyala
+  var bocilClient = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Client();
+  console.log(gradient.instagram(figlet.textSync("RIZQY\nSTUDIO", {
+    font: "Epic",
+    horizontalLayout: "default"
+  })));
+  console.log(style.dev("Made by R-Dev Studio"));
+  console.log(style.bot("Have a nice day Rizqy :)"));
+  console.log(style.bot("I'm ready for my Jobs")); //!Mempertahankan sesi agar tetap nyala
 
-  RClient.onStateChanged(function (state) {
-    console.log(color('[~>>]', 'red'), state);
-    if (state === 'CONFLICT' || state === 'UNLAUNCHED') RClient.forceRefocus();
+  bocilClient.onStateChanged(function (state) {
+    console.log(style.warn(state));
+    if (state === "CONFLICT" || state === "UNLAUNCHED") bocilClient.forceRefocus();
   }); // ketika bot diinvite ke dalam group
 
-  RClient.onAddedToGroup(function _callee2(chat) {
+  bocilClient.onAddedToGroup(function _callee2(chat) {
     var groups;
     return regeneratorRuntime.async(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return regeneratorRuntime.awrap(RClient.getAllGroups());
+            return regeneratorRuntime.awrap(bocilClient.getAllGroups());
 
           case 2:
             groups = _context2.sent;
@@ -42,9 +62,9 @@ var start = function start() {
             }
 
             _context2.next = 6;
-            return regeneratorRuntime.awrap(RClient.sendText(chat.id, "Sorry, the group on this bot is full\nMax Group is: ".concat(groupLimit)).then(function () {
-              RClient.leaveGroup(chat.id);
-              RClient.deleteChat(chat.id);
+            return regeneratorRuntime.awrap(bocilClient.sendText(chat.id, "Maaf, saat ini ".concat(botName, " mencapai batas maksimum.\nMaksimal grup : ").concat(groupLimit, " ") + infoProblem).then(function () {
+              bocilClient.leaveGroup(chat.id);
+              bocilClient.deleteChat(chat.id);
             }));
 
           case 6:
@@ -58,9 +78,9 @@ var start = function start() {
             }
 
             _context2.next = 11;
-            return regeneratorRuntime.awrap(RClient.sendText(chat.id, "Sorry, BOT comes out if the group members do not exceed ".concat(memberLimit, " people")).then(function () {
-              RClient.leaveGroup(chat.id);
-              RClient.deleteChat(chat.id);
+            return regeneratorRuntime.awrap(bocilClient.sendText(chat.id, "Maaf, ".concat(botName, " hanya bisa masuk grup yang mempunyai anggota lebih dari ").concat(memberLimit, " anggota") + infoProblem).then(function () {
+              bocilClient.leaveGroup(chat.id);
+              bocilClient.deleteChat(chat.id);
             }));
 
           case 11:
@@ -69,13 +89,13 @@ var start = function start() {
 
           case 13:
             _context2.next = 15;
-            return regeneratorRuntime.awrap(RClient.simulateTyping(chat.id, true).then(function _callee() {
+            return regeneratorRuntime.awrap(bocilClient.simulateTyping(chat.id, true).then(function _callee() {
               return regeneratorRuntime.async(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
                       _context.next = 2;
-                      return regeneratorRuntime.awrap(RClient.sendText(chat.id, "Hai minna~, Im RClient BOT. To find out the commands on this bot type ".concat(prefix, "menu")));
+                      return regeneratorRuntime.awrap(bocilClient.sendText(chat.id, "Hai member ".concat(groupName, ",  perkenalkan aku *").concat(botName, "*\nUntuk melihat perintah pada ketik ").concat(prefix, "menu \uD83D\uDE18")));
 
                     case 2:
                     case "end":
@@ -93,35 +113,35 @@ var start = function start() {
     });
   }); // ketika seseorang masuk/keluar dari group
 
-  RClient.onGlobalParicipantsChanged(function _callee3(event) {
+  bocilClient.onGlobalParicipantsChanged(function _callee3(event) {
     var host;
     return regeneratorRuntime.async(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return regeneratorRuntime.awrap(RClient.getHostNumber());
+            return regeneratorRuntime.awrap(bocilClient.getHostNumber());
 
           case 2:
             _context3.t0 = _context3.sent;
-            host = _context3.t0 + '@c.us';
+            host = _context3.t0 + "@c.us";
 
-            if (!(event.action === 'add' && event.who !== host)) {
+            if (!(event.action === "add" && event.who !== host)) {
               _context3.next = 7;
               break;
             }
 
             _context3.next = 7;
-            return regeneratorRuntime.awrap(RClient.sendTextWithMentions(event.chat, "Hello, Welcome to the group @".concat(event.who.replace('@c.us', ''), " \n\nHave fun with us\u2728")));
+            return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(event.chat, "Hai ".concat(event.who.replace("@c.us", ""), ", Selamat datang digrup.\n Semoga nyaman \uD83E\uDD70 \n*-").concat(botName, "*")));
 
           case 7:
-            if (!(event.action === 'remove' && event.who !== host)) {
+            if (!(event.action === "remove" && event.who !== host)) {
               _context3.next = 10;
               break;
             }
 
             _context3.next = 10;
-            return regeneratorRuntime.awrap(RClient.sendTextWithMentions(event.chat, "Good bye @".concat(event.who.replace('@c.us', ''), ", We'll miss you\u2728")));
+            return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(event.chat, "Jangan rindu @".concat(event.who.replace("@c.us", ""), ", Semoga tenang")));
 
           case 10:
           case "end":
@@ -130,19 +150,19 @@ var start = function start() {
       }
     });
   });
-  RClient.onIncomingCall(function _callee5(callData) {
+  bocilClient.onIncomingCall(function _callee5(callData) {
     return regeneratorRuntime.async(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return regeneratorRuntime.awrap(RClient.sendText(callData.peerJid, 'Maaf sedang tidak bisa menerima panggilan.\n\n-bot').then(function _callee4() {
+            return regeneratorRuntime.awrap(bocilClient.sendText(callData.peerJid, "Dilarang Keras Menelepon hukuman block." + infoProblem).then(function _callee4() {
               return regeneratorRuntime.async(function _callee4$(_context4) {
                 while (1) {
                   switch (_context4.prev = _context4.next) {
                     case 0:
                       _context4.next = 2;
-                      return regeneratorRuntime.awrap(RClient.contactBlock(callData.peerJid));
+                      return regeneratorRuntime.awrap(bocilClient.contactBlock(callData.peerJid));
 
                     case 2:
                     case "end":
@@ -160,19 +180,19 @@ var start = function start() {
     });
   }); // ketika seseorang mengirim pesan
 
-  RClient.onMessage(function _callee6(message) {
+  bocilClient.onMessage(function _callee6(message) {
     return regeneratorRuntime.async(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            RClient.getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
+            bocilClient.getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
             .then(function (msg) {
-              if (msg >= 3000) {
-                console.log('[RClient]', color("Loaded Message Reach ".concat(msg, ", cuting message cache..."), 'yellow'));
-                RClient.cutMsgCache();
+              if (msg >= cacheMessage) {
+                console.log(style.bot("Loaded Message reach ".concat(msg, ", deleting message cache...")));
+                bocilClient.cutMsgCache();
               }
             });
-            HandleMsg(RClient, message);
+            HandleMsg(bocilClient, message);
 
           case 2:
           case "end":
@@ -182,14 +202,14 @@ var start = function start() {
     });
   }); // Message log for analytic
 
-  RClient.onAnyMessage(function (anal) {
+  bocilClient.onAnyMessage(function (anal) {
     messageLog(anal.fromMe, anal.type);
   });
 }; //create session
 
 
-create(options(true, start)).then(function (RClient) {
-  return start(RClient);
+create(options(true, start)).then(function (bocilClient) {
+  return start(bocilClient);
 })["catch"](function (err) {
   return new Error(err);
 });

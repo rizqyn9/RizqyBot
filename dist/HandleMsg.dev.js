@@ -79,13 +79,7 @@ var _require7 = require('./bot-setting.json'),
     memberLimit = _require7.memberLimit,
     groupLimit = _require7.groupLimit,
     prefix = _require7.prefix,
-    waFeed = _require7.waFeed; // ? Style console
-
-
-var style = require('./custom/console');
-
-var _require8 = require('./msg/msg-temp'),
-    infoProblem = _require8.infoProblem; // const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
+    waFeed = _require7.waFeed; // const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
 // let { 
 //     ownerNumber, 
 //     groupLimit, 
@@ -115,8 +109,8 @@ var inArray = function inArray(needle, haystack) {
   return false;
 };
 
-module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
-  var type, id, from, t, sender, isGroupMsg, chat, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList, body, name, formattedTitle, pushname, verifiedName, formattedName, botNumber, groupId, groupAdmins, isGroupAdmins, chats, pengirim, isBotGroupAdmins, command, arg, args, argx, isCmd, uaOverride, url, isQuotedImage, isQuotedVideo, isOwnerBot, isBanned, isSimi, isNgegas, isKasar, timeFormat, linkgrup, islink, chekgrup, cgrup, loadedMsg, chatIds, groups, encryptMedia, _mimetype, _mediaData, _imageBase, mediaData, imageBase64, base64img, outFile, result, filename, isGiphy, isMediaGiphy, getGiphyCode, giphyCode, smallGifUrl, gifUrl, _smallGifUrl, top, bottom, _encryptMedia, _mediaData2, getUrl, ImageBase64, qmaker, quotes, author, theme, hasilqmaker, nulisq, nulisp, responseh, data, idx, pesan, responseh2, last, responsh, responsih, surah, responsih2, _responsih2$data, name_translations, number_of_ayah, number_of_surah, recitations, solatx, solatj, daerahq, instag, quotex, randmeme, cariwall, hasilwall, carireddit, hasilreddit, cariresep, hasilresep, igstalk, igstalkpict, wikip, wikis, cuacaq, cuacap, chordq, chordp, scrinshit, _fetch, imgBS4, kurirs, ttsGB, dataText, quoteText, zoneStatus, datax, _i3, _zoneStatus$data$_i, zone, region, _zone, text, shortlink, klasemen, urut, textKlas, i, _i4, groupMem, hehex, _i5, inxx, nixx, reset, isOwner, allMem, _i6, xnxx, _i7, msg, chatz, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, idk, cvk, allChatz, allGroupz, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, gclist, allChatx, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, dchat, find, cekuser, isIn, denda, cekMember, _cekuser;
+module.exports = HandleMsg = function HandleMsg(aruga, message) {
+  var type, id, from, t, sender, isGroupMsg, chat, chatId, caption, isMedia, mimetype, quotedMsg, quotedMsgObj, mentionedJidList, body, name, formattedTitle, pushname, verifiedName, formattedName, botNumber, groupId, groupAdmins, isGroupAdmins, chats, pengirim, isBotGroupAdmins, command, arg, args, argx, isCmd, uaOverride, url, isQuotedImage, isQuotedVideo, isOwnerBot, isBanned, isSimi, isNgegas, isKasar, linkgrup, islink, chekgrup, cgrup, loadedMsg, chatIds, groups, encryptMedia, _mimetype, _mediaData, _imageBase, mediaData, imageBase64, base64img, outFile, result, filename, isGiphy, isMediaGiphy, getGiphyCode, giphyCode, smallGifUrl, gifUrl, _smallGifUrl, top, bottom, _encryptMedia, _mediaData2, getUrl, ImageBase64, qmaker, quotes, author, theme, hasilqmaker, nulisq, nulisp, responseh, data, idx, pesan, responseh2, last, responsh, responsih, surah, responsih2, _responsih2$data, name_translations, number_of_ayah, number_of_surah, recitations, solatx, solatj, daerahq, instag, quotex, randmeme, cariwall, hasilwall, carireddit, hasilreddit, cariresep, hasilresep, igstalk, igstalkpict, wikip, wikis, cuacaq, cuacap, chordq, chordp, scrinshit, _fetch, imgBS4, kurirs, ttsGB, dataText, quoteText, zoneStatus, datax, _i3, _zoneStatus$data$_i, zone, region, _zone, text, shortlink, klasemen, urut, textKlas, i, _i4, groupMem, hehex, _i5, inxx, nixx, reset, isOwner, allMem, _i6, xnxx, _i7, msg, chatz, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, idk, cvk, allChatz, allGroupz, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, gclist, allChatx, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, dchat, find, cekuser, isIn, denda, cekMember, _cekuser;
 
   return regeneratorRuntime.async(function HandleMsg$(_context13) {
     while (1) {
@@ -130,7 +124,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           pushname = pushname || verifiedName || formattedName; // verifiedName is the name of someone who uses a business account
 
           _context13.next = 8;
-          return regeneratorRuntime.awrap(bocilClient.getHostNumber());
+          return regeneratorRuntime.awrap(aruga.getHostNumber());
 
         case 8:
           _context13.t0 = _context13.sent;
@@ -143,7 +137,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 14;
-          return regeneratorRuntime.awrap(bocilClient.getGroupAdmins(groupId));
+          return regeneratorRuntime.awrap(aruga.getGroupAdmins(groupId));
 
         case 14:
           _context13.t1 = _context13.sent;
@@ -180,69 +174,69 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 39:
           isKasar = _context13.sent;
-          // ? Console View
-          timeFormat = moment(t * 1000).format('DD/MM/YY HH:mm:ss'); //! SPAM RULES CONSOLE
 
           if (!(isCmd && msgFilter.isFiltered(from) && !isGroupMsg)) {
-            _context13.next = 43;
+            _context13.next = 42;
             break;
           }
 
-          return _context13.abrupt("return", style.spamChat(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname));
+          return _context13.abrupt("return", console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(command, " [").concat(args.length, "]")), 'from', color(pushname)));
 
-        case 43:
+        case 42:
           if (!(isCmd && msgFilter.isFiltered(from) && isGroupMsg)) {
-            _context13.next = 45;
+            _context13.next = 44;
             break;
           }
 
-          return _context13.abrupt("return", style.spamGroup(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname, 'in', name || formattedTitle));
+          return _context13.abrupt("return", console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(command, " [").concat(args.length, "]")), 'from', color(pushname), 'in', color(name || formattedTitle)));
 
-        case 45:
-          //!BADWORDS CONSOLE
+        case 44:
+          //
           if (!isCmd && isKasar && isGroupMsg) {
-            style.exeGroup(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname, 'in', name || formattedTitle);
-          } //!EXECUTION CONSOLE
-
+            console.log(color('[BADW]', 'orange'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(argx)), 'from', color(pushname), 'in', color(name || formattedTitle));
+          }
 
           if (isCmd && !isGroupMsg) {
-            style.exeChat(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname);
+            console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(command, " [").concat(args.length, "]")), 'from', color(pushname));
           }
 
           if (isCmd && isGroupMsg) {
-            style.exeGroup(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname, 'in', name || formattedTitle);
+            console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(command, " [").concat(args.length, "]")), 'from', color(pushname), 'in', color(name || formattedTitle));
           } // [BETA] Avoid Spam Message
 
 
-          msgFilter.addFilter(from); //! Filter Banned People
+          msgFilter.addFilter(from); // Filter Banned People
 
-          if (isBanned) {
-            style.banPerson(timeFormat, "".concat(command, " [").concat(args.length, "]"), 'from', pushname);
-          } //! COMMAND
+          if (!isBanned) {
+            _context13.next = 50;
+            break;
+          }
 
+          return _context13.abrupt("return", console.log(color('[BAN]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color("".concat(command, " [").concat(args.length, "]")), 'from', color(pushname)));
 
+        case 50:
           _context13.t2 = command;
           _context13.next = _context13.t2 === 'speed' ? 53 : _context13.t2 === 'ping' ? 53 : _context13.t2 === 'tnc' ? 56 : _context13.t2 === 'menu' ? 59 : _context13.t2 === 'help' ? 59 : _context13.t2 === 'menuadmin' ? 62 : _context13.t2 === 'donate' ? 69 : _context13.t2 === 'donasi' ? 69 : _context13.t2 === 'ownerbot' ? 72 : _context13.t2 === 'join' ? 75 : _context13.t2 === 'botstat' ? 99 : _context13.t2 === 'sticker' ? 110 : _context13.t2 === 'stiker' ? 110 : _context13.t2 === 'stickergif' ? 155 : _context13.t2 === 'stikergif' ? 155 : _context13.t2 === 'stikergiphy' ? 173 : _context13.t2 === 'stickergiphy' ? 173 : _context13.t2 === 'meme' ? 197 : _context13.t2 === 'quotemaker' ? 216 : _context13.t2 === 'nulis' ? 236 : _context13.t2 === 'listsurah' ? 245 : _context13.t2 === 'infosurah' ? 247 : _context13.t2 === 'surah' ? 258 : _context13.t2 === 'tafsir' ? 279 : _context13.t2 === 'alaudio' ? 298 : _context13.t2 === 'jsolat' ? 339 : _context13.t2 === 'daerah' ? 348 : _context13.t2 === 'instagram' ? 354 : _context13.t2 === 'ytmp3' ? 362 : _context13.t2 === 'ytmp4' ? 366 : _context13.t2 === 'artinama' ? 370 : _context13.t2 === 'cekjodoh' ? 374 : _context13.t2 === 'fakta' ? 378 : _context13.t2 === 'katabijak' ? 380 : _context13.t2 === 'pantun' ? 382 : _context13.t2 === 'quote' ? 384 : _context13.t2 === 'anime' ? 390 : _context13.t2 === 'kpop' ? 394 : _context13.t2 === 'memes' ? 398 : _context13.t2 === 'images' ? 403 : _context13.t2 === 'sreddit' ? 412 : _context13.t2 === 'resep' ? 421 : _context13.t2 === 'nekopoi' ? 430 : _context13.t2 === 'stalkig' ? 432 : _context13.t2 === 'wiki' ? 443 : _context13.t2 === 'cuaca' ? 452 : _context13.t2 === 'lirik' ? 461 : _context13.t2 === 'chord' ? 465 : _context13.t2 === 'ss' ? 474 : _context13.t2 === 'play' ? 482 : _context13.t2 === 'whatanime' ? 486 : _context13.t2 === 'resi' ? 504 : _context13.t2 === 'tts' ? 512 : _context13.t2 === 'translate' ? 520 : _context13.t2 === 'covidindo' ? 527 : _context13.t2 === 'ceklokasi' ? 529 : _context13.t2 === 'shortlink' ? 541 : _context13.t2 === 'bapakfont' ? 551 : _context13.t2 === 'klasmen' ? 555 : _context13.t2 === 'add' ? 565 : _context13.t2 === 'kick' ? 582 : _context13.t2 === 'promote' ? 608 : _context13.t2 === 'demote' ? 629 : _context13.t2 === 'bye' ? 650 : _context13.t2 === 'del' ? 656 : _context13.t2 === 'tagall' ? 664 : _context13.t2 === 'everyone' ? 664 : _context13.t2 === 'simisimi' ? 677 : _context13.t2 === 'simi' ? 681 : _context13.t2 === 'katakasar' ? 689 : _context13.t2 === 'kasar' ? 693 : _context13.t2 === 'reset' ? 701 : _context13.t2 === 'kickall' ? 710 : _context13.t2 === 'ban' ? 732 : _context13.t2 === 'bc' ? 738 : _context13.t2 === 'leaveall' ? 777 : _context13.t2 === 'clearall' ? 817 : 850;
           break;
 
         case 53:
           _context13.next = 55;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, "Hai,\n respon bot : ".concat(processTime(t, moment()), " _Second_")));
+          return regeneratorRuntime.awrap(aruga.sendText(from, "Pong!!!!\nSpeed: ".concat(processTime(t, moment()), " _Second_")));
 
         case 55:
           return _context13.abrupt("break", 851);
 
         case 56:
           _context13.next = 58;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, menuId.textTnC()));
+          return regeneratorRuntime.awrap(aruga.sendText(from, menuId.textTnC()));
 
         case 58:
           return _context13.abrupt("break", 851);
 
         case 59:
           _context13.next = 61;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, menuId.textMenu(pushname)).then(function () {
-            return isGroupMsg && isGroupAdmins ? bocilClient.sendText(from, "Admin Grup : *".concat(prefix, "menuadmin*")) : null;
+          return regeneratorRuntime.awrap(aruga.sendText(from, menuId.textMenu(pushname)).then(function () {
+            return isGroupMsg && isGroupAdmins ? aruga.sendText(from, "Menu Admin Grup: *".concat(prefix, "menuadmin*")) : null;
           }));
 
         case 61:
@@ -254,7 +248,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat digunakan didalam grup. ".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 64:
           if (isGroupAdmins) {
@@ -262,26 +256,26 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '*Gagal*, perintah ini hanya dapat digunakan oleh admin grup', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 66:
           _context13.next = 68;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, menuId.textAdmin()));
+          return regeneratorRuntime.awrap(aruga.sendText(from, menuId.textAdmin()));
 
         case 68:
           return _context13.abrupt("break", 851);
 
         case 69:
           _context13.next = 71;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, menuId.textDonasi()));
+          return regeneratorRuntime.awrap(aruga.sendText(from, menuId.textDonasi()));
 
         case 71:
           return _context13.abrupt("break", 851);
 
         case 72:
           _context13.next = 74;
-          return regeneratorRuntime.awrap(bocilClient.sendContact(from, ownerNumber).then(function () {
-            return bocilClient.sendText(from, 'Jika kalian ingin request fitur silahkan chat nomor owner!');
+          return regeneratorRuntime.awrap(aruga.sendContact(from, ownerNumber).then(function () {
+            return aruga.sendText(from, 'Jika kalian ingin request fitur silahkan chat nomor owner!');
           }));
 
         case 74:
@@ -293,13 +287,13 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Jika kalian ingin mengundang bot kegroup silahkan invite atau dengan\nketik ".concat(prefix, "join [link group]"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Jika kalian ingin mengundang bot kegroup silahkan invite atau dengan\nketik ".concat(prefix, "join [link group]"), id));
 
         case 77:
           linkgrup = body.slice(6);
           islink = linkgrup.match(/(https:\/\/chat.whatsapp.com)/gi);
           _context13.next = 81;
-          return regeneratorRuntime.awrap(bocilClient.inviteInfo(linkgrup));
+          return regeneratorRuntime.awrap(aruga.inviteInfo(linkgrup));
 
         case 81:
           chekgrup = _context13.sent;
@@ -309,7 +303,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, 'Maaf link group-nya salah! silahkan kirim link yang benar', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf link group-nya salah! silahkan kirim link yang benar', id));
 
         case 84:
           if (!isOwnerBot) {
@@ -318,17 +312,17 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 87;
-          return regeneratorRuntime.awrap(bocilClient.joinGroupViaLink(linkgrup).then(function _callee() {
+          return regeneratorRuntime.awrap(aruga.joinGroupViaLink(linkgrup).then(function _callee() {
             return regeneratorRuntime.async(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
                     _context.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.sendText(from, 'Berhasil join grup via link!'));
+                    return regeneratorRuntime.awrap(aruga.sendText(from, 'Berhasil join grup via link!'));
 
                   case 2:
                     _context.next = 4;
-                    return regeneratorRuntime.awrap(bocilClient.sendText(chekgrup.id, "Hai minna~, Im bocilClient BOT. To find out the commands on this bot type ".concat(prefix, "menu")));
+                    return regeneratorRuntime.awrap(aruga.sendText(chekgrup.id, "Hai minna~, Im Aruga BOT. To find out the commands on this bot type ".concat(prefix, "menu")));
 
                   case 4:
                   case "end":
@@ -344,7 +338,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 89:
           _context13.next = 91;
-          return regeneratorRuntime.awrap(bocilClient.getAllGroups());
+          return regeneratorRuntime.awrap(aruga.getAllGroups());
 
         case 91:
           cgrup = _context13.sent;
@@ -354,7 +348,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Sorry, the group on this bot is full\nMax Group is: ".concat(groupLimit), id));
+          return _context13.abrupt("return", aruga.reply(from, "Sorry, the group on this bot is full\nMax Group is: ".concat(groupLimit), id));
 
         case 94:
           if (!(cgrup.size < memberLimit)) {
@@ -362,17 +356,17 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Sorry, BOT wil not join if the group members do not exceed ".concat(memberLimit, " people"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Sorry, BOT wil not join if the group members do not exceed ".concat(memberLimit, " people"), id));
 
         case 96:
           _context13.next = 98;
-          return regeneratorRuntime.awrap(bocilClient.joinGroupViaLink(linkgrup).then(function _callee2() {
+          return regeneratorRuntime.awrap(aruga.joinGroupViaLink(linkgrup).then(function _callee2() {
             return regeneratorRuntime.async(function _callee2$(_context2) {
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
                     _context2.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.reply(from, 'Berhasil join grup via link!', id));
+                    return regeneratorRuntime.awrap(aruga.reply(from, 'Berhasil join grup via link!', id));
 
                   case 2:
                   case "end":
@@ -381,7 +375,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
               }
             });
           })["catch"](function () {
-            bocilClient.reply(from, 'Gagal!', id);
+            aruga.reply(from, 'Gagal!', id);
           }));
 
         case 98:
@@ -389,21 +383,21 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 99:
           _context13.next = 101;
-          return regeneratorRuntime.awrap(bocilClient.getAmountOfLoadedMessages());
+          return regeneratorRuntime.awrap(aruga.getAmountOfLoadedMessages());
 
         case 101:
           loadedMsg = _context13.sent;
           _context13.next = 104;
-          return regeneratorRuntime.awrap(bocilClient.getAllChatIds());
+          return regeneratorRuntime.awrap(aruga.getAllChatIds());
 
         case 104:
           chatIds = _context13.sent;
           _context13.next = 107;
-          return regeneratorRuntime.awrap(bocilClient.getAllGroups());
+          return regeneratorRuntime.awrap(aruga.getAllGroups());
 
         case 107:
           groups = _context13.sent;
-          bocilClient.sendText(from, "Status :\n- *".concat(loadedMsg, "* Loaded Messages\n- *").concat(groups.length, "* Group Chats\n- *").concat(chatIds.length - groups.length, "* Personal Chats\n- *").concat(chatIds.length, "* Total Chats"));
+          aruga.sendText(from, "Status :\n- *".concat(loadedMsg, "* Loaded Messages\n- *").concat(groups.length, "* Group Chats\n- *").concat(chatIds.length - groups.length, "* Personal Chats\n- *").concat(chatIds.length, "* Total Chats"));
           return _context13.abrupt("break", 851);
 
         case 110:
@@ -420,9 +414,9 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 115:
           _mediaData = _context13.sent;
           _imageBase = "data:".concat(_mimetype, ";base64,").concat(_mediaData.toString('base64'));
-          bocilClient.sendImageAsSticker(from, _imageBase).then(function () {
-            bocilClient.reply(from, "\u2611 Sukses dibuat ".concat(botName));
-            console.log(style.msg(style.msg("Sticker Processed for ".concat(processTime(t, moment()), " Second"))));
+          aruga.sendImageAsSticker(from, _imageBase).then(function () {
+            aruga.reply(from, 'Here\'s your sticker');
+            console.log("Sticker Processed for ".concat(processTime(t, moment()), " Second"));
           });
           _context13.next = 154;
           break;
@@ -464,7 +458,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 134:
           _context13.next = 136;
-          return regeneratorRuntime.awrap(bocilClient.sendImageAsSticker(from, "data:".concat(mimetype, ";base64,").concat(result.base64img)));
+          return regeneratorRuntime.awrap(aruga.sendImageAsSticker(from, "data:".concat(mimetype, ";base64,").concat(result.base64img)));
 
         case 136:
           _context13.next = 143;
@@ -475,7 +469,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           _context13.t3 = _context13["catch"](122);
           console.log(_context13.t3);
           _context13.next = 143;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, 'Maaf batas penggunaan hari ini sudah mencapai maksimal', id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf batas penggunaan hari ini sudah mencapai maksimal', id));
 
         case 143:
           _context13.next = 154;
@@ -493,20 +487,20 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 149;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, 'Maaf, link yang kamu kirim tidak valid.', id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, link yang kamu kirim tidak valid.', id));
 
         case 149:
-          bocilClient.sendStickerfromUrl(from, url).then(function (r) {
-            return !r && r !== undefined ? bocilClient.sendText(from, 'Maaf, link yang kamu kirim tidak memuat gambar.') : bocilClient.reply(from, "\u2611 Sukses dibuat ".concat(botName));
+          aruga.sendStickerfromUrl(from, url).then(function (r) {
+            return !r && r !== undefined ? aruga.sendText(from, 'Maaf, link yang kamu kirim tidak memuat gambar.') : aruga.reply(from, 'Here\'s your sticker');
           }).then(function () {
-            return console.log(style.msg("Sticker Processed for ".concat(processTime(t, moment()), " Second")));
+            return console.log("Sticker Processed for ".concat(processTime(t, moment()), " Second"));
           });
           _context13.next = 154;
           break;
 
         case 152:
           _context13.next = 154;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "Tidak ada gambar! Untuk menggunakan ".concat(prefix, "sticker\n\n\nKirim gambar dengan caption\n").concat(prefix, "sticker <biasa>\n").concat(prefix, "sticker nobg <tanpa background>\n\natau Kirim pesan dengan\n").concat(prefix, "sticker <link_gambar>"), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, "Tidak ada gambar! Untuk menggunakan ".concat(prefix, "sticker\n\n\nKirim gambar dengan caption\n").concat(prefix, "sticker <biasa>\n").concat(prefix, "sticker nobg <tanpa background>\n\natau Kirim pesan dengan\n").concat(prefix, "sticker <link_gambar>"), id));
 
         case 154:
           return _context13.abrupt("break", 851);
@@ -527,7 +521,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 159:
           mediaData = _context13.sent;
-          bocilClient.reply(from, '⌛ Sedang di proses silahkan tunggu ± 1 min!', id);
+          aruga.reply(from, '[WAIT] Sedang di proses⏳ silahkan tunggu ± 1 min!', id);
           filename = "./media/stickergif.".concat(mimetype.split('/')[1]);
           _context13.next = 164;
           return regeneratorRuntime.awrap(fs.writeFileSync(filename, mediaData));
@@ -548,8 +542,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                   case 2:
                     gif = _context3.sent;
                     _context3.next = 5;
-                    return regeneratorRuntime.awrap(bocilClient.sendImageAsSticker(from, "data:image/gif;base64,".concat(gif.toString('base64')))["catch"](function () {
-                      bocilClient.reply(from, '↳ Maaf filenya terlalu besar!', id);
+                    return regeneratorRuntime.awrap(aruga.sendImageAsSticker(from, "data:image/gif;base64,".concat(gif.toString('base64')))["catch"](function () {
+                      aruga.reply(from, 'Maaf filenya terlalu besar!', id);
                     }));
 
                   case 5:
@@ -565,14 +559,14 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           break;
 
         case 168:
-          bocilClient.reply(from, "\u21B3 Kirim gif dengan *".concat(prefix, "stickergif* max video 10 sec!"), id);
+          aruga.reply(from, "[\u2757] Kirim gif dengan caption *".concat(prefix, "stickergif* max 10 sec!"), id);
 
         case 169:
           _context13.next = 172;
           break;
 
         case 171:
-          bocilClient.reply(from, "\u21B3 Kirim gif dengan caption *".concat(prefix, "stickergif*"), id);
+          aruga.reply(from, "[\u2757] Kirim gif dengan caption *".concat(prefix, "stickergif*"), id);
 
         case 172:
           return _context13.abrupt("break", 851);
@@ -583,7 +577,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "\u2718 Format pesan salah.\nKetik pesan dengan *".concat(prefix, "stickergiphy* <link_giphy>"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah.\nKetik pesan dengan ".concat(prefix, "stickergiphy <link_giphy>"), id));
 
         case 175:
           isGiphy = url.match(new RegExp(/https?:\/\/(www\.)?giphy.com/, 'gi'));
@@ -601,14 +595,14 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '✘ Gagal mengambil kode giphy', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal mengambil kode giphy', id));
 
         case 181:
           giphyCode = getGiphyCode[0].replace(/[-\/]/gi, '');
           smallGifUrl = 'https://media.giphy.com/media/' + giphyCode + '/giphy-downsized.gif';
-          bocilClient.sendGiphyAsSticker(from, smallGifUrl).then(function () {
-            bocilClient.reply(from, "\u2611 Sukses dibuat ".concat(botName));
-            console.log(style.msg("Sticker Processed for ".concat(processTime(t, moment()), " Second")));
+          aruga.sendGiphyAsSticker(from, smallGifUrl).then(function () {
+            aruga.reply(from, 'Here\'s your sticker');
+            console.log("Sticker Processed for ".concat(processTime(t, moment()), " Second"));
           })["catch"](function (err) {
             return console.log(err);
           });
@@ -628,22 +622,22 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '✘ Gagal mengambil kode giphy', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal mengambil kode giphy', id));
 
         case 190:
           _smallGifUrl = url.replace(gifUrl[0], 'giphy-downsized.gif');
-          bocilClient.sendGiphyAsSticker(from, _smallGifUrl).then(function () {
-            bocilClient.reply(from, "\u2611 Sukses dibuat ".concat(botName));
-            console.log(style.msg("Sticker Processed for ".concat(processTime(t, moment()), " Second")));
+          aruga.sendGiphyAsSticker(from, _smallGifUrl).then(function () {
+            aruga.reply(from, 'Here\'s your sticker');
+            console.log("Sticker Processed for ".concat(processTime(t, moment()), " Second"));
           })["catch"](function () {
-            bocilClient.reply(from, "\u2718 Ada yang Error!", id);
+            aruga.reply(from, "Ada yang error!", id);
           });
           _context13.next = 196;
           break;
 
         case 194:
           _context13.next = 196;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, '✘ Hanya bisa menggunakan link dari Giphy', id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, command sticker giphy hanya bisa menggunakan link dari giphy.  [Giphy Only]', id));
 
         case 196:
           return _context13.abrupt("break", 851);
@@ -672,17 +666,17 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 209:
           ImageBase64 = _context13.sent;
-          bocilClient.sendFile(from, ImageBase64, 'image.png', '', null, true).then(function () {
-            bocilClient.reply(from, 'Ini makasih!', id);
+          aruga.sendFile(from, ImageBase64, 'image.png', '', null, true).then(function () {
+            aruga.reply(from, 'Ini makasih!', id);
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!');
+            aruga.reply(from, 'Ada yang error!');
           });
           _context13.next = 215;
           break;
 
         case 213:
           _context13.next = 215;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "Tidak ada gambar! Silahkan kirim gambar dengan caption ".concat(prefix, "meme <teks_atas> | <teks_bawah>\ncontoh: ").concat(prefix, "meme teks atas | teks bawah"), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, "Tidak ada gambar! Silahkan kirim gambar dengan caption ".concat(prefix, "meme <teks_atas> | <teks_bawah>\ncontoh: ").concat(prefix, "meme teks atas | teks bawah"), id));
 
         case 215:
           return _context13.abrupt("break", 851);
@@ -698,28 +692,28 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           quotes = qmaker[1];
           author = qmaker[2];
           theme = qmaker[3];
-          bocilClient.reply(from, 'Proses kak..', id);
+          aruga.reply(from, 'Proses kak..', id);
           _context13.prev = 222;
           _context13.next = 225;
           return regeneratorRuntime.awrap(images.quote(quotes, author, theme));
 
         case 225:
           hasilqmaker = _context13.sent;
-          bocilClient.sendFileFromUrl(from, "".concat(hasilqmaker), '', 'Ini kak..', id);
+          aruga.sendFileFromUrl(from, "".concat(hasilqmaker), '', 'Ini kak..', id);
           _context13.next = 232;
           break;
 
         case 229:
           _context13.prev = 229;
           _context13.t4 = _context13["catch"](222);
-          bocilClient.reply('Yahh proses gagal, kakak isinya sudah benar belum?..', id);
+          aruga.reply('Yahh proses gagal, kakak isinya sudah benar belum?..', id);
 
         case 232:
           _context13.next = 235;
           break;
 
         case 234:
-          bocilClient.reply(from, "Pemakaian ".concat(prefix, "quotemaker |isi quote|author|theme\n\ncontoh: ").concat(prefix, "quotemaker |aku sayang kamu|-bocilClient|random\n\nuntuk theme nya pakai random ya kak.."));
+          aruga.reply(from, "Pemakaian ".concat(prefix, "quotemaker |isi quote|author|theme\n\ncontoh: ").concat(prefix, "quotemaker |aku sayang kamu|-aruga|random\n\nuntuk theme nya pakai random ya kak.."));
 
         case 235:
           return _context13.abrupt("break", 851);
@@ -730,7 +724,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Membuat bot menulis teks yang dikirim menjadi gambar\nPemakaian: ".concat(prefix, "nulis [teks]\n\ncontoh: ").concat(prefix, "nulis i love you 3000"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Membuat bot menulis teks yang dikirim menjadi gambar\nPemakaian: ".concat(prefix, "nulis [teks]\n\ncontoh: ").concat(prefix, "nulis i love you 3000"), id));
 
         case 238:
           nulisq = body.slice(7);
@@ -740,8 +734,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 241:
           nulisp = _context13.sent;
           _context13.next = 244;
-          return regeneratorRuntime.awrap(bocilClient.sendImage(from, "".concat(nulisp), '', 'Nih...', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendImage(from, "".concat(nulisp), '', 'Nih...', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 244:
@@ -749,7 +743,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 245:
           try {
-            axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah.json').then(function (response) {
+            axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json').then(function (response) {
               var hehex = '╔══✪〘 List Surah 〙✪══\n';
 
               for (var _i = 0; _i < response.data.data.length; _i++) {
@@ -758,10 +752,10 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
               }
 
               hehex += '╚═〘 *A R U G A  B O T* 〙';
-              bocilClient.reply(from, hehex, id);
+              aruga.reply(from, hehex, id);
             });
           } catch (err) {
-            bocilClient.reply(from, err, id);
+            aruga.reply(from, err, id);
           }
 
           return _context13.abrupt("break", 851);
@@ -772,11 +766,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "*_".concat(prefix, "infosurah <nama surah>_*\nMenampilkan informasi lengkap mengenai surah tertentu. Contoh penggunan: ").concat(prefix, "infosurah al-baqarah"), message.id));
+          return _context13.abrupt("return", aruga.reply(from, "*_".concat(prefix, "infosurah <nama surah>_*\nMenampilkan informasi lengkap mengenai surah tertentu. Contoh penggunan: ").concat(prefix, "infosurah al-baqarah"), message.id));
 
         case 249:
           _context13.next = 251;
-          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah.json'));
+          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
         case 251:
           responseh = _context13.sent;
@@ -786,7 +780,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           });
           pesan = "";
           pesan = pesan + "Nama : " + data[idx].name.transliteration.id + "\n" + "Asma : " + data[idx].name["short"] + "\n" + "Arti : " + data[idx].name.translation.id + "\n" + "Jumlah ayat : " + data[idx].numberOfVerses + "\n" + "Nomor surah : " + data[idx].number + "\n" + "Jenis : " + data[idx].revelation.id + "\n" + "Keterangan : " + data[idx].tafsir.id;
-          bocilClient.reply(from, pesan, message.id);
+          aruga.reply(from, pesan, message.id);
           return _context13.abrupt("break", 851);
 
         case 258:
@@ -795,11 +789,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "*_".concat(prefix, "surah <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1\n\n*_").concat(prefix, "surah <nama surah> <ayat> en/id_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Inggris / Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1 id"), message.id));
+          return _context13.abrupt("return", aruga.reply(from, "*_".concat(prefix, "surah <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1\n\n*_").concat(prefix, "surah <nama surah> <ayat> en/id_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Inggris / Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1 id"), message.id));
 
         case 260:
           _context13.next = 262;
-          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah.json'));
+          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
         case 262:
           responseh = _context13.sent;
@@ -838,7 +832,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           pesan = pesan + "\n\n(Q.S. " + data.surah.name.transliteration.id + ":" + args[1] + ")";
-          bocilClient.reply(from, pesan, message.id);
+          aruga.reply(from, pesan, message.id);
 
         case 278:
           return _context13.abrupt("break", 851);
@@ -849,11 +843,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "*_".concat(prefix, "tafsir <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahan dan tafsirnya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "tafsir al-baqarah 1"), message.id));
+          return _context13.abrupt("return", aruga.reply(from, "*_".concat(prefix, "tafsir <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahan dan tafsirnya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "tafsir al-baqarah 1"), message.id));
 
         case 281:
           _context13.next = 283;
-          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah.json'));
+          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
         case 283:
           responsh = _context13.sent;
@@ -878,7 +872,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           pesan = pesan + "Tafsir Q.S. " + data.surah.name.transliteration.id + ":" + args[1] + "\n\n";
           pesan = pesan + data.text.arab + "\n\n";
           pesan = pesan + "_" + data.translation.id + "_" + "\n\n" + data.tafsir.id["long"];
-          bocilClient.reply(from, pesan, message.id);
+          aruga.reply(from, pesan, message.id);
 
         case 297:
           return _context13.abrupt("break", 851);
@@ -889,13 +883,13 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "*_".concat(prefix, "ALaudio <nama surah>_*\nMenampilkan tautan dari audio surah tertentu. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat>_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat> en_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Inggris. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1 en"), message.id));
+          return _context13.abrupt("return", aruga.reply(from, "*_".concat(prefix, "ALaudio <nama surah>_*\nMenampilkan tautan dari audio surah tertentu. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat>_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat> en_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Inggris. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1 en"), message.id));
 
         case 300:
           ayat = "ayat";
           bhs = "";
           _context13.next = 304;
-          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah.json'));
+          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
         case 304:
           responseh = _context13.sent;
@@ -932,7 +926,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 315;
-          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/bocilClientZ/grabbed-results/main/islam/surah/' + nmr + '.json'));
+          return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah/' + nmr + '.json'));
 
         case 315:
           responsih2 = _context13.sent;
@@ -941,7 +935,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           pesan = pesan + "Dilantunkan oleh " + recitations[0].name + " : " + recitations[0].audio_url + "\n";
           pesan = pesan + "Dilantunkan oleh " + recitations[1].name + " : " + recitations[1].audio_url + "\n";
           pesan = pesan + "Dilantunkan oleh " + recitations[2].name + " : " + recitations[2].audio_url + "\n";
-          bocilClient.reply(from, pesan, message.id);
+          aruga.reply(from, pesan, message.id);
           _context13.next = 338;
           break;
 
@@ -971,11 +965,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
           pesan = pesan + "\n\n(Q.S. " + data.surah.name.transliteration.id + ":" + args[1] + ")";
           _context13.next = 336;
-          return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, data.audio.secondary[0]));
+          return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, data.audio.secondary[0]));
 
         case 336:
           _context13.next = 338;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, pesan, message.id));
+          return regeneratorRuntime.awrap(aruga.reply(from, pesan, message.id));
 
         case 338:
           return _context13.abrupt("break", 851);
@@ -986,7 +980,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk melihat jadwal solat dari setiap daerah yang ada\nketik: ".concat(prefix, "jsolat [daerah]\n\nuntuk list daerah yang ada\nketik: ").concat(prefix, "daerah"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk melihat jadwal solat dari setiap daerah yang ada\nketik: ".concat(prefix, "jsolat [daerah]\n\nuntuk list daerah yang ada\nketik: ").concat(prefix, "daerah"), id));
 
         case 341:
           solatx = body.slice(8);
@@ -996,8 +990,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 344:
           solatj = _context13.sent;
           _context13.next = 347;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, solatj, id)["catch"](function () {
-            bocilClient.reply(from, 'Sudah input daerah yang ada dilist?', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, solatj, id)["catch"](function () {
+            aruga.reply(from, 'Sudah input daerah yang ada dilist?', id);
           }));
 
         case 347:
@@ -1010,8 +1004,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 350:
           daerahq = _context13.sent;
           _context13.next = 353;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, daerahq, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, daerahq, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 353:
@@ -1023,7 +1017,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mendownload gambar atau video instagram\nketik: *".concat(prefix, "instagram [link_ig]*"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mendownload gambar atau video dari instagram\nketik: ".concat(prefix, "instagram [link_ig]"), id));
 
         case 356:
           _context13.next = 358;
@@ -1032,8 +1026,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 358:
           instag = _context13.sent;
           _context13.next = 361;
-          return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, instag, '', '', id)["catch"](function () {
-            bocilClient.reply(from, '✘ ✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, instag, '', '', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 361:
@@ -1045,7 +1039,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mendownload lagu dari youtube\nketik: *".concat(prefix, "ytmp3 [link_yt]*"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mendownload lagu dari youtube\nketik: ".concat(prefix, "ytmp3 [link_yt]"), id));
 
         case 364:
           rugaapi.ytmp3(args[0]).then(function _callee4(res) {
@@ -1058,7 +1052,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                       break;
                     }
 
-                    return _context4.abrupt("return", bocilClient.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
+                    return _context4.abrupt("return", aruga.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
 
                   case 2:
                     if (!(res.status == 'filesize')) {
@@ -1066,15 +1060,15 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                       break;
                     }
 
-                    return _context4.abrupt("return", bocilClient.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
+                    return _context4.abrupt("return", aruga.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
 
                   case 4:
                     _context4.next = 6;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.thumb), '', "\u2611 Data Youtube ditemukan :\n\nJudul: ".concat(res.judul, "\n\nUkuran: ").concat(res.size, "\n\n\u231B Audio sedang dikirim"), id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.thumb), '', "Youtube ditemukan\n\nJudul: ".concat(res.judul, "\n\nUkuran: ").concat(res.size, "\n\nAudio sedang dikirim"), id));
 
                   case 6:
                     _context4.next = 8;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.link), '', '', id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.link), '', '', id));
 
                   case 8:
                   case "end":
@@ -1091,7 +1085,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mendownload video dari youtube\nketik: *".concat(prefix, "ytmp4 [link_yt]*")));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mendownload video dari youtube\nketik: ".concat(prefix, "ytmp3 [link_yt]")));
 
         case 368:
           rugaapi.ytmp4(args[0]).then(function _callee5(res) {
@@ -1104,7 +1098,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                       break;
                     }
 
-                    return _context5.abrupt("return", bocilClient.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
+                    return _context5.abrupt("return", aruga.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
 
                   case 2:
                     if (!(res.status == 'filesize')) {
@@ -1112,15 +1106,15 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                       break;
                     }
 
-                    return _context5.abrupt("return", bocilClient.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
+                    return _context5.abrupt("return", aruga.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.judul), id));
 
                   case 4:
                     _context5.next = 6;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.thumb), '', "\u2611 Data Youtube ditemukan\n\nJudul: ".concat(res.judul, "\n\nUkuran: ").concat(res.size, "\n\n\u231B Video sedang dikirim"), id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.thumb), '', "Youtube ditemukan\n\nJudul: ".concat(res.judul, "\n\nUkuran: ").concat(res.size, "\n\nVideo sedang dikirim"), id));
 
                   case 6:
                     _context5.next = 8;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.link), '', '', id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.link), '', '', id));
 
                   case 8:
                   case "end":
@@ -1137,7 +1131,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mengetahui arti nama seseorang\nketik ".concat(prefix, "artinama Namanya"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mengetahui arti nama seseorang\nketik ".concat(prefix, "artinama Namanya"), id));
 
         case 372:
           rugaapi.artinama(body.slice(10)).then(function _callee6(res) {
@@ -1146,7 +1140,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context6.prev = _context6.next) {
                   case 0:
                     _context6.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.reply(from, "Arti : ".concat(res), id));
+                    return regeneratorRuntime.awrap(aruga.reply(from, "Arti : ".concat(res), id));
 
                   case 2:
                   case "end":
@@ -1163,7 +1157,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mengecek jodoh melalui nama\nketik: ".concat(prefix, "cekjodoh nama pasangan\n\ncontoh: ").concat(prefix, "cekjodoh aku kamu\n\nhanya bisa pakai nama panggilan (satu kata)")));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mengecek jodoh melalui nama\nketik: ".concat(prefix, "cekjodoh nama pasangan\n\ncontoh: ").concat(prefix, "cekjodoh aku kamu\n\nhanya bisa pakai nama panggilan (satu kata)")));
 
         case 376:
           rugaapi.cekjodoh(args[0], args[1]).then(function _callee7(res) {
@@ -1172,7 +1166,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context7.prev = _context7.next) {
                   case 0:
                     _context7.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.text), id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.link), '', "".concat(res.text), id));
 
                   case 2:
                   case "end":
@@ -1189,9 +1183,9 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }).then(function (body) {
             var splitnix = body.split('\n');
             var randomnix = splitnix[Math.floor(Math.random() * splitnix.length)];
-            bocilClient.reply(from, randomnix, id);
+            aruga.reply(from, randomnix, id);
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1201,9 +1195,9 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }).then(function (body) {
             var splitbijak = body.split('\n');
             var randombijak = splitbijak[Math.floor(Math.random() * splitbijak.length)];
-            bocilClient.reply(from, randombijak, id);
+            aruga.reply(from, randombijak, id);
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1213,9 +1207,9 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }).then(function (body) {
             var splitpantun = body.split('\n');
             var randompantun = splitpantun[Math.floor(Math.random() * splitpantun.length)];
-            bocilClient.reply(from, randompantun.replace(/bocilClient-line/g, "\n"), id);
+            aruga.reply(from, randompantun.replace(/aruga-line/g, "\n"), id);
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1226,8 +1220,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 386:
           quotex = _context13.sent;
           _context13.next = 389;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, quotex, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, quotex, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 389:
@@ -1239,7 +1233,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk menggunakan ".concat(prefix, "anime\nSilahkan ketik: ").concat(prefix, "anime [query]\nContoh: ").concat(prefix, "anime random\n\nquery yang tersedia:\nrandom, waifu, husbu, neko"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk menggunakan ".concat(prefix, "anime\nSilahkan ketik: ").concat(prefix, "anime [query]\nContoh: ").concat(prefix, "anime random\n\nquery yang tersedia:\nrandom, waifu, husbu, neko"), id));
 
         case 392:
           if (args[0] == 'random' || args[0] == 'waifu' || args[0] == 'husbu' || args[0] == 'neko') {
@@ -1248,12 +1242,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             }).then(function (body) {
               var randomnime = body.split('\n');
               var randomnimex = randomnime[Math.floor(Math.random() * randomnime.length)];
-              bocilClient.sendFileFromUrl(from, randomnimex, '', 'Nee..', id);
+              aruga.sendFileFromUrl(from, randomnimex, '', 'Nee..', id);
             })["catch"](function () {
-              bocilClient.reply(from, '✘ Ada yang Error!', id);
+              aruga.reply(from, 'Ada yang Error!', id);
             });
           } else {
-            bocilClient.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "anime untuk melihat list query"));
+            aruga.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "anime untuk melihat list query"));
           }
 
           return _context13.abrupt("break", 851);
@@ -1264,7 +1258,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk menggunakan ".concat(prefix, "kpop\nSilahkan ketik: ").concat(prefix, "kpop [query]\nContoh: ").concat(prefix, "kpop bts\n\nquery yang tersedia:\nblackpink, exo, bts"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk menggunakan ".concat(prefix, "kpop\nSilahkan ketik: ").concat(prefix, "kpop [query]\nContoh: ").concat(prefix, "kpop bts\n\nquery yang tersedia:\nblackpink, exo, bts"), id));
 
         case 396:
           if (args[0] == 'blackpink' || args[0] == 'exo' || args[0] == 'bts') {
@@ -1273,12 +1267,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             }).then(function (body) {
               var randomkpop = body.split('\n');
               var randomkpopx = randomkpop[Math.floor(Math.random() * randomkpop.length)];
-              bocilClient.sendFileFromUrl(from, randomkpopx, '', 'Nee..', id);
+              aruga.sendFileFromUrl(from, randomkpopx, '', 'Nee..', id);
             })["catch"](function () {
-              bocilClient.reply(from, '✘ Ada yang Error!', id);
+              aruga.reply(from, 'Ada yang Error!', id);
             });
           } else {
-            bocilClient.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "kpop untuk melihat list query"));
+            aruga.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "kpop untuk melihat list query"));
           }
 
           return _context13.abrupt("break", 851);
@@ -1289,8 +1283,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 400:
           randmeme = _context13.sent;
-          bocilClient.sendFileFromUrl(from, randmeme, '', '', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          aruga.sendFileFromUrl(from, randmeme, '', '', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1300,7 +1294,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari gambar di pinterest\nketik: ".concat(prefix, "images [search]\ncontoh: ").concat(prefix, "images naruto"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari gambar di pinterest\nketik: ".concat(prefix, "images [search]\ncontoh: ").concat(prefix, "images naruto"), id));
 
         case 405:
           cariwall = body.slice(8);
@@ -1310,8 +1304,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 408:
           hasilwall = _context13.sent;
           _context13.next = 411;
-          return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, hasilwall, '', '', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, hasilwall, '', '', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 411:
@@ -1323,7 +1317,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari gambar di sub reddit\nketik: ".concat(prefix, "sreddit [search]\ncontoh: ").concat(prefix, "sreddit naruto"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari gambar di sub reddit\nketik: ".concat(prefix, "sreddit [search]\ncontoh: ").concat(prefix, "sreddit naruto"), id));
 
         case 414:
           carireddit = body.slice(9);
@@ -1333,8 +1327,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 417:
           hasilreddit = _context13.sent;
           _context13.next = 420;
-          return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, hasilreddit, '', '', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, hasilreddit, '', '', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 420:
@@ -1346,7 +1340,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari resep makanan\nCaranya ketik: ".concat(prefix, "resep [search]\n\ncontoh: ").concat(prefix, "resep tahu"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari resep makanan\nCaranya ketik: ".concat(prefix, "resep [search]\n\ncontoh: ").concat(prefix, "resep tahu"), id));
 
         case 423:
           cariresep = body.slice(7);
@@ -1356,8 +1350,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 426:
           hasilresep = _context13.sent;
           _context13.next = 429;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 429:
@@ -1372,10 +1366,10 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 heheq += "".concat(res.links[_i2], "\n");
               }
 
-              bocilClient.reply(from, "Title: ".concat(res.title, "\n\nLink:\n").concat(heheq, "\nmasih tester bntr :v"));
+              aruga.reply(from, "Title: ".concat(res.title, "\n\nLink:\n").concat(heheq, "\nmasih tester bntr :v"));
             });
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1385,7 +1379,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Stalk akun instagram seseorang\nketik ".concat(prefix, "stalkig [username]\ncontoh: ").concat(prefix, "stalkig rizqy.pan"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk men-stalk akun instagram seseorang\nketik ".concat(prefix, "stalkig [username]\ncontoh: ").concat(prefix, "stalkig ini.arga"), id));
 
         case 434:
           _context13.next = 436;
@@ -1399,8 +1393,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 439:
           igstalkpict = _context13.sent;
           _context13.next = 442;
-          return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, igstalkpict, '', igstalk, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, igstalkpict, '', igstalk, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 442:
@@ -1412,7 +1406,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari suatu kata dari wikipedia\nketik: ".concat(prefix, "wiki [kata]"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari suatu kata dari wikipedia\nketik: ".concat(prefix, "wiki [kata]"), id));
 
         case 445:
           wikip = body.slice(6);
@@ -1422,8 +1416,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 448:
           wikis = _context13.sent;
           _context13.next = 451;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, wikis, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, wikis, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 451:
@@ -1435,7 +1429,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk melihat cuaca pada suatu daerah\nketik: ".concat(prefix, "cuaca [daerah]"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk melihat cuaca pada suatu daerah\nketik: ".concat(prefix, "cuaca [daerah]"), id));
 
         case 454:
           cuacaq = body.slice(7);
@@ -1445,8 +1439,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 457:
           cuacap = _context13.sent;
           _context13.next = 460;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, cuacap, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, cuacap, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 460:
@@ -1458,7 +1452,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari lirik dari sebuah lagu\bketik: ".concat(prefix, "lirik [judul_lagu]"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari lirik dari sebuah lagu\bketik: ".concat(prefix, "lirik [judul_lagu]"), id));
 
         case 463:
           rugaapi.lirik(body.slice(7)).then(function _callee8(res) {
@@ -1467,7 +1461,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context8.prev = _context8.next) {
                   case 0:
                     _context8.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.reply(from, "Lirik Lagu: ".concat(body.slice(7), "\n\n").concat(res), id));
+                    return regeneratorRuntime.awrap(aruga.reply(from, "Lirik Lagu: ".concat(body.slice(7), "\n\n").concat(res), id));
 
                   case 2:
                   case "end":
@@ -1484,7 +1478,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari lirik dan chord dari sebuah lagu\bketik: ".concat(prefix, "chord [judul_lagu]"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari lirik dan chord dari sebuah lagu\bketik: ".concat(prefix, "chord [judul_lagu]"), id));
 
         case 467:
           chordq = body.slice(7);
@@ -1494,8 +1488,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 470:
           chordp = _context13.sent;
           _context13.next = 473;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, chordp, id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.reply(from, chordp, id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 473:
@@ -1507,7 +1501,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Membuat bot men-screenshot sebuah web\n\nPemakaian: ".concat(prefix, "ss [url]\n\ncontoh: ").concat(prefix, "ss http://google.com"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Membuat bot men-screenshot sebuah web\n\nPemakaian: ".concat(prefix, "ss [url]\n\ncontoh: ").concat(prefix, "ss http://google.com"), id));
 
         case 476:
           _context13.next = 478;
@@ -1516,8 +1510,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 478:
           scrinshit = _context13.sent;
           _context13.next = 481;
-          return regeneratorRuntime.awrap(bocilClient.sendFile(from, scrinshit, 'ss.jpg', 'cekrek', id)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendFile(from, scrinshit, 'ss.jpg', 'cekrek', id)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 481:
@@ -1529,7 +1523,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mencari lagu dari youtube\n\nPenggunaan: ".concat(prefix, "play judul lagu"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mencari lagu dari youtube\n\nPenggunaan: ".concat(prefix, "play judul lagu"), id));
 
         case 484:
           axios.get("https://arugaytdl.herokuapp.com/search?q=".concat(body.slice(6))).then(function _callee10(res) {
@@ -1538,7 +1532,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context10.prev = _context10.next) {
                   case 0:
                     _context10.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.sendFileFromUrl(from, "".concat(res.data[0].thumbnail), "", "Lagu ditemukan\n\nJudul: ".concat(res.data[0].title, "\nDurasi: ").concat(res.data[0].duration, "detik\nUploaded: ").concat(res.data[0].uploadDate, "\nView: ").concat(res.data[0].viewCount, "\n\nsedang dikirim"), id));
+                    return regeneratorRuntime.awrap(aruga.sendFileFromUrl(from, "".concat(res.data[0].thumbnail), "", "Lagu ditemukan\n\nJudul: ".concat(res.data[0].title, "\nDurasi: ").concat(res.data[0].duration, "detik\nUploaded: ").concat(res.data[0].uploadDate, "\nView: ").concat(res.data[0].viewCount, "\n\nsedang dikirim"), id));
 
                   case 2:
                     axios.get("https://arugaz.herokuapp.com/api/yta?url=https://youtu.be/".concat(res.data[0].id)).then(function _callee9(rest) {
@@ -1551,11 +1545,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                                 break;
                               }
 
-                              return _context9.abrupt("return", bocilClient.reply(from, '⚠ Maaf ukuran file terlalu besar!'));
+                              return _context9.abrupt("return", aruga.reply(from, 'Maaf ukuran file terlalu besar!'));
 
                             case 2:
                               _context9.next = 4;
-                              return regeneratorRuntime.awrap(bocilClient.sendPtt(from, "".concat(rest.data.result), id));
+                              return regeneratorRuntime.awrap(aruga.sendPtt(from, "".concat(rest.data.result), id));
 
                             case 4:
                             case "end":
@@ -1564,7 +1558,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                         }
                       });
                     })["catch"](function () {
-                      bocilClient.reply(from, '✘ Ada yang Error!', id);
+                      aruga.reply(from, 'Ada yang Error!', id);
                     });
 
                   case 3:
@@ -1574,7 +1568,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
               }
             });
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
           return _context13.abrupt("break", 851);
 
@@ -1607,7 +1601,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 496:
           _fetch = require('node-fetch');
           imgBS4 = "data:".concat(mimetype, ";base64,").concat(mediaData.toString('base64'));
-          bocilClient.reply(from, 'Searching....', id);
+          aruga.reply(from, 'Searching....', id);
 
           _fetch('https://trace.moe/api/search', {
             method: 'POST',
@@ -1621,7 +1615,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             return respon.json();
           }).then(function (resolt) {
             if (resolt.docs && resolt.docs.length <= 0) {
-              bocilClient.reply(from, 'Maaf, saya tidak tau ini anime apa, pastikan gambar yang akan di Search tidak Buram/Kepotong', id);
+              aruga.reply(from, 'Maaf, saya tidak tau ini anime apa, pastikan gambar yang akan di Search tidak Buram/Kepotong', id);
             }
 
             var _resolt$docs$ = resolt.docs[0],
@@ -1647,18 +1641,18 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             teks += "\u27B8 *Eps* : ".concat(episode.toString(), "\n");
             teks += "\u27B8 *Kesamaan* : ".concat((similarity * 100).toFixed(1), "%\n");
             var video = "https://media.trace.moe/video/".concat(anilist_id, "/").concat(encodeURIComponent(filename), "?t=").concat(at, "&token=").concat(tokenthumb);
-            bocilClient.sendFileFromUrl(from, video, 'anime.mp4', teks, id)["catch"](function () {
-              bocilClient.reply(from, teks, id);
+            aruga.sendFileFromUrl(from, video, 'anime.mp4', teks, id)["catch"](function () {
+              aruga.reply(from, teks, id);
             });
           })["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+            aruga.reply(from, 'Ada yang Error!', id);
           });
 
           _context13.next = 503;
           break;
 
         case 502:
-          bocilClient.reply(from, "Maaf format salah\n\nSilahkan kirim foto dengan caption ".concat(prefix, "whatanime\n\nAtau reply foto dengan caption ").concat(prefix, "whatanime"), id);
+          aruga.reply(from, "Maaf format salah\n\nSilahkan kirim foto dengan caption ".concat(prefix, "whatanime\n\nAtau reply foto dengan caption ").concat(prefix, "whatanime"), id);
 
         case 503:
           return _context13.abrupt("break", 851);
@@ -1669,7 +1663,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah.\nSilahkan ketik pesan dengan ".concat(prefix, "resi <kurir> <no_resi>\n\nKurir yang tersedia:\njne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah.\nSilahkan ketik pesan dengan ".concat(prefix, "resi <kurir> <no_resi>\n\nKurir yang tersedia:\njne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex"), id));
 
         case 506:
           kurirs = ['jne', 'pos', 'tiki', 'wahana', 'jnt', 'rpx', 'sap', 'sicepat', 'pcp', 'jet', 'dse', 'first', 'ninja', 'lion', 'idl', 'rex'];
@@ -1679,12 +1673,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.sendText(from, "Maaf, jenis ekspedisi pengiriman tidak didukung layanan ini hanya mendukung ekspedisi pengiriman ".concat(kurirs.join(', '), " Tolong periksa kembali.")));
+          return _context13.abrupt("return", aruga.sendText(from, "Maaf, jenis ekspedisi pengiriman tidak didukung layanan ini hanya mendukung ekspedisi pengiriman ".concat(kurirs.join(', '), " Tolong periksa kembali.")));
 
         case 509:
           console.log('Memeriksa No Resi', args[1], 'dengan ekspedisi', args[0]);
           cekResi(args[0], args[1]).then(function (result) {
-            return bocilClient.sendText(from, result);
+            return aruga.sendText(from, result);
           });
           return _context13.abrupt("break", 851);
 
@@ -1694,7 +1688,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Mengubah teks menjadi sound (google voice)\nketik: ".concat(prefix, "tts <kode_bahasa> <teks>\ncontoh : ").concat(prefix, "tts id halo\nuntuk kode bahasa cek disini : https://anotepad.com/note/read/5xqahdy8")));
+          return _context13.abrupt("return", aruga.reply(from, "Mengubah teks menjadi sound (google voice)\nketik: ".concat(prefix, "tts <kode_bahasa> <teks>\ncontoh : ").concat(prefix, "tts id halo\nuntuk kode bahasa cek disini : https://anotepad.com/note/read/5xqahdy8")));
 
         case 514:
           ttsGB = require('node-gtts')(args[0]);
@@ -1705,15 +1699,15 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, 'apa teksnya syg..', id));
+          return _context13.abrupt("return", aruga.reply(from, 'apa teksnya syg..', id));
 
         case 518:
           try {
             ttsGB.save('./media/tts.mp3', dataText, function () {
-              bocilClient.sendPtt(from, './media/tts.mp3', id);
+              aruga.sendPtt(from, './media/tts.mp3', id);
             });
           } catch (err) {
-            bocilClient.reply(from, err, id);
+            aruga.reply(from, err, id);
           }
 
           return _context13.abrupt("break", 851);
@@ -1724,7 +1718,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
 
         case 522:
           if (quotedMsg) {
@@ -1732,14 +1726,14 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
 
         case 524:
           quoteText = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : '';
           translate(quoteText, args[0]).then(function (result) {
-            return bocilClient.sendText(from, result);
+            return aruga.sendText(from, result);
           })["catch"](function () {
-            return bocilClient.sendText(from, 'Error, Kode bahasa salah.');
+            return aruga.sendText(from, 'Error, Kode bahasa salah.');
           });
           return _context13.abrupt("break", 851);
 
@@ -1750,7 +1744,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context11.prev = _context11.next) {
                   case 0:
                     _context11.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.reply(from, "".concat(res), id));
+                    return regeneratorRuntime.awrap(aruga.reply(from, "".concat(res), id));
 
                   case 2:
                   case "end":
@@ -1767,7 +1761,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah.\nKirimkan lokasi dan reply dengan caption ".concat(prefix, "ceklokasi"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah.\nKirimkan lokasi dan reply dengan caption ".concat(prefix, "ceklokasi"), id));
 
         case 531:
           console.log("Request Status Zona Penyebaran Covid-19 (".concat(quotedMsg.lat, ", ").concat(quotedMsg.lng, ")."));
@@ -1776,7 +1770,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 534:
           zoneStatus = _context13.sent;
-          if (zoneStatus.kode !== 200) bocilClient.sendText(from, 'Maaf, Terjadi error ketika memeriksa lokasi yang anda kirim.');
+          if (zoneStatus.kode !== 200) aruga.sendText(from, 'Maaf, Terjadi error ketika memeriksa lokasi yang anda kirim.');
           datax = '';
 
           for (_i3 = 0; _i3 < zoneStatus.data.length; _i3++) {
@@ -1786,7 +1780,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           text = "*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *".concat(zoneStatus.status, "* ").concat(zoneStatus.optional, "\n\nInformasi lokasi terdampak disekitar anda:\n").concat(datax);
-          bocilClient.sendText(from, text);
+          aruga.sendText(from, text);
           return _context13.abrupt("break", 851);
 
         case 541:
@@ -1795,7 +1789,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "ketik ".concat(prefix, "shortlink <url>"), id));
+          return _context13.abrupt("return", aruga.reply(from, "ketik ".concat(prefix, "shortlink <url>"), id));
 
         case 543:
           if (isUrl(args[0])) {
@@ -1803,7 +1797,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, 'Maaf, url yang kamu kirim tidak valid.', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, url yang kamu kirim tidak valid.', id));
 
         case 545:
           _context13.next = 547;
@@ -1812,8 +1806,8 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 547:
           shortlink = _context13.sent;
           _context13.next = 550;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, shortlink)["catch"](function () {
-            bocilClient.reply(from, '✘ Ada yang Error!', id);
+          return regeneratorRuntime.awrap(aruga.sendText(from, shortlink)["catch"](function () {
+            aruga.reply(from, 'Ada yang Error!', id);
           }));
 
         case 550:
@@ -1825,7 +1819,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Mengubah kalimat menjadi alayyyyy\n\nketik ".concat(prefix, "bapakfont kalimat"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Mengubah kalimat menjadi alayyyyy\n\nketik ".concat(prefix, "bapakfont kalimat"), id));
 
         case 553:
           rugaapi.bapakfont(body.slice(11)).then(function _callee12(res) {
@@ -1834,7 +1828,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
                 switch (_context12.prev = _context12.next) {
                   case 0:
                     _context12.next = 2;
-                    return regeneratorRuntime.awrap(bocilClient.reply(from, "".concat(res), id));
+                    return regeneratorRuntime.awrap(aruga.reply(from, "".concat(res), id));
 
                   case 2:
                   case "end":
@@ -1851,7 +1845,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 557:
           klasemen = db.get('group').filter({
@@ -1875,7 +1869,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             i++;
           });
           _context13.next = 564;
-          return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(from, textKlas));
+          return regeneratorRuntime.awrap(aruga.sendTextWithMentions(from, textKlas));
 
         case 564:
           return _context13.abrupt("break", 851);
@@ -1886,7 +1880,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 567:
           if (isGroupAdmins) {
@@ -1894,7 +1888,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 569:
           if (isBotGroupAdmins) {
@@ -1902,7 +1896,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[BOT] Silahkan tambahkan bot sebagai admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
         case 571:
           if (!(args.length !== 1)) {
@@ -1910,12 +1904,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk menggunakan ".concat(prefix, "add\nPenggunaan: ").concat(prefix, "add <nomor>\ncontoh: ").concat(prefix, "add 628xxx"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk menggunakan ".concat(prefix, "add\nPenggunaan: ").concat(prefix, "add <nomor>\ncontoh: ").concat(prefix, "add 628xxx"), id));
 
         case 573:
           _context13.prev = 573;
           _context13.next = 576;
-          return regeneratorRuntime.awrap(bocilClient.addParticipant(from, "".concat(args[0], "@c.us")));
+          return regeneratorRuntime.awrap(aruga.addParticipant(from, "".concat(args[0], "@c.us")));
 
         case 576:
           _context13.next = 581;
@@ -1924,7 +1918,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 578:
           _context13.prev = 578;
           _context13.t5 = _context13["catch"](573);
-          bocilClient.reply(from, 'Tidak dapat menambahkan target', id);
+          aruga.reply(from, 'Tidak dapat menambahkan target', id);
 
         case 581:
           return _context13.abrupt("break", 851);
@@ -1935,7 +1929,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 584:
           if (isGroupAdmins) {
@@ -1943,7 +1937,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 586:
           if (isBotGroupAdmins) {
@@ -1951,7 +1945,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[BOT] Silahkan tambahkan bot sebagai admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
         case 588:
           if (!(mentionedJidList.length === 0)) {
@@ -1959,7 +1953,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '✘ Format pesan salah.\nSilahkan tag satu atau lebih orang yang akan dikeluarkan', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, format pesan salah.\nSilahkan tag satu atau lebih orang yang akan dikeluarkan', id));
 
         case 590:
           if (!(mentionedJidList[0] === botNumber)) {
@@ -1968,14 +1962,14 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 593;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "\u2718 Format pesan salah.\nTidak dapat mengeluarkan ".concat(botName), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, format pesan salah.\nTidak dapat mengeluarkan akun bot sendiri', id));
 
         case 593:
           return _context13.abrupt("return", _context13.sent);
 
         case 594:
           _context13.next = 596;
-          return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(from, "Da dahhh \uD83D\uDE18\n".concat(mentionedJidList.map(function (x) {
+          return regeneratorRuntime.awrap(aruga.sendTextWithMentions(from, "Request diterima, mengeluarkan:\n".concat(mentionedJidList.map(function (x) {
             return "@".concat(x.replace('@c.us', ''));
           }).join('\n'))));
 
@@ -1994,14 +1988,14 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 601;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, 'Dasar member nakal!! Tidak bisa kick Admin'));
+          return regeneratorRuntime.awrap(aruga.sendText(from, 'Gagal, kamu tidak bisa mengeluarkan admin grup.'));
 
         case 601:
           return _context13.abrupt("return", _context13.sent);
 
         case 602:
           _context13.next = 604;
-          return regeneratorRuntime.awrap(bocilClient.removeParticipant(groupId, mentionedJidList[_i4]));
+          return regeneratorRuntime.awrap(aruga.removeParticipant(groupId, mentionedJidList[_i4]));
 
         case 604:
           _i4++;
@@ -2017,7 +2011,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 610:
           if (isGroupAdmins) {
@@ -2025,7 +2019,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 612:
           if (isBotGroupAdmins) {
@@ -2033,7 +2027,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[BOT] Silahkan tambahkan bot sebagai admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
         case 614:
           if (!(mentionedJidList.length !== 1)) {
@@ -2041,7 +2035,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, 'Lakukan promote per User', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, hanya bisa mempromote 1 user', id));
 
         case 616:
           if (!groupAdmins.includes(mentionedJidList[0])) {
@@ -2050,7 +2044,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 619;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "".concat(mentionedJidList[0], " sudah menjadi Admin"), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, user tersebut sudah menjadi admin.', id));
 
         case 619:
           return _context13.abrupt("return", _context13.sent);
@@ -2062,18 +2056,18 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 623;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, 'Maaf, format pesan salah.\nTidak dapat mempromote akun bot sendiri', id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, format pesan salah.\nTidak dapat mempromote akun bot sendiri', id));
 
         case 623:
           return _context13.abrupt("return", _context13.sent);
 
         case 624:
           _context13.next = 626;
-          return regeneratorRuntime.awrap(bocilClient.promoteParticipant(groupId, mentionedJidList[0]));
+          return regeneratorRuntime.awrap(aruga.promoteParticipant(groupId, mentionedJidList[0]));
 
         case 626:
           _context13.next = 628;
-          return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(from, "Selamat @".concat(mentionedJidList[0].replace('@c.us', ''), " diangkat sebagai admin.")));
+          return regeneratorRuntime.awrap(aruga.sendTextWithMentions(from, "Request diterima, menambahkan @".concat(mentionedJidList[0].replace('@c.us', ''), " sebagai admin.")));
 
         case 628:
           return _context13.abrupt("break", 851);
@@ -2084,7 +2078,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 631:
           if (isGroupAdmins) {
@@ -2092,7 +2086,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 633:
           if (isBotGroupAdmins) {
@@ -2100,7 +2094,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[BOT] Silahkan tambahkan bot sebagai admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
         case 635:
           if (!(mentionedJidList.length !== 1)) {
@@ -2108,7 +2102,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, 'Lakukan demote per User', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, hanya bisa mendemote 1 user', id));
 
         case 637:
           if (groupAdmins.includes(mentionedJidList[0])) {
@@ -2117,7 +2111,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 640;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "".concat(mentionedJidList, ", kasihan kamu masih member :("), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, user tersebut belum menjadi admin.', id));
 
         case 640:
           return _context13.abrupt("return", _context13.sent);
@@ -2129,18 +2123,18 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 644;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, 'Maaf, format pesan salah.\nTidak dapat mendemote akun bot sendiri', id));
+          return regeneratorRuntime.awrap(aruga.reply(from, 'Maaf, format pesan salah.\nTidak dapat mendemote akun bot sendiri', id));
 
         case 644:
           return _context13.abrupt("return", _context13.sent);
 
         case 645:
           _context13.next = 647;
-          return regeneratorRuntime.awrap(bocilClient.demoteParticipant(groupId, mentionedJidList[0]));
+          return regeneratorRuntime.awrap(aruga.demoteParticipant(groupId, mentionedJidList[0]));
 
         case 647:
           _context13.next = 649;
-          return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(from, "Selamat menjadi member lagi hahaha, Hapus jabatan @".concat(mentionedJidList[0].replace('@c.us', ''), ".")));
+          return regeneratorRuntime.awrap(aruga.sendTextWithMentions(from, "Request diterima, menghapus jabatan @".concat(mentionedJidList[0].replace('@c.us', ''), ".")));
 
         case 649:
           return _context13.abrupt("break", 851);
@@ -2151,7 +2145,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 652:
           if (isGroupAdmins) {
@@ -2159,11 +2153,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 654:
-          bocilClient.sendText(from, 'Selamat jalan, kalian jangan rindu ya :(').then(function () {
-            return bocilClient.leaveGroup(groupId);
+          aruga.sendText(from, 'Good bye... ( ⇀‸↼‶ )').then(function () {
+            return aruga.leaveGroup(groupId);
           });
           return _context13.abrupt("break", 851);
 
@@ -2173,7 +2167,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 658:
           if (quotedMsg) {
@@ -2181,7 +2175,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
 
         case 660:
           if (quotedMsgObj.fromMe) {
@@ -2189,10 +2183,10 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
 
         case 662:
-          bocilClient.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false);
+          aruga.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false);
           return _context13.abrupt("break", 851);
 
         case 664:
@@ -2201,7 +2195,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 666:
           if (isGroupAdmins) {
@@ -2209,11 +2203,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 668:
           _context13.next = 670;
-          return regeneratorRuntime.awrap(bocilClient.getGroupMembers(groupId));
+          return regeneratorRuntime.awrap(aruga.getGroupMembers(groupId));
 
         case 670:
           groupMem = _context13.sent;
@@ -2224,9 +2218,9 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             hehex += " @".concat(groupMem[_i5].id.replace(/@c.us/g, ''), "\n");
           }
 
-          hehex += '╚═〘 *R - B O T* 〙';
+          hehex += '╚═〘 *A R U G A  B O T* 〙';
           _context13.next = 676;
-          return regeneratorRuntime.awrap(bocilClient.sendTextWithMentions(from, hehex));
+          return regeneratorRuntime.awrap(aruga.sendTextWithMentions(from, hehex));
 
         case 676:
           return _context13.abrupt("break", 851);
@@ -2237,10 +2231,10 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 679:
-          bocilClient.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
+          aruga.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
           return _context13.abrupt("break", 851);
 
         case 681:
@@ -2249,7 +2243,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 683:
           if (isGroupAdmins) {
@@ -2257,7 +2251,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 685:
           if (!(args.length !== 1)) {
@@ -2265,20 +2259,20 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id));
 
         case 687:
           if (args[0] == 'on') {
             simi.push(chatId);
             fs.writeFileSync('./settings/simi.json', JSON.stringify(simi));
-            bocilClient.reply(from, 'Mengaktifkan bot simi-simi!', id);
+            aruga.reply(from, 'Mengaktifkan bot simi-simi!', id);
           } else if (args[0] == 'off') {
             inxx = simi.indexOf(chatId);
             simi.splice(inxx, 1);
             fs.writeFileSync('./settings/simi.json', JSON.stringify(simi));
-            bocilClient.reply(from, 'Menonaktifkan bot simi-simi!', id);
+            aruga.reply(from, 'Menonaktifkan bot simi-simi!', id);
           } else {
-            bocilClient.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
+            aruga.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
           }
 
           return _context13.abrupt("break", 851);
@@ -2289,10 +2283,10 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 691:
-          bocilClient.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
+          aruga.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
           return _context13.abrupt("break", 851);
 
         case 693:
@@ -2301,7 +2295,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 695:
           if (isGroupAdmins) {
@@ -2309,7 +2303,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 697:
           if (!(args.length !== 1)) {
@@ -2317,20 +2311,20 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id));
 
         case 699:
           if (args[0] == 'on') {
             ngegas.push(chatId);
             fs.writeFileSync('./settings/ngegas.json', JSON.stringify(ngegas));
-            bocilClient.reply(from, 'Fitur Anti Kasar sudah di Aktifkan', id);
+            aruga.reply(from, 'Fitur Anti Kasar sudah di Aktifkan', id);
           } else if (args[0] == 'off') {
             nixx = ngegas.indexOf(chatId);
             ngegas.splice(nixx, 1);
             fs.writeFileSync('./settings/ngegas.json', JSON.stringify(ngegas));
-            bocilClient.reply(from, 'Fitur Anti Kasar sudah di non-Aktifkan', id);
+            aruga.reply(from, 'Fitur Anti Kasar sudah di non-Aktifkan', id);
           } else {
-            bocilClient.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\napasih itu? fitur apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
+            aruga.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\napasih itu? fitur apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
           }
 
           return _context13.abrupt("break", 851);
@@ -2341,7 +2335,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 703:
           if (isGroupAdmins) {
@@ -2349,7 +2343,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[Group Admin] Perintah ini hanya digunakan oleh admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
         case 705:
           reset = db.get('group').find({
@@ -2364,7 +2358,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 709;
-          return regeneratorRuntime.awrap(bocilClient.sendText(from, "Klasemen telah direset."));
+          return regeneratorRuntime.awrap(aruga.sendText(from, "Klasemen telah direset."));
 
         case 709:
           return _context13.abrupt("break", 851);
@@ -2375,7 +2369,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "[GROUP] Perintah ini hanya dapat digunakan didalam grup!\n".concat(infoProblem), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
         case 712:
           isOwner = chat.groupMetadata.owner == pengirim;
@@ -2385,7 +2379,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat dipakai oleh R-Dev : @".concat(ownerNumber.replace('@c.us', '')), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Maaf, perintah ini hanya dapat dipakai oleh owner grup!', id));
 
         case 715:
           if (isBotGroupAdmins) {
@@ -2393,11 +2387,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, '[BOT] Silahkan tambahkan bot sebagai admin grup!', id));
+          return _context13.abrupt("return", aruga.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
         case 717:
           _context13.next = 719;
-          return regeneratorRuntime.awrap(bocilClient.getGroupMembers(groupId));
+          return regeneratorRuntime.awrap(aruga.getGroupMembers(groupId));
 
         case 719:
           allMem = _context13.sent;
@@ -2419,7 +2413,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
         case 725:
           _context13.next = 727;
-          return regeneratorRuntime.awrap(bocilClient.removeParticipant(groupId, allMem[_i6].id));
+          return regeneratorRuntime.awrap(aruga.removeParticipant(groupId, allMem[_i6].id));
 
         case 727:
           _i6++;
@@ -2427,7 +2421,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           break;
 
         case 730:
-          bocilClient.reply(from, 'Success kick all member', id);
+          aruga.reply(from, 'Success kick all member', id);
           return _context13.abrupt("break", 851);
 
         case 732:
@@ -2436,7 +2430,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat dipakai oleh R-Dev : @".concat(ownerNumber.replace('@c.us', '')), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Perintah ini hanya untuk Owner bot!', id));
 
         case 734:
           if (!(args.length == 0)) {
@@ -2444,24 +2438,23 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, // `Untuk banned seseorang agar tidak bisa menggunakan commands\n\nCaranya ketik: \n${prefix}ban add 628xx --untuk mengaktifkan\n${prefix}ban del 628xx --untuk nonaktifkan\n\ncara cepat ban banyak digrup ketik:\n${prefix}ban @tag @tag @tag`
-          "Error {Check Source", id));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk banned seseorang agar tidak bisa menggunakan commands\n\nCaranya ketik: \n".concat(prefix, "ban add 628xx --untuk mengaktifkan\n").concat(prefix, "ban del 628xx --untuk nonaktifkan\n\ncara cepat ban banyak digrup ketik:\n").concat(prefix, "ban @tag @tag @tag"), id));
 
         case 736:
           if (args[0] == 'add') {
             banned.push(args[1] + '@c.us');
             fs.writeFileSync('./settings/banned.json', JSON.stringify(banned));
-            bocilClient.reply(from, 'Success banned target!');
+            aruga.reply(from, 'Success banned target!');
           } else if (args[0] == 'del') {
             xnxx = banned.indexOf(args[1] + '@c.us');
             banned.splice(xnxx, 1);
             fs.writeFileSync('./settings/banned.json', JSON.stringify(banned));
-            bocilClient.reply(from, 'Success unbanned target!');
+            aruga.reply(from, 'Success unbanned target!');
           } else {
             for (_i7 = 0; _i7 < mentionedJidList.length; _i7++) {
               banned.push(mentionedJidList[_i7]);
               fs.writeFileSync('./settings/banned.json', JSON.stringify(banned));
-              bocilClient.reply(from, 'Success ban target!', id);
+              aruga.reply(from, 'Success ban target!', id);
             }
           }
 
@@ -2473,7 +2466,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat dipakai oleh R-Dev : @".concat(ownerNumber.replace('@c.us', '')), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Perintah ini hanya untuk Owner bot!', id));
 
         case 740:
           if (!(args.length == 0)) {
@@ -2481,13 +2474,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, // `Untuk broadcast ke semua chat ketik:\n${prefix}bc [isi chat]`
-          "Error {Check Source"));
+          return _context13.abrupt("return", aruga.reply(from, "Untuk broadcast ke semua chat ketik:\n".concat(prefix, "bc [isi chat]")));
 
         case 742:
           msg = body.slice(4);
           _context13.next = 745;
-          return regeneratorRuntime.awrap(bocilClient.getAllChatIds());
+          return regeneratorRuntime.awrap(aruga.getAllChatIds());
 
         case 745:
           chatz = _context13.sent;
@@ -2505,12 +2497,12 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
           idk = _step.value;
           _context13.next = 755;
-          return regeneratorRuntime.awrap(bocilClient.getChatById(idk));
+          return regeneratorRuntime.awrap(aruga.getChatById(idk));
 
         case 755:
           cvk = _context13.sent;
-          if (!cvk.isReadOnly) bocilClient.sendText(idk, " \u273C *R - D E V* \u273C\n\n".concat(msg));
-          if (cvk.isReadOnly) bocilClient.sendText(idk, " \u273C *R - D E V* \u273C\n\n".concat(msg));
+          if (!cvk.isReadOnly) aruga.sendText(idk, "\u3018 *A R U G A  B C* \u3019\n\n".concat(msg));
+          if (cvk.isReadOnly) aruga.sendText(idk, "\u3018 *A R U G A  B C* \u3019\n\n".concat(msg));
 
         case 758:
           _iteratorNormalCompletion = true;
@@ -2552,7 +2544,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           return _context13.finish(767);
 
         case 775:
-          bocilClient.reply(from, "@".concat(ownerNumber.replace('@c.us', ''), " Broadcast Success! - ").concat(botName), id);
+          aruga.reply(from, 'Broadcast Success!', id);
           return _context13.abrupt("break", 851);
 
         case 777:
@@ -2561,16 +2553,16 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat dipakai oleh R-Dev : @".concat(ownerNumber.replace('@c.us', '')), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Perintah ini hanya untuk Owner bot', id));
 
         case 779:
           _context13.next = 781;
-          return regeneratorRuntime.awrap(bocilClient.getAllChatIds());
+          return regeneratorRuntime.awrap(aruga.getAllChatIds());
 
         case 781:
           allChatz = _context13.sent;
           _context13.next = 784;
-          return regeneratorRuntime.awrap(bocilClient.getAllGroups());
+          return regeneratorRuntime.awrap(aruga.getAllGroups());
 
         case 784:
           allGroupz = _context13.sent;
@@ -2588,15 +2580,15 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
           gclist = _step2.value;
           _context13.next = 794;
-          return regeneratorRuntime.awrap(bocilClient.sendText(gclist.contact.id, "Maaf bot sedang pembersihan, total chat aktif : ".concat(allChatz.length)));
+          return regeneratorRuntime.awrap(aruga.sendText(gclist.contact.id, "Maaf bot sedang pembersihan, total chat aktif : ".concat(allChatz.length)));
 
         case 794:
           _context13.next = 796;
-          return regeneratorRuntime.awrap(bocilClient.leaveGroup(gclist.contact.id));
+          return regeneratorRuntime.awrap(aruga.leaveGroup(gclist.contact.id));
 
         case 796:
           _context13.next = 798;
-          return regeneratorRuntime.awrap(bocilClient.deleteChat(gclist.contact.id));
+          return regeneratorRuntime.awrap(aruga.deleteChat(gclist.contact.id));
 
         case 798:
           _iteratorNormalCompletion2 = true;
@@ -2638,7 +2630,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           return _context13.finish(807);
 
         case 815:
-          bocilClient.reply(from, "@".concat(ownerNumber.replace('@c.us', ''), " Success leave all group! - ").concat(botName), id);
+          aruga.reply(from, 'Success leave all group!', id);
           return _context13.abrupt("break", 851);
 
         case 817:
@@ -2647,11 +2639,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             break;
           }
 
-          return _context13.abrupt("return", bocilClient.reply(from, "Perintah ini hanya dapat dipakai oleh R-Dev : @".concat(ownerNumber.replace('@c.us', '')), id));
+          return _context13.abrupt("return", aruga.reply(from, 'Perintah ini hanya untuk Owner bot', id));
 
         case 819:
           _context13.next = 821;
-          return regeneratorRuntime.awrap(bocilClient.getAllChats());
+          return regeneratorRuntime.awrap(aruga.getAllChats());
 
         case 821:
           allChatx = _context13.sent;
@@ -2669,7 +2661,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
 
           dchat = _step3.value;
           _context13.next = 831;
-          return regeneratorRuntime.awrap(bocilClient.deleteChat(dchat.id));
+          return regeneratorRuntime.awrap(aruga.deleteChat(dchat.id));
 
         case 831:
           _iteratorNormalCompletion3 = true;
@@ -2711,7 +2703,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           return _context13.finish(840);
 
         case 848:
-          bocilClient.reply(from, "@".concat(ownerNumber.replace('@c.us', ''), " Success clear all chat! - ").concat(botName), id);
+          aruga.reply(from, 'Success clear all chat!', id);
           return _context13.abrupt("break", 851);
 
         case 850:
@@ -2720,11 +2712,11 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 851:
           // Simi-simi function
           if (!isCmd && isGroupMsg && isSimi && message.type === 'chat') {
-            axios.get("https://bocilClientz.herokuapp.com/api/simisimi?kata=".concat(encodeURIComponent(message.body), "&apikey=").concat(apiSimi)).then(function (res) {
-              if (res.data.status == 403) return bocilClient.sendText(ownerNumber, "".concat(res.data.result, "\n\n").concat(res.data.pesan));
-              bocilClient.reply(from, "Simi berkata: ".concat(res.data.result), id);
+            axios.get("https://arugaz.herokuapp.com/api/simisimi?kata=".concat(encodeURIComponent(message.body), "&apikey=").concat(apiSimi)).then(function (res) {
+              if (res.data.status == 403) return aruga.sendText(ownerNumber, "".concat(res.data.result, "\n\n").concat(res.data.pesan));
+              aruga.reply(from, "Simi berkata: ".concat(res.data.result), id);
             })["catch"](function (err) {
-              bocilClient.reply(from, "".concat(err), id);
+              aruga.reply(from, "".concat(err), id);
             });
           } // Kata kasar function
 
@@ -2772,7 +2764,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           }
 
           _context13.next = 863;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp" + formatin(denda.denda), id));
+          return regeneratorRuntime.awrap(aruga.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp" + formatin(denda.denda), id));
 
         case 863:
           _context13.next = 879;
@@ -2823,7 +2815,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
           });
 
           _context13.next = 875;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "Jangan badword bodoh\nDenda +5.000", id));
+          return regeneratorRuntime.awrap(aruga.reply(from, "Jangan badword bodoh\nDenda +5.000", id));
 
         case 875:
           _context13.next = 878;
@@ -2858,7 +2850,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
             }]
           }).write();
           _context13.next = 885;
-          return regeneratorRuntime.awrap(bocilClient.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp5.000", id));
+          return regeneratorRuntime.awrap(aruga.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp5.000", id));
 
         case 885:
           _context13.next = 888;
@@ -2880,7 +2872,7 @@ module.exports = HandleMsg = function HandleMsg(bocilClient, message) {
         case 890:
           _context13.prev = 890;
           _context13.t9 = _context13["catch"](0);
-          console.log(style.err("".concat(_context13.t9)));
+          console.log(color('[EROR]', 'red'), _context13.t9);
 
         case 893:
         case "end":

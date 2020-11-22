@@ -70,7 +70,3 @@ exports.msg = function (string) {
 exports.time = function (string) {
   return chalk.yellow("".concat(string));
 };
-
-exports.err = function (string) {
-  return console.log(chalk.red('[ERROR]'), "".concat(string));
-};
