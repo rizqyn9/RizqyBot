@@ -6,8 +6,6 @@ var _require = require("@open-wa/wa-automate"),
 
 var figlet = require("figlet");
 
-var gradient = require("gradient-string");
-
 var style = require("./custom/console");
 
 var options = require("./utils/options");
@@ -31,10 +29,10 @@ var _require4 = require('./msg/msg-temp'),
 
 var start = function start() {
   var aruga = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Client();
-  console.log(gradient.instagram(figlet.textSync("RIZQY\nSTUDIO", {
+  console.log(figlet.textSync("RIZQY\nSTUDIO", {
     font: "Epic",
     horizontalLayout: "default"
-  })));
+  }));
   console.log(style.dev("Made by R-Dev Studio"));
   console.log(style.bot("Have a nice day Rizqy :)"));
   console.log(style.bot("I'm ready for my Jobs")); //!Mempertahankan sesi agar tetap nyala

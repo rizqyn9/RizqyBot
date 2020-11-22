@@ -1,6 +1,5 @@
 const { create, Client } = require("@open-wa/wa-automate");
 const figlet = require("figlet");
-const gradient = require("gradient-string");
 const style = require("./custom/console");
 const options = require("./utils/options");
 const { color, messageLog } = require("./utils");
@@ -11,12 +10,12 @@ const {infoFeedback,infoProblem} = require('./msg/msg-temp') //! Massage Templat
 const start = (aruga = new Client()) => {
 
   console.log(
-    gradient.instagram(
+
       figlet.textSync("RIZQY\nSTUDIO", {
         font: "Epic",
         horizontalLayout: "default",
       })
-    )
+    
   );
   console.log(style.dev("Made by R-Dev Studio"));
   console.log(style.bot("Have a nice day Rizqy :)"));
