@@ -1,127 +1,85 @@
-const { create, Client } = require("@open-wa/wa-automate");
-const figlet = require("figlet");
-const style = require("./custom/console");
-const options = require("./utils/options");
-const { color, messageLog } = require("./utils");
-const HandleMsg = require("./HandleMsg"); 
-const { cacheMessage, groupLimit, botName} = require("./bot-setting.json"); //! Bot Setting
-const {infoFeedback,infoProblem} = require('./msg/msg-temp') //! Massage Template
+const { create, Client } = require('@open-wa/wa-automate')
+const figlet = require('figlet')
+const options = require('./utils/options')
+const { color, messageLog } = require('./utils')
+const HandleMsg = require('./HandleMsg')
 
-const start = (aruga = new Client()) => {
+const start = (RClient = new Client()) => {
+    console.log(color('[DEV]'), color('RClientZ', 'yellow'))
+    console.log(color('[~>>]'), color('BOT Started!', 'green'))
 
-  console.log(
+    // Mempertahankan sesi agar tetap nyala
+    RClient.onStateChanged((state) => {
+        console.log(color('[~>>]', 'red'), state)
+        if (state === 'CONFLICT' || state === 'UNLAUNCHED') RClient.forceRefocus()
+    })
 
-      figlet.textSync("RIZQY\nSTUDIO", {
-        font: "Epic",
-        horizontalLayout: "default",
-      })
-    
-  );
-  console.log(style.dev("Made by R-Dev Studio"));
-  console.log(style.bot("Have a nice day Rizqy :)"));
-  console.log(style.bot("I'm ready for my Jobs"));
+    // ketika bot diinvite ke dalam group
+    RClient.onAddedToGroup(async (chat) => {
+	const groups = await RClient.getAllGroups()
+	// kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
+	if (groups.length > groupLimit) {
+	await RClient.sendText(chat.id, `Sorry, the group on this bot is full\nMax Group is: ${groupLimit}`).then(() => {
+	      RClient.leaveGroup(chat.id)
+	      RClient.deleteChat(chat.id)
+	  }) 
+	} else {
+	// kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
+	    if (chat.groupMetadata.participants.length < memberLimit) {
+	    await RClient.sendText(chat.id, `Sorry, BOT comes out if the group members do not exceed ${memberLimit} people`).then(() => {
+	      RClient.leaveGroup(chat.id)
+	      RClient.deleteChat(chat.id)
+	    })
+	    } else {
+        await RClient.simulateTyping(chat.id, true).then(async () => {
+          await RClient.sendText(chat.id, `Hai minna~, Im RClient BOT. To find out the commands on this bot type ${prefix}menu`)
+        })
+	    }
+	}
+    })
 
-  //!Mempertahankan sesi agar tetap nyala
-  aruga.onStateChanged((state) => {
-    console.log(style.warn(state));
-    if (state === "CONFLICT" || state === "UNLAUNCHED")
-      aruga.forceRefocus();
-  });
-
-  // ketika bot diinvite ke dalam group
-  aruga.onAddedToGroup(async (chat) => {
-    const groups = await aruga.getAllGroups();
-    // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
-    if (groups.length > groupLimit) {
-      await aruga
-        .sendText(
-          chat.id,
-          `Maaf, saat ini ${botName} mencapai batas maksimum.\nMaksimal grup : ${groupLimit} ` + infoProblem
-        )
-        .then(() => {
-          aruga.leaveGroup(chat.id);
-          aruga.deleteChat(chat.id);
-        });
-    } else {
-      // kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
-      if (chat.groupMetadata.participants.length < memberLimit) {
-        await aruga
-          .sendText(
-            chat.id,
-            `Maaf, ${botName} hanya bisa masuk grup yang mempunyai anggota lebih dari ${memberLimit} anggota` + infoProblem
-          )
-          .then(() => {
-            aruga.leaveGroup(chat.id);
-            aruga.deleteChat(chat.id);
-          });
-      } else {
-        await aruga.simulateTyping(chat.id, true).then(async () => {
-          await aruga.sendText(
-            chat.id,
-            `Hai member ${groupName},  perkenalkan aku *${botName}*\nUntuk melihat perintah pada ketik ${prefix}menu 😘`
-          );
-        });
-      }
-    }
-  });
-
-  // ketika seseorang masuk/keluar dari group
-  aruga.onGlobalParicipantsChanged(async (event) => {
-    const host = (await aruga.getHostNumber()) + "@c.us";
-    // kondisi ketika seseorang diinvite/join group lewat link
-    if (event.action === "add" && event.who !== host) {
-      await aruga.sendTextWithMentions(
-        event.chat,
-        `Hai ${event.who.replace(
-          "@c.us",
-          ""
-        )}, Selamat datang digrup.\n Semoga nyaman 🥰 \n*-${botName}*`
-      );
-    }
-    // kondisi ketika seseorang dikick/keluar dari group
-    if (event.action === "remove" && event.who !== host) {
-      await aruga.sendTextWithMentions(
-        event.chat,
-        `Jangan rindu @${event.who.replace("@c.us", "")}, Semoga tenang`
-      );
-    }
-  });
-
-  aruga.onIncomingCall(async (callData) => {
-    // ketika seseorang menelpon nomor bot akan mengirim pesan
-    await aruga
-      .sendText(
-        callData.peerJid,
-        `Dilarang Keras Menelepon hukuman block.` + infoProblem
-      )
-      .then(async () => {
-        // bot akan memblock nomor itu
-        await aruga.contactBlock(callData.peerJid);
-      });
-  });
-
-  // ketika seseorang mengirim pesan
-  aruga.onMessage(async (message) => {
-    aruga
-      .getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
-      .then((msg) => {
-        if (msg >= cacheMessage) {
-          console.log(
-            style.bot(`Loaded Message reach ${msg}, deleting message cache...`),
-          );
-          aruga.cutMsgCache();
+    // ketika seseorang masuk/keluar dari group
+    RClient.onGlobalParicipantsChanged(async (event) => {
+        const host = await RClient.getHostNumber() + '@c.us'
+        // kondisi ketika seseorang diinvite/join group lewat link
+        if (event.action === 'add' && event.who !== host) {
+            await RClient.sendTextWithMentions(event.chat, `Hello, Welcome to the group @${event.who.replace('@c.us', '')} \n\nHave fun with us✨`)
         }
-      });
-    HandleMsg(aruga, message);
-  });
+        // kondisi ketika seseorang dikick/keluar dari group
+        if (event.action === 'remove' && event.who !== host) {
+            await RClient.sendTextWithMentions(event.chat, `Good bye @${event.who.replace('@c.us', '')}, We'll miss you✨`)
+        }
+    })
 
-  // Message log for analytic
-  aruga.onAnyMessage((anal) => {
-    messageLog(anal.fromMe, anal.type);
-  });
-};
+    RClient.onIncomingCall(async (callData) => {
+        // ketika seseorang menelpon nomor bot akan mengirim pesan
+        await RClient.sendText(callData.peerJid, 'Maaf sedang tidak bisa menerima panggilan.\n\n-bot')
+        .then(async () => {
+            // bot akan memblock nomor itu
+            await RClient.contactBlock(callData.peerJid)
+        })
+    })
+
+    // ketika seseorang mengirim pesan
+    RClient.onMessage(async (message) => {
+        RClient.getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
+            .then((msg) => {
+                if (msg >= 3000) {
+                    console.log('[RClient]', color(`Loaded Message Reach ${msg}, cuting message cache...`, 'yellow'))
+                    RClient.cutMsgCache()
+                }
+            })
+        HandleMsg(RClient, message)    
+    
+    })
+	
+    // Message log for analytic
+    RClient.onAnyMessage((anal) => { 
+        messageLog(anal.fromMe, anal.type)
+    })
+}
 
 //create session
 create(options(true, start))
-  .then((aruga) => start(aruga))
-  .catch((err) => new Error(err));
+    .then((RClient) => start(RClient))
+    .catch((err) => new Error(err))
