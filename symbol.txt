@@ -3,13 +3,31 @@ Arrow
 ↳
 
 Wait
-⌛
+[⌛]
 
 wrong
-✘
+[✘]
 
 Success
-☑
+[☑]
 
 Warn
-⚠
+[⚠]
+
+Branch
+╔
+║
+╠
+║
+╚
+
+┏
+┣
+┗
+
+╒
+╞
+╘
+
+✅
+❎

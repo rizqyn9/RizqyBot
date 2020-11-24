@@ -59,3 +59,15 @@ exports.time = (string) => {
     return chalk.yellow(`${string}`)
 }
 
+//! Bot Non / Activate 
+exports.botAct = (string, groupName) => {
+    return console.log( chalk.whiteBright(`[BOT]\t`+`${string}`), chalk.cyan(groupName))
+}
+exports.botNonAct = (string, groupName) => {
+    return console.log( chalk.red(`[BOT]\t`+`${string}`), chalk.cyan(groupName))
+}
+exports.nonRegist = (name, groupName,groupId) => {
+    return console.log(chalk.red(`[BOT]\t`,chalk.whiteBright(`Group : ${groupName}, Name : ${name} Not Regist, ${groupId}`)))
+}
+
+

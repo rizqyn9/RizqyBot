@@ -5,10 +5,12 @@ const style = require("./custom/console");
 const options = require("./utils/options");
 const { color, messageLog } = require("./utils");
 const HandleMsg = require("./HandleMsg"); 
-const { cacheMessage, groupLimit, botName} = require("./bot-setting.json"); //! Bot Setting
+const { cacheMessage, groupLimit, botName,memberLimit} = require("./bot-setting.json"); //! Bot Setting
 const {infoFeedback,infoProblem} = require('./msg/msg-temp') //! Massage Template
+const fs = require('fs-extra')
+const groupList = JSON.parse(fs.readFileSync('./feature/groupList.json'))
 
-const start = (bocilClient = new Client()) => {
+const start = (RBot = new Client()) => {
   console.log(
     gradient.instagram(
       figlet.textSync("RIZQY\nSTUDIO", {
@@ -22,41 +24,43 @@ const start = (bocilClient = new Client()) => {
   console.log(style.bot("I'm ready for my Jobs"));
 
   //!Mempertahankan sesi agar tetap nyala
-  bocilClient.onStateChanged((state) => {
+  RBot.onStateChanged((state) => {
     console.log(style.warn(state));
     if (state === "CONFLICT" || state === "UNLAUNCHED")
-      bocilClient.forceRefocus();
+      RBot.forceRefocus();
   });
 
   // ketika bot diinvite ke dalam group
-  bocilClient.onAddedToGroup(async (chat) => {
-    const groups = await bocilClient.getAllGroups();
+  RBot.onAddedToGroup(async (chat) => {
+    const groups = await RBot.getAllGroups();
+    const groupName = chat.contact.id //! Get Group Name
+
     // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
     if (groups.length > groupLimit) {
-      await bocilClient
+      await RBot
         .sendText(
           chat.id,
           `Maaf, saat ini ${botName} mencapai batas maksimum.\nMaksimal grup : ${groupLimit} ` + infoProblem
         )
         .then(() => {
-          bocilClient.leaveGroup(chat.id);
-          bocilClient.deleteChat(chat.id);
+          RBot.leaveGroup(chat.id);
+          RBot.deleteChat(chat.id);
         });
     } else {
       // kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
       if (chat.groupMetadata.participants.length < memberLimit) {
-        await bocilClient
+        await RBot
           .sendText(
             chat.id,
             `Maaf, ${botName} hanya bisa masuk grup yang mempunyai anggota lebih dari ${memberLimit} anggota` + infoProblem
           )
           .then(() => {
-            bocilClient.leaveGroup(chat.id);
-            bocilClient.deleteChat(chat.id);
+            RBot.leaveGroup(chat.id);
+            RBot.deleteChat(chat.id);
           });
       } else {
-        await bocilClient.simulateTyping(chat.id, true).then(async () => {
-          await bocilClient.sendText(
+        await RBot.simulateTyping(chat.id, true).then(async () => {
+          await RBot.sendText(
             chat.id,
             `Hai member ${groupName},  perkenalkan aku *${botName}*\nUntuk melihat perintah pada ketik ${prefix}menu 😘`
           );
@@ -65,12 +69,13 @@ const start = (bocilClient = new Client()) => {
     }
   });
 
+
   // ketika seseorang masuk/keluar dari group
-  bocilClient.onGlobalParicipantsChanged(async (event) => {
-    const host = (await bocilClient.getHostNumber()) + "@c.us";
+  RBot.onGlobalParicipantsChanged(async (event) => {
+    const host = (await RBot.getHostNumber()) + "@c.us";
     // kondisi ketika seseorang diinvite/join group lewat link
     if (event.action === "add" && event.who !== host) {
-      await bocilClient.sendTextWithMentions(
+      await RBot.sendTextWithMentions(
         event.chat,
         `Hai ${event.who.replace(
           "@c.us",
@@ -80,48 +85,48 @@ const start = (bocilClient = new Client()) => {
     }
     // kondisi ketika seseorang dikick/keluar dari group
     if (event.action === "remove" && event.who !== host) {
-      await bocilClient.sendTextWithMentions(
+      await RBot.sendTextWithMentions(
         event.chat,
         `Jangan rindu @${event.who.replace("@c.us", "")}, Semoga tenang`
       );
     }
   });
 
-  bocilClient.onIncomingCall(async (callData) => {
+  RBot.onIncomingCall(async (callData) => {
     // ketika seseorang menelpon nomor bot akan mengirim pesan
-    await bocilClient
+    await RBot
       .sendText(
         callData.peerJid,
         `Dilarang Keras Menelepon hukuman block.` + infoProblem
       )
       .then(async () => {
         // bot akan memblock nomor itu
-        await bocilClient.contactBlock(callData.peerJid);
+        await RBot.contactBlock(callData.peerJid);
       });
   });
 
   // ketika seseorang mengirim pesan
-  bocilClient.onMessage(async (message) => {
-    bocilClient
+  RBot.onMessage(async (message) => {
+    RBot
       .getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
       .then((msg) => {
         if (msg >= cacheMessage) {
           console.log(
             style.bot(`Loaded Message reach ${msg}, deleting message cache...`),
           );
-          bocilClient.cutMsgCache();
+          RBot.cutMsgCache();
         }
       });
-    HandleMsg(bocilClient, message);
+    HandleMsg(RBot, message);
   });
 
   // Message log for analytic
-  bocilClient.onAnyMessage((anal) => {
+  RBot.onAnyMessage((anal) => {
     messageLog(anal.fromMe, anal.type);
   });
 };
 
 //create session
 create(options(true, start))
-  .then((bocilClient) => start(bocilClient))
+  .then((RBot) => start(RBot))
   .catch((err) => new Error(err));

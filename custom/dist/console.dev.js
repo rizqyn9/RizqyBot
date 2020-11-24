@@ -69,4 +69,17 @@ exports.msg = function (string) {
 
 exports.time = function (string) {
   return chalk.yellow("".concat(string));
+}; //! Bot Non / Activate 
+
+
+exports.botAct = function (string, groupName) {
+  return console.log(chalk.whiteBright("[BOT]\t" + "".concat(string)), chalk.cyan(groupName));
+};
+
+exports.botNonAct = function (string, groupName) {
+  return console.log(chalk.red("[BOT]\t" + "".concat(string)), chalk.cyan(groupName));
+};
+
+exports.nonRegist = function (name, groupName, groupId) {
+  return console.log(chalk.red("[BOT]\t", chalk.whiteBright("Group : ".concat(groupName, ", Name : ").concat(name, " Not Regist, ").concat(groupId))));
 };
