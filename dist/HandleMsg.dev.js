@@ -83,14 +83,7 @@ var _require7 = require('./bot-setting.json'),
     prefix = _require7.prefix,
     waFeed = _require7.waFeed;
 
-var style = require('./custom/console'); // const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
-// let { 
-//     ownerNumber, 
-//     groupLimit, 
-//     memberLimit,
-//     prefix
-// } = setting
-
+var style = require('./custom/console');
 
 var _JSON$parse = JSON.parse(fs.readFileSync('./settings/api.json')),
     apiNoBg = _JSON$parse.apiNoBg,
@@ -182,8 +175,22 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           isGroupList = groupList.includes(groupId);
           groupName = name || formattedTitle;
           formatTime = moment(t * 1000).format('DD/MM/YY HH:mm:ss');
-          formatCommand = "".concat(command, " [").concat(args.length, "]"); // ! Owner Adding Group
+          formatCommand = "".concat(command, " [").concat(args.length, "]"); //! Group Admin Request Activation Bot
 
+          if (!(command == 'reqbot' && isGroupAdmins)) {
+            _context13.next = 49;
+            break;
+          }
+
+          RBot.reply(from, "Permintaan akan di Acc 1 x 24 jam.", id);
+          _context13.next = 48;
+          return regeneratorRuntime.awrap(RBot.sendText(ownerNumber, groupId));
+
+        case 48:
+          return _context13.abrupt("return", style.bot("REQ : ".concat(groupId)));
+
+        case 49:
+          // ! Owner Adding Group
           if (command == 'addgrup' && isOwnerBot) {
             check = groupList.includes(groupId);
 
@@ -214,29 +221,29 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
 
 
           if (!(!isGroupList && isGroupMsg && isCmd)) {
-            _context13.next = 48;
+            _context13.next = 53;
             break;
           }
 
           return _context13.abrupt("return", style.nonRegist(pushname, groupName, groupId));
 
-        case 48:
+        case 53:
           if (!(isCmd && msgFilter.isFiltered(from) && !isGroupMsg)) {
-            _context13.next = 50;
+            _context13.next = 55;
             break;
           }
 
           return _context13.abrupt("return", style.spamChat(formatTime, formatCommand, 'from', pushname));
 
-        case 50:
+        case 55:
           if (!(isCmd && msgFilter.isFiltered(from) && isGroupMsg)) {
-            _context13.next = 52;
+            _context13.next = 57;
             break;
           }
 
           return _context13.abrupt("return", style.spamGroup(formatTime, formatCommand, 'from', pushname, 'in', groupName));
 
-        case 52:
+        case 57:
           //! BadWord
           if (!isCmd && isKasar && isGroupMsg) {
             style.badWord(formatTime, formatCommand, 'from', pushname, 'in', groupName);
@@ -255,108 +262,108 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           msgFilter.addFilter(from); //! Filter Banned People
 
           if (!isBanned) {
-            _context13.next = 58;
+            _context13.next = 63;
             break;
           }
 
           return _context13.abrupt("return", style.banPerson(formatTime, formatCommand, 'from', pushname));
 
-        case 58:
+        case 63:
           _context13.t2 = command;
-          _context13.next = _context13.t2 === 'speed' ? 61 : _context13.t2 === 'ping' ? 61 : _context13.t2 === 'tes' ? 61 : _context13.t2 === 'tnc' ? 64 : _context13.t2 === 'peraturan' ? 64 : _context13.t2 === 'aturan' ? 64 : _context13.t2 === 'menu' ? 67 : _context13.t2 === 'help' ? 67 : _context13.t2 === 'menuadmin' ? 70 : _context13.t2 === 'donate' ? 77 : _context13.t2 === 'donasi' ? 77 : _context13.t2 === 'botowner' ? 80 : _context13.t2 === 'ownerbot' ? 80 : _context13.t2 === 'join' ? 83 : _context13.t2 === 'botstat' ? 107 : _context13.t2 === 'sticker' ? 118 : _context13.t2 === 'stiker' ? 118 : _context13.t2 === 'stickergif' ? 163 : _context13.t2 === 'stikergif' ? 163 : _context13.t2 === 'stikergiphy' ? 181 : _context13.t2 === 'stickergiphy' ? 181 : _context13.t2 === 'meme' ? 205 : _context13.t2 === 'quotemaker' ? 224 : _context13.t2 === 'nulis' ? 244 : _context13.t2 === 'listsurah' ? 253 : _context13.t2 === 'infosurah' ? 255 : _context13.t2 === 'surah' ? 266 : _context13.t2 === 'tafsir' ? 287 : _context13.t2 === 'alaudio' ? 306 : _context13.t2 === 'jsolat' ? 347 : _context13.t2 === 'daerah' ? 356 : _context13.t2 === 'instagram' ? 362 : _context13.t2 === 'ytmp3' ? 370 : _context13.t2 === 'ytmp4' ? 374 : _context13.t2 === 'artinama' ? 378 : _context13.t2 === 'cekjodoh' ? 382 : _context13.t2 === 'fakta' ? 386 : _context13.t2 === 'katabijak' ? 388 : _context13.t2 === 'pantun' ? 390 : _context13.t2 === 'quote' ? 392 : _context13.t2 === 'anime' ? 398 : _context13.t2 === 'kpop' ? 402 : _context13.t2 === 'memes' ? 406 : _context13.t2 === 'images' ? 411 : _context13.t2 === 'sreddit' ? 420 : _context13.t2 === 'resep' ? 429 : _context13.t2 === 'nekopoi' ? 438 : _context13.t2 === 'stalkig' ? 440 : _context13.t2 === 'wiki' ? 451 : _context13.t2 === 'cuaca' ? 460 : _context13.t2 === 'lirik' ? 469 : _context13.t2 === 'chord' ? 473 : _context13.t2 === 'ss' ? 482 : _context13.t2 === 'play' ? 490 : _context13.t2 === 'whatanime' ? 494 : _context13.t2 === 'resi' ? 512 : _context13.t2 === 'tts' ? 520 : _context13.t2 === 'translate' ? 528 : _context13.t2 === 'covidindo' ? 535 : _context13.t2 === 'ceklokasi' ? 537 : _context13.t2 === 'shortlink' ? 549 : _context13.t2 === 'bapakfont' ? 559 : _context13.t2 === 'klasmen' ? 563 : _context13.t2 === 'add' ? 573 : _context13.t2 === 'kick' ? 590 : _context13.t2 === 'promote' ? 616 : _context13.t2 === 'demote' ? 637 : _context13.t2 === 'bye' ? 658 : _context13.t2 === 'del' ? 664 : _context13.t2 === 'tagall' ? 672 : _context13.t2 === 'everyone' ? 672 : _context13.t2 === 'simisimi' ? 685 : _context13.t2 === 'simi' ? 689 : _context13.t2 === 'katakasar' ? 697 : _context13.t2 === 'kasar' ? 701 : _context13.t2 === 'reset' ? 709 : _context13.t2 === 'kickall' ? 718 : _context13.t2 === 'ban' ? 740 : _context13.t2 === 'bc' ? 746 : _context13.t2 === 'leaveall' ? 785 : _context13.t2 === 'clearall' ? 825 : 858;
+          _context13.next = _context13.t2 === 'speed' ? 66 : _context13.t2 === 'ping' ? 66 : _context13.t2 === 'tes' ? 66 : _context13.t2 === 'tnc' ? 69 : _context13.t2 === 'peraturan' ? 69 : _context13.t2 === 'aturan' ? 69 : _context13.t2 === 'menu' ? 72 : _context13.t2 === 'help' ? 72 : _context13.t2 === 'menuadmin' ? 75 : _context13.t2 === 'donate' ? 82 : _context13.t2 === 'donasi' ? 82 : _context13.t2 === 'botowner' ? 85 : _context13.t2 === 'ownerbot' ? 85 : _context13.t2 === 'join' ? 88 : _context13.t2 === 'botstat' ? 112 : _context13.t2 === 'sticker' ? 123 : _context13.t2 === 'stiker' ? 123 : _context13.t2 === 'stickergif' ? 168 : _context13.t2 === 'stikergif' ? 168 : _context13.t2 === 'stikergiphy' ? 186 : _context13.t2 === 'stickergiphy' ? 186 : _context13.t2 === 'meme' ? 210 : _context13.t2 === 'quotemaker' ? 229 : _context13.t2 === 'nulis' ? 249 : _context13.t2 === 'listsurah' ? 258 : _context13.t2 === 'infosurah' ? 260 : _context13.t2 === 'surah' ? 271 : _context13.t2 === 'tafsir' ? 292 : _context13.t2 === 'alaudio' ? 311 : _context13.t2 === 'jsolat' ? 352 : _context13.t2 === 'daerah' ? 361 : _context13.t2 === 'instagram' ? 367 : _context13.t2 === 'ytmp3' ? 375 : _context13.t2 === 'ytmp4' ? 379 : _context13.t2 === 'artinama' ? 383 : _context13.t2 === 'cekjodoh' ? 387 : _context13.t2 === 'fakta' ? 391 : _context13.t2 === 'katabijak' ? 393 : _context13.t2 === 'pantun' ? 395 : _context13.t2 === 'quote' ? 397 : _context13.t2 === 'anime' ? 403 : _context13.t2 === 'kpop' ? 407 : _context13.t2 === 'memes' ? 411 : _context13.t2 === 'images' ? 416 : _context13.t2 === 'sreddit' ? 425 : _context13.t2 === 'resep' ? 434 : _context13.t2 === 'nekopoi' ? 443 : _context13.t2 === 'stalkig' ? 445 : _context13.t2 === 'wiki' ? 456 : _context13.t2 === 'cuaca' ? 465 : _context13.t2 === 'lirik' ? 474 : _context13.t2 === 'chord' ? 478 : _context13.t2 === 'ss' ? 487 : _context13.t2 === 'play' ? 495 : _context13.t2 === 'whatanime' ? 499 : _context13.t2 === 'resi' ? 517 : _context13.t2 === 'tts' ? 525 : _context13.t2 === 'translate' ? 533 : _context13.t2 === 'covidindo' ? 540 : _context13.t2 === 'ceklokasi' ? 542 : _context13.t2 === 'shortlink' ? 554 : _context13.t2 === 'bapakfont' ? 564 : _context13.t2 === 'klasmen' ? 568 : _context13.t2 === 'add' ? 578 : _context13.t2 === 'kick' ? 595 : _context13.t2 === 'promote' ? 621 : _context13.t2 === 'demote' ? 642 : _context13.t2 === 'bye' ? 663 : _context13.t2 === 'del' ? 669 : _context13.t2 === 'tagall' ? 677 : _context13.t2 === 'everyone' ? 677 : _context13.t2 === 'simisimi' ? 690 : _context13.t2 === 'simi' ? 694 : _context13.t2 === 'katakasar' ? 702 : _context13.t2 === 'kasar' ? 706 : _context13.t2 === 'reset' ? 714 : _context13.t2 === 'kickall' ? 723 : _context13.t2 === 'ban' ? 745 : _context13.t2 === 'bc' ? 751 : _context13.t2 === 'leaveall' ? 790 : _context13.t2 === 'clearall' ? 830 : 863;
           break;
 
-        case 61:
-          _context13.next = 63;
+        case 66:
+          _context13.next = 68;
           return regeneratorRuntime.awrap(RBot.sendText(from, "Respon ".concat(botName, ": ").concat(processTime(t, moment()), " Second")));
 
-        case 63:
-          return _context13.abrupt("break", 859);
+        case 68:
+          return _context13.abrupt("break", 864);
 
-        case 64:
-          _context13.next = 66;
+        case 69:
+          _context13.next = 71;
           return regeneratorRuntime.awrap(RBot.sendText(from, menuId.textTnC()));
 
-        case 66:
-          return _context13.abrupt("break", 859);
+        case 71:
+          return _context13.abrupt("break", 864);
 
-        case 67:
-          _context13.next = 69;
+        case 72:
+          _context13.next = 74;
           return regeneratorRuntime.awrap(RBot.sendText(from, menuId.textMenu(pushname)).then(function () {
             return isGroupMsg && isGroupAdmins ? RBot.sendText(from, "Menu Admin Grup: *".concat(prefix, "menuadmin*")) : null;
           }));
 
-        case 69:
-          return _context13.abrupt("break", 859);
+        case 74:
+          return _context13.abrupt("break", 864);
 
-        case 70:
+        case 75:
           if (isGroupMsg) {
-            _context13.next = 72;
+            _context13.next = 77;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '✘ Perintah ini hanya dapat digunakan didalam grup!', id));
 
-        case 72:
+        case 77:
           if (isGroupAdmins) {
-            _context13.next = 74;
+            _context13.next = 79;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '✘ Perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 74:
-          _context13.next = 76;
+        case 79:
+          _context13.next = 81;
           return regeneratorRuntime.awrap(RBot.sendText(from, menuId.textAdmin()));
 
-        case 76:
-          return _context13.abrupt("break", 859);
-
-        case 77:
-          _context13.next = 79;
-          return regeneratorRuntime.awrap(RBot.sendText(from, menuId.textDonasi()));
-
-        case 79:
-          return _context13.abrupt("break", 859);
-
-        case 80:
-          _context13.next = 82;
-          return regeneratorRuntime.awrap(RBot.sendContact(from, ownerNumber));
+        case 81:
+          return _context13.abrupt("break", 864);
 
         case 82:
-          return _context13.abrupt("break", 859);
+          _context13.next = 84;
+          return regeneratorRuntime.awrap(RBot.sendText(from, menuId.textDonasi()));
 
-        case 83:
+        case 84:
+          return _context13.abrupt("break", 864);
+
+        case 85:
+          _context13.next = 87;
+          return regeneratorRuntime.awrap(RBot.sendContact(from, ownerNumber));
+
+        case 87:
+          return _context13.abrupt("break", 864);
+
+        case 88:
           if (!(args.length == 0)) {
-            _context13.next = 85;
+            _context13.next = 90;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Jika ingin memasukkan ".concat(botName, " kedalam group, silahkan invite atau dengan\nketik ").concat(prefix, "join [link group]"), id));
 
-        case 85:
+        case 90:
           linkgrup = body.slice(6);
           islink = linkgrup.match(/(https:\/\/chat.whatsapp.com)/gi);
-          _context13.next = 89;
+          _context13.next = 94;
           return regeneratorRuntime.awrap(RBot.inviteInfo(linkgrup));
 
-        case 89:
+        case 94:
           chekgrup = _context13.sent;
 
           if (islink) {
-            _context13.next = 92;
+            _context13.next = 97;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '✘ Format link salah', id));
 
-        case 92:
+        case 97:
           if (!isOwnerBot) {
-            _context13.next = 97;
+            _context13.next = 102;
             break;
           }
 
-          _context13.next = 95;
+          _context13.next = 100;
           return regeneratorRuntime.awrap(RBot.joinGroupViaLink(linkgrup).then(function _callee() {
             return regeneratorRuntime.async(function _callee$(_context) {
               while (1) {
@@ -377,34 +384,34 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             });
           }));
 
-        case 95:
-          _context13.next = 106;
+        case 100:
+          _context13.next = 111;
           break;
 
-        case 97:
-          _context13.next = 99;
+        case 102:
+          _context13.next = 104;
           return regeneratorRuntime.awrap(RBot.getAllGroups());
 
-        case 99:
+        case 104:
           cgrup = _context13.sent;
 
           if (!(cgrup.length > groupLimit)) {
-            _context13.next = 102;
+            _context13.next = 107;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Saat ini ".concat(botName, " sudah melebihi kapasitas untuk masuk kedalam group. \nGroup Now : ").concat(groupLimit), id));
 
-        case 102:
+        case 107:
           if (!(cgrup.size < memberLimit)) {
-            _context13.next = 104;
+            _context13.next = 109;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Minimal anggota group harus lebih dari ".concat(memberLimit, " anggota"), id));
 
-        case 104:
-          _context13.next = 106;
+        case 109:
+          _context13.next = 111;
           return regeneratorRuntime.awrap(RBot.joinGroupViaLink(linkgrup).then(function _callee2() {
             return regeneratorRuntime.async(function _callee2$(_context2) {
               while (1) {
@@ -423,72 +430,72 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, '✘ Gagal!', id);
           }));
 
-        case 106:
-          return _context13.abrupt("break", 859);
-
-        case 107:
-          _context13.next = 109;
-          return regeneratorRuntime.awrap(RBot.getAmountOfLoadedMessages());
-
-        case 109:
-          loadedMsg = _context13.sent;
-          _context13.next = 112;
-          return regeneratorRuntime.awrap(RBot.getAllChatIds());
+        case 111:
+          return _context13.abrupt("break", 864);
 
         case 112:
+          _context13.next = 114;
+          return regeneratorRuntime.awrap(RBot.getAmountOfLoadedMessages());
+
+        case 114:
+          loadedMsg = _context13.sent;
+          _context13.next = 117;
+          return regeneratorRuntime.awrap(RBot.getAllChatIds());
+
+        case 117:
           chatIds = _context13.sent;
-          _context13.next = 115;
+          _context13.next = 120;
           return regeneratorRuntime.awrap(RBot.getAllGroups());
 
-        case 115:
+        case 120:
           groups = _context13.sent;
           RBot.sendText(from, "Status :\n- *".concat(loadedMsg, "* Loaded Messages\n- *").concat(groups.length, "* Group Chats\n- *").concat(chatIds.length - groups.length, "* Personal Chats\n- *").concat(chatIds.length, "* Total Chats"));
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 118:
+        case 123:
           if (!((isMedia || isQuotedImage) && args.length === 0)) {
-            _context13.next = 128;
+            _context13.next = 133;
             break;
           }
 
           encryptMedia = isQuotedImage ? quotedMsg : message;
           _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype;
-          _context13.next = 123;
+          _context13.next = 128;
           return regeneratorRuntime.awrap(decryptMedia(encryptMedia, uaOverride));
 
-        case 123:
+        case 128:
           _mediaData = _context13.sent;
           _imageBase = "data:".concat(_mimetype, ";base64,").concat(_mediaData.toString('base64'));
           RBot.sendImageAsSticker(from, _imageBase).then(function () {
             RBot.reply(from, '↳ Sukses dibuat', id);
             style.msg("Sticker Processed for ".concat(processTime(t, moment()), " Second"));
           });
-          _context13.next = 162;
+          _context13.next = 167;
           break;
 
-        case 128:
+        case 133:
           if (!(args[0] === 'nobg')) {
-            _context13.next = 153;
+            _context13.next = 158;
             break;
           }
 
           if (!(isMedia || isQuotedImage)) {
-            _context13.next = 151;
+            _context13.next = 156;
             break;
           }
 
-          _context13.prev = 130;
-          _context13.next = 133;
+          _context13.prev = 135;
+          _context13.next = 138;
           return regeneratorRuntime.awrap(decryptMedia(message, uaOverride));
 
-        case 133:
+        case 138:
           mediaData = _context13.sent;
           imageBase64 = "data:".concat(mimetype, ";base64,").concat(mediaData.toString('base64'));
           base64img = imageBase64;
           outFile = './media/noBg.png'; // kamu dapat mengambil api key dari website remove.bg dan ubahnya difolder settings/api.json
           //! Take API KEY at remove.bg
 
-          _context13.next = 139;
+          _context13.next = 144;
           return regeneratorRuntime.awrap(removeBackgroundFromImageBase64({
             base64img: base64img,
             apiKey: apiNoBg,
@@ -497,83 +504,83 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             outFile: outFile
           }));
 
-        case 139:
+        case 144:
           result = _context13.sent;
-          _context13.next = 142;
+          _context13.next = 147;
           return regeneratorRuntime.awrap(fs.writeFile(outFile, result.base64img));
 
-        case 142:
-          _context13.next = 144;
+        case 147:
+          _context13.next = 149;
           return regeneratorRuntime.awrap(RBot.sendImageAsSticker(from, "data:".concat(mimetype, ";base64,").concat(result.base64img)));
 
-        case 144:
-          _context13.next = 151;
+        case 149:
+          _context13.next = 156;
           break;
-
-        case 146:
-          _context13.prev = 146;
-          _context13.t3 = _context13["catch"](130);
-          console.log(_context13.t3);
-          _context13.next = 151;
-          return regeneratorRuntime.awrap(RBot.reply(from, "Penggunaan fitur ".concat(prefix, "nobg hari ini sudah habis"), id));
 
         case 151:
-          _context13.next = 162;
+          _context13.prev = 151;
+          _context13.t3 = _context13["catch"](135);
+          console.log(_context13.t3);
+          _context13.next = 156;
+          return regeneratorRuntime.awrap(RBot.reply(from, "Penggunaan fitur ".concat(prefix, "nobg hari ini sudah habis"), id));
+
+        case 156:
+          _context13.next = 167;
           break;
 
-        case 153:
+        case 158:
           if (!(args.length === 1)) {
-            _context13.next = 160;
+            _context13.next = 165;
             break;
           }
 
           if (isUrl(url)) {
-            _context13.next = 157;
+            _context13.next = 162;
             break;
           }
 
-          _context13.next = 157;
+          _context13.next = 162;
           return regeneratorRuntime.awrap(RBot.reply(from, '✘ link tidak valid', id));
 
-        case 157:
+        case 162:
           RBot.sendStickerfromUrl(from, url).then(function (r) {
             return !r && r !== undefined ? RBot.sendText(from, '✘ Link tersebut tidak memuat gambar.') : RBot.reply(from, '↳ Sukses dibuat');
           }).then(function () {
             return style.msg("\tSticker Processed for ".concat(processTime(t, moment()), " Second"));
           });
-          _context13.next = 162;
+          _context13.next = 167;
           break;
 
-        case 160:
-          _context13.next = 162;
+        case 165:
+          _context13.next = 167;
           return regeneratorRuntime.awrap(RBot.reply(from, "Untuk membuat sticker kamu harus mengirimkan gambar dengan caption ".concat(prefix, "sticker"), id));
 
-        case 162:
-          return _context13.abrupt("break", 859);
+        case 167:
+          return _context13.abrupt("break", 864);
 
-        case 163:
+        case 168:
           if (!(isMedia || isQuotedVideo)) {
-            _context13.next = 179;
+            _context13.next = 184;
             break;
           }
 
           if (!(mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10)) {
-            _context13.next = 176;
+            _context13.next = 181;
             break;
           }
 
-          _context13.next = 167;
+          _context13.next = 172;
           return regeneratorRuntime.awrap(decryptMedia(message, uaOverride));
 
-        case 167:
+        case 172:
           mediaData = _context13.sent;
           RBot.reply(from, '⏳ Sticker di proses', id);
           filename = "./media/stickergif.".concat(mimetype.split('/')[1]);
-          _context13.next = 172;
+          _context13.next = 177;
           return regeneratorRuntime.awrap(fs.writeFileSync(filename, mediaData));
 
-        case 172:
-          _context13.next = 174;
+        case 177:
+          _context13.next = 179;
           return regeneratorRuntime.awrap(exec("gify ".concat(filename, " ./media/stickergf.gif --fps=30 --scale=240:240"), function _callee3(error, stdout, stderr) {
             var gif;
             return regeneratorRuntime.async(function _callee3$(_context3) {
@@ -600,50 +607,50 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             });
           }));
 
-        case 174:
-          _context13.next = 177;
-          break;
-
-        case 176:
-          RBot.reply(from, "[\u2718] Maksimal gif 10 detik!", id);
-
-        case 177:
-          _context13.next = 180;
-          break;
-
         case 179:
-          RBot.reply(from, "[\u2718] Kirim gif dengan caption *".concat(prefix, "stickergif*"), id);
-
-        case 180:
-          return _context13.abrupt("break", 859);
+          _context13.next = 182;
+          break;
 
         case 181:
+          RBot.reply(from, "[\u2718] Maksimal gif 10 detik!", id);
+
+        case 182:
+          _context13.next = 185;
+          break;
+
+        case 184:
+          RBot.reply(from, "[\u2718] Kirim gif dengan caption *".concat(prefix, "stickergif*"), id);
+
+        case 185:
+          return _context13.abrupt("break", 864);
+
+        case 186:
           if (!(args.length !== 1)) {
-            _context13.next = 183;
+            _context13.next = 188;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "[\u2718] Format pesan salah.\nKetik".concat(prefix, "stickergiphy <link_giphy>"), id));
 
-        case 183:
+        case 188:
           isGiphy = url.match(new RegExp(/https?:\/\/(www\.)?giphy.com/, 'gi'));
           isMediaGiphy = url.match(new RegExp(/https?:\/\/media.giphy.com\/media/, 'gi'));
 
           if (!isGiphy) {
-            _context13.next = 194;
+            _context13.next = 199;
             break;
           }
 
           getGiphyCode = url.match(new RegExp(/(\/|\-)(?:.(?!(\/|\-)))+$/, 'gi'));
 
           if (getGiphyCode) {
-            _context13.next = 189;
+            _context13.next = 194;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Gagal mengambil kode giphy', id));
 
-        case 189:
+        case 194:
           giphyCode = getGiphyCode[0].replace(/[-\/]/gi, '');
           smallGifUrl = 'https://media.giphy.com/media/' + giphyCode + '/giphy-downsized.gif';
           RBot.sendGiphyAsSticker(from, smallGifUrl).then(function () {
@@ -652,25 +659,25 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function (err) {
             return console.log(err);
           });
-          _context13.next = 204;
+          _context13.next = 209;
           break;
 
-        case 194:
+        case 199:
           if (!isMediaGiphy) {
-            _context13.next = 202;
+            _context13.next = 207;
             break;
           }
 
           gifUrl = url.match(new RegExp(/(giphy|source).(gif|mp4)/, 'gi'));
 
           if (gifUrl) {
-            _context13.next = 198;
+            _context13.next = 203;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Gagal mengambil kode giphy', id));
 
-        case 198:
+        case 203:
           _smallGifUrl = url.replace(gifUrl[0], 'giphy-downsized.gif');
           RBot.sendGiphyAsSticker(from, _smallGifUrl).then(function () {
             RBot.reply(from, '↳ Sukses dibuat');
@@ -678,60 +685,60 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          _context13.next = 204;
+          _context13.next = 209;
           break;
 
-        case 202:
-          _context13.next = 204;
+        case 207:
+          _context13.next = 209;
           return regeneratorRuntime.awrap(RBot.reply(from, '[✘] Sticker harus dari link Giphy ', id));
 
-        case 204:
-          return _context13.abrupt("break", 859);
+        case 209:
+          return _context13.abrupt("break", 864);
 
-        case 205:
+        case 210:
           if (!((isMedia || isQuotedImage) && args.length >= 2)) {
-            _context13.next = 221;
+            _context13.next = 226;
             break;
           }
 
           top = arg.split('|')[0];
           bottom = arg.split('|')[1];
           _encryptMedia = isQuotedImage ? quotedMsg : message;
-          _context13.next = 211;
+          _context13.next = 216;
           return regeneratorRuntime.awrap(decryptMedia(_encryptMedia, uaOverride));
 
-        case 211:
+        case 216:
           _mediaData2 = _context13.sent;
-          _context13.next = 214;
+          _context13.next = 219;
           return regeneratorRuntime.awrap(uploadImages(_mediaData2, false));
 
-        case 214:
+        case 219:
           getUrl = _context13.sent;
-          _context13.next = 217;
+          _context13.next = 222;
           return regeneratorRuntime.awrap(meme.custom(getUrl, top, bottom));
 
-        case 217:
+        case 222:
           ImageBase64 = _context13.sent;
           RBot.sendFile(from, ImageBase64, 'image.png', '', null, true).then(function () {
             RBot.reply(from, '↳ Sukses dibuat', id);
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"));
           });
-          _context13.next = 223;
+          _context13.next = 228;
           break;
 
-        case 221:
-          _context13.next = 223;
+        case 226:
+          _context13.next = 228;
           return regeneratorRuntime.awrap(RBot.reply(from, "Cara penggunaan, kirim gambar dengan caption ".concat(prefix, "meme <teks_atas> | <teks_bawah>\ncontoh: ").concat(prefix, "meme teks atas | teks bawah"), id));
 
-        case 223:
-          return _context13.abrupt("break", 859);
+        case 228:
+          return _context13.abrupt("break", 864);
 
-        case 224:
+        case 229:
           qmaker = body.trim().split('|');
 
           if (!(qmaker.length >= 3)) {
-            _context13.next = 242;
+            _context13.next = 247;
             break;
           }
 
@@ -740,55 +747,55 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
 
           theme = "random";
           RBot.reply(from, '[⏳] Sedang di proses', id);
-          _context13.prev = 230;
-          _context13.next = 233;
+          _context13.prev = 235;
+          _context13.next = 238;
           return regeneratorRuntime.awrap(images.quote(quotes, author, theme));
 
-        case 233:
+        case 238:
           hasilqmaker = _context13.sent;
           RBot.sendFileFromUrl(from, "".concat(hasilqmaker), '', '↳ Sukses dibuat', id);
-          _context13.next = 240;
-          break;
-
-        case 237:
-          _context13.prev = 237;
-          _context13.t4 = _context13["catch"](230);
-          RBot.reply('[✘] Format pesan salah', id);
-
-        case 240:
-          _context13.next = 243;
+          _context13.next = 245;
           break;
 
         case 242:
+          _context13.prev = 242;
+          _context13.t4 = _context13["catch"](235);
+          RBot.reply('[✘] Format pesan salah', id);
+
+        case 245:
+          _context13.next = 248;
+          break;
+
+        case 247:
           RBot.reply(from, "Ketik ".concat(prefix, "quotemaker |<isi_quote>|<author>|\n\ncontoh: ").concat(prefix, "quotemaker |aku sayang kamu|-R-Bot|"));
 
-        case 243:
-          return _context13.abrupt("break", 859);
+        case 248:
+          return _context13.abrupt("break", 864);
 
-        case 244:
+        case 249:
           if (!(args.length == 0)) {
-            _context13.next = 246;
+            _context13.next = 251;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Membuat bot menulis teks yang dikirim menjadi gambar\nPemakaian: ".concat(prefix, "nulis [teks]\n\ncontoh: ").concat(prefix, "nulis i love you 3000"), id));
 
-        case 246:
+        case 251:
           nulisq = body.slice(7);
-          _context13.next = 249;
+          _context13.next = 254;
           return regeneratorRuntime.awrap(rugaapi.tulis(nulisq));
 
-        case 249:
+        case 254:
           nulisp = _context13.sent;
-          _context13.next = 252;
+          _context13.next = 257;
           return regeneratorRuntime.awrap(RBot.sendImage(from, "".concat(nulisp), '', 'Nih...', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 252:
-          return _context13.abrupt("break", 859);
+        case 257:
+          return _context13.abrupt("break", 864);
 
-        case 253:
+        case 258:
           try {
             axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json').then(function (response) {
               var hehex = '╔〘 List Surah 〙\n';
@@ -805,21 +812,21 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, err, id);
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 255:
+        case 260:
           if (!(args.length == 0)) {
-            _context13.next = 257;
+            _context13.next = 262;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "*_".concat(prefix, "infosurah <nama surah>_*\nMenampilkan informasi lengkap mengenai surah tertentu. Contoh : ").concat(prefix, "infosurah al-baqarah"), message.id));
 
-        case 257:
-          _context13.next = 259;
+        case 262:
+          _context13.next = 264;
           return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
-        case 259:
+        case 264:
           responseh = _context13.sent;
           data = responseh.data.data;
           idx = data.findIndex(function (post, index) {
@@ -828,21 +835,21 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           pesan = "";
           pesan = pesan + "Nama : " + data[idx].name.transliteration.id + "\n" + "Asma : " + data[idx].name["short"] + "\n" + "Arti : " + data[idx].name.translation.id + "\n" + "Jumlah ayat : " + data[idx].numberOfVerses + "\n" + "Nomor surah : " + data[idx].number + "\n" + "Jenis : " + data[idx].revelation.id + "\n" + "Keterangan : " + data[idx].tafsir.id;
           RBot.reply(from, pesan, message.id);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 266:
+        case 271:
           if (!(args.length == 0)) {
-            _context13.next = 268;
+            _context13.next = 273;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "*_".concat(prefix, "surah <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1\n\n*_").concat(prefix, "surah <nama surah> <ayat> en/id_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahannya dalam bahasa Inggris / Indonesia. Contoh penggunaan : ").concat(prefix, "surah al-baqarah 1 id"), message.id));
 
-        case 268:
-          _context13.next = 270;
+        case 273:
+          _context13.next = 275;
           return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
-        case 270:
+        case 275:
           responseh = _context13.sent;
           data = responseh.data.data;
           idx = data.findIndex(function (post, index) {
@@ -851,14 +858,14 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           nmr = data[idx].number;
 
           if (isNaN(nmr)) {
-            _context13.next = 286;
+            _context13.next = 291;
             break;
           }
 
-          _context13.next = 277;
+          _context13.next = 282;
           return regeneratorRuntime.awrap(axios.get('https://api.quran.sutanlab.id/surah/' + nmr + "/" + args[1]));
 
-        case 277:
+        case 282:
           responseh2 = _context13.sent;
           data = responseh2.data.data;
 
@@ -881,22 +888,22 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           pesan = pesan + "\n\n(Q.S. " + data.surah.name.transliteration.id + ":" + args[1] + ")";
           RBot.reply(from, pesan, message.id);
 
-        case 286:
-          return _context13.abrupt("break", 859);
+        case 291:
+          return _context13.abrupt("break", 864);
 
-        case 287:
+        case 292:
           if (!(args.length == 0)) {
-            _context13.next = 289;
+            _context13.next = 294;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "*_".concat(prefix, "tafsir <nama surah> <ayat>_*\nMenampilkan ayat Al-Quran tertentu beserta terjemahan dan tafsirnya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "tafsir al-baqarah 1"), message.id));
 
-        case 289:
-          _context13.next = 291;
+        case 294:
+          _context13.next = 296;
           return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
-        case 291:
+        case 296:
           responsh = _context13.sent;
           data = responsh.data.data;
           idx = data.findIndex(function (post, index) {
@@ -905,14 +912,14 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           nmr = data[idx].number;
 
           if (isNaN(nmr)) {
-            _context13.next = 305;
+            _context13.next = 310;
             break;
           }
 
-          _context13.next = 298;
+          _context13.next = 303;
           return regeneratorRuntime.awrap(axios.get('https://api.quran.sutanlab.id/surah/' + nmr + "/" + args[1]));
 
-        case 298:
+        case 303:
           responsih = _context13.sent;
           data = responsih.data.data;
           pesan = "";
@@ -921,24 +928,24 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           pesan = pesan + "_" + data.translation.id + "_" + "\n\n" + data.tafsir.id["long"];
           RBot.reply(from, pesan, message.id);
 
-        case 305:
-          return _context13.abrupt("break", 859);
+        case 310:
+          return _context13.abrupt("break", 864);
 
-        case 306:
+        case 311:
           if (!(args.length == 0)) {
-            _context13.next = 308;
+            _context13.next = 313;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "*_".concat(prefix, "ALaudio <nama surah>_*\nMenampilkan tautan dari audio surah tertentu. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat>_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Indonesia. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1\n\n*_").concat(prefix, "ALaudio <nama surah> <ayat> en_*\nMengirim audio surah dan ayat tertentu beserta terjemahannya dalam bahasa Inggris. Contoh penggunaan : ").concat(prefix, "ALaudio al-fatihah 1 en"), message.id));
 
-        case 308:
+        case 313:
           ayat = "ayat";
           bhs = "";
-          _context13.next = 312;
+          _context13.next = 317;
           return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json'));
 
-        case 312:
+        case 317:
           responseh = _context13.sent;
           surah = responseh.data;
           idx = surah.data.findIndex(function (post, index) {
@@ -947,7 +954,7 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           nmr = surah.data[idx].number;
 
           if (isNaN(nmr)) {
-            _context13.next = 346;
+            _context13.next = 351;
             break;
           }
 
@@ -968,14 +975,14 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           pesan = "";
 
           if (!isNaN(ayat)) {
-            _context13.next = 332;
+            _context13.next = 337;
             break;
           }
 
-          _context13.next = 323;
+          _context13.next = 328;
           return regeneratorRuntime.awrap(axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah/' + nmr + '.json'));
 
-        case 323:
+        case 328:
           responsih2 = _context13.sent;
           _responsih2$data = responsih2.data, name = _responsih2$data.name, name_translations = _responsih2$data.name_translations, number_of_ayah = _responsih2$data.number_of_ayah, number_of_surah = _responsih2$data.number_of_surah, recitations = _responsih2$data.recitations;
           pesan = pesan + "Audio Quran Surah ke-" + number_of_surah + " " + name + " (" + name_translations.ar + ") " + "dengan jumlah " + number_of_ayah + " ayat\n";
@@ -983,14 +990,14 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           pesan = pesan + "Dilantunkan oleh " + recitations[1].name + " : " + recitations[1].audio_url + "\n";
           pesan = pesan + "Dilantunkan oleh " + recitations[2].name + " : " + recitations[2].audio_url + "\n";
           RBot.reply(from, pesan, message.id);
-          _context13.next = 346;
+          _context13.next = 351;
           break;
 
-        case 332:
-          _context13.next = 334;
+        case 337:
+          _context13.next = 339;
           return regeneratorRuntime.awrap(axios.get('https://api.quran.sutanlab.id/surah/' + nmr + "/" + ayat));
 
-        case 334:
+        case 339:
           responsih2 = _context13.sent;
           data = responsih2.data.data;
 
@@ -1011,84 +1018,84 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           }
 
           pesan = pesan + "\n\n(Q.S. " + data.surah.name.transliteration.id + ":" + args[1] + ")";
-          _context13.next = 344;
+          _context13.next = 349;
           return regeneratorRuntime.awrap(RBot.sendFileFromUrl(from, data.audio.secondary[0]));
 
-        case 344:
-          _context13.next = 346;
+        case 349:
+          _context13.next = 351;
           return regeneratorRuntime.awrap(RBot.reply(from, pesan, message.id));
 
-        case 346:
-          return _context13.abrupt("break", 859);
+        case 351:
+          return _context13.abrupt("break", 864);
 
-        case 347:
+        case 352:
           if (!(args.length == 0)) {
-            _context13.next = 349;
+            _context13.next = 354;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Melihat jadwal solat di setiap daerah \nketik: ".concat(prefix, "jsolat [namadaerah]\n\nuntuk list daerah yang ada\nketik: ").concat(prefix, "daerah"), id));
 
-        case 349:
+        case 354:
           solatx = body.slice(8);
-          _context13.next = 352;
+          _context13.next = 357;
           return regeneratorRuntime.awrap(rugaapi.jadwaldaerah(solatx));
 
-        case 352:
+        case 357:
           solatj = _context13.sent;
-          _context13.next = 355;
+          _context13.next = 360;
           return regeneratorRuntime.awrap(RBot.reply(from, solatj, id)["catch"](function () {
             RBot.reply(from, "Masukkan nama daerah. contoh ".concat(prefix, "jsolat Kudus"), id);
           }));
 
-        case 355:
-          return _context13.abrupt("break", 859);
+        case 360:
+          return _context13.abrupt("break", 864);
 
-        case 356:
-          _context13.next = 358;
+        case 361:
+          _context13.next = 363;
           return regeneratorRuntime.awrap(rugaapi.daerah());
 
-        case 358:
+        case 363:
           daerahq = _context13.sent;
-          _context13.next = 361;
+          _context13.next = 366;
           return regeneratorRuntime.awrap(RBot.reply(from, daerahq, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 361:
-          return _context13.abrupt("break", 859);
+        case 366:
+          return _context13.abrupt("break", 864);
 
-        case 362:
+        case 367:
           if (!(args.length == 0)) {
-            _context13.next = 364;
+            _context13.next = 369;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mendownload gambar atau video dari instagram\nketik: ".concat(prefix, "instagram [link_ig]"), id));
 
-        case 364:
-          _context13.next = 366;
+        case 369:
+          _context13.next = 371;
           return regeneratorRuntime.awrap(rugaapi.insta(args[0]));
 
-        case 366:
+        case 371:
           instag = _context13.sent;
-          _context13.next = 369;
+          _context13.next = 374;
           return regeneratorRuntime.awrap(RBot.sendFileFromUrl(from, instag, '', '', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 369:
-          return _context13.abrupt("break", 859);
+        case 374:
+          return _context13.abrupt("break", 864);
 
-        case 370:
+        case 375:
           if (!(args.length == 0)) {
-            _context13.next = 372;
+            _context13.next = 377;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mendownload lagu dari youtube\nketik: ".concat(prefix, "ytmp3 [link_yt]"), id));
 
-        case 372:
+        case 377:
           rugaapi.ytmp3(args[0]).then(function _callee4(res) {
             return regeneratorRuntime.async(function _callee4$(_context4) {
               while (1) {
@@ -1124,17 +1131,17 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 374:
+        case 379:
           if (!(args.length == 0)) {
-            _context13.next = 376;
+            _context13.next = 381;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mendownload video dari youtube\nketik: ".concat(prefix, "ytmp3 [link_yt]")));
 
-        case 376:
+        case 381:
           rugaapi.ytmp4(args[0]).then(function _callee5(res) {
             return regeneratorRuntime.async(function _callee5$(_context5) {
               while (1) {
@@ -1170,17 +1177,17 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 378:
+        case 383:
           if (!(args.length == 0)) {
-            _context13.next = 380;
+            _context13.next = 385;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mengetahui arti nama seseorang\nketik ".concat(prefix, "artinama Namanya"), id));
 
-        case 380:
+        case 385:
           rugaapi.artinama(body.slice(10)).then(function _callee6(res) {
             return regeneratorRuntime.async(function _callee6$(_context6) {
               while (1) {
@@ -1196,17 +1203,17 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 382:
+        case 387:
           if (!(args.length !== 2)) {
-            _context13.next = 384;
+            _context13.next = 389;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mengecek jodoh melalui nama\nketik: ".concat(prefix, "cekjodoh nama pasangan\n\ncontoh: ").concat(prefix, "cekjodoh aku kamu\n\nhanya bisa pakai nama panggilan (satu kata)")));
 
-        case 384:
+        case 389:
           rugaapi.cekjodoh(args[0], args[1]).then(function _callee7(res) {
             return regeneratorRuntime.async(function _callee7$(_context7) {
               while (1) {
@@ -1222,9 +1229,9 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 386:
+        case 391:
           fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/faktaunix.txt').then(function (res) {
             return res.text();
           }).then(function (body) {
@@ -1234,9 +1241,9 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 388:
+        case 393:
           fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/katabijax.txt').then(function (res) {
             return res.text();
           }).then(function (body) {
@@ -1246,9 +1253,9 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 390:
+        case 395:
           fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/pantun.txt').then(function (res) {
             return res.text();
           }).then(function (body) {
@@ -1258,31 +1265,31 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 392:
-          _context13.next = 394;
+        case 397:
+          _context13.next = 399;
           return regeneratorRuntime.awrap(rugaapi.quote());
 
-        case 394:
+        case 399:
           quotex = _context13.sent;
-          _context13.next = 397;
+          _context13.next = 402;
           return regeneratorRuntime.awrap(RBot.reply(from, quotex, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 397:
-          return _context13.abrupt("break", 859);
+        case 402:
+          return _context13.abrupt("break", 864);
 
-        case 398:
+        case 403:
           if (!(args.length == 0)) {
-            _context13.next = 400;
+            _context13.next = 405;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk menggunakan ".concat(prefix, "anime\nSilahkan ketik: ").concat(prefix, "anime [query]\nContoh: ").concat(prefix, "anime random\n\nquery yang tersedia:\nrandom, waifu, husbu, neko"), id));
 
-        case 400:
+        case 405:
           if (args[0] == 'random' || args[0] == 'waifu' || args[0] == 'husbu' || args[0] == 'neko') {
             fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/anime/' + args[0] + '.txt').then(function (res) {
               return res.text();
@@ -1297,17 +1304,17 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "anime untuk melihat list query"));
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 402:
+        case 407:
           if (!(args.length == 0)) {
-            _context13.next = 404;
+            _context13.next = 409;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk menggunakan ".concat(prefix, "kpop\nSilahkan ketik: ").concat(prefix, "kpop [query]\nContoh: ").concat(prefix, "kpop bts\n\nquery yang tersedia:\nblackpink, exo, bts"), id));
 
-        case 404:
+        case 409:
           if (args[0] == 'blackpink' || args[0] == 'exo' || args[0] == 'bts') {
             fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/kpop/' + args[0] + '.txt').then(function (res) {
               return res.text();
@@ -1322,89 +1329,89 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, "Maaf query tidak tersedia. Silahkan ketik ".concat(prefix, "kpop untuk melihat list query"));
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 406:
-          _context13.next = 408;
+        case 411:
+          _context13.next = 413;
           return regeneratorRuntime.awrap(meme.random());
 
-        case 408:
+        case 413:
           randmeme = _context13.sent;
           RBot.sendFileFromUrl(from, randmeme, '', '', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 411:
+        case 416:
           if (!(args.length == 0)) {
-            _context13.next = 413;
+            _context13.next = 418;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari gambar di pinterest\nketik: ".concat(prefix, "images [search]\ncontoh: ").concat(prefix, "images naruto"), id));
 
-        case 413:
+        case 418:
           cariwall = body.slice(8);
-          _context13.next = 416;
+          _context13.next = 421;
           return regeneratorRuntime.awrap(images.fdci(cariwall));
 
-        case 416:
+        case 421:
           hasilwall = _context13.sent;
-          _context13.next = 419;
+          _context13.next = 424;
           return regeneratorRuntime.awrap(RBot.sendFileFromUrl(from, hasilwall, '', '', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 419:
-          return _context13.abrupt("break", 859);
+        case 424:
+          return _context13.abrupt("break", 864);
 
-        case 420:
+        case 425:
           if (!(args.length == 0)) {
-            _context13.next = 422;
+            _context13.next = 427;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari gambar di sub reddit\nketik: ".concat(prefix, "sreddit [search]\ncontoh: ").concat(prefix, "sreddit naruto"), id));
 
-        case 422:
+        case 427:
           carireddit = body.slice(9);
-          _context13.next = 425;
+          _context13.next = 430;
           return regeneratorRuntime.awrap(images.sreddit(carireddit));
 
-        case 425:
+        case 430:
           hasilreddit = _context13.sent;
-          _context13.next = 428;
+          _context13.next = 433;
           return regeneratorRuntime.awrap(RBot.sendFileFromUrl(from, hasilreddit, '', '', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 428:
-          return _context13.abrupt("break", 859);
+        case 433:
+          return _context13.abrupt("break", 864);
 
-        case 429:
+        case 434:
           if (!(args.length == 0)) {
-            _context13.next = 431;
+            _context13.next = 436;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari resep makanan\nCaranya ketik: ".concat(prefix, "resep [search]\n\ncontoh: ").concat(prefix, "resep tahu"), id));
 
-        case 431:
+        case 436:
           cariresep = body.slice(7);
-          _context13.next = 434;
+          _context13.next = 439;
           return regeneratorRuntime.awrap(resep.resep(cariresep));
 
-        case 434:
+        case 439:
           hasilresep = _context13.sent;
-          _context13.next = 437;
+          _context13.next = 442;
           return regeneratorRuntime.awrap(RBot.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 437:
-          return _context13.abrupt("break", 859);
+        case 442:
+          return _context13.abrupt("break", 864);
 
-        case 438:
+        case 443:
           rugapoi.getLatest().then(function (result) {
             rugapoi.getVideo(result.link).then(function (res) {
               var heheq = '\n';
@@ -1418,90 +1425,90 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 440:
+        case 445:
           if (!(args.length == 0)) {
-            _context13.next = 442;
+            _context13.next = 447;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk men-stalk akun instagram seseorang\nketik ".concat(prefix, "stalkig [username]\ncontoh: ").concat(prefix, "stalkig ini.arga"), id));
 
-        case 442:
-          _context13.next = 444;
+        case 447:
+          _context13.next = 449;
           return regeneratorRuntime.awrap(rugaapi.stalkig(args[0]));
 
-        case 444:
+        case 449:
           igstalk = _context13.sent;
-          _context13.next = 447;
+          _context13.next = 452;
           return regeneratorRuntime.awrap(rugaapi.stalkigpict(args[0]));
 
-        case 447:
+        case 452:
           igstalkpict = _context13.sent;
-          _context13.next = 450;
+          _context13.next = 455;
           return regeneratorRuntime.awrap(RBot.sendFileFromUrl(from, igstalkpict, '', igstalk, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 450:
-          return _context13.abrupt("break", 859);
+        case 455:
+          return _context13.abrupt("break", 864);
 
-        case 451:
+        case 456:
           if (!(args.length == 0)) {
-            _context13.next = 453;
+            _context13.next = 458;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari suatu kata dari wikipedia\nketik: ".concat(prefix, "wiki [kata]"), id));
 
-        case 453:
+        case 458:
           wikip = body.slice(6);
-          _context13.next = 456;
+          _context13.next = 461;
           return regeneratorRuntime.awrap(rugaapi.wiki(wikip));
 
-        case 456:
+        case 461:
           wikis = _context13.sent;
-          _context13.next = 459;
+          _context13.next = 464;
           return regeneratorRuntime.awrap(RBot.reply(from, wikis, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 459:
-          return _context13.abrupt("break", 859);
+        case 464:
+          return _context13.abrupt("break", 864);
 
-        case 460:
+        case 465:
           if (!(args.length == 0)) {
-            _context13.next = 462;
+            _context13.next = 467;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk melihat cuaca pada suatu daerah\nketik: ".concat(prefix, "cuaca [daerah]"), id));
 
-        case 462:
+        case 467:
           cuacaq = body.slice(7);
-          _context13.next = 465;
+          _context13.next = 470;
           return regeneratorRuntime.awrap(rugaapi.cuaca(cuacaq));
 
-        case 465:
+        case 470:
           cuacap = _context13.sent;
-          _context13.next = 468;
+          _context13.next = 473;
           return regeneratorRuntime.awrap(RBot.reply(from, cuacap, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 468:
-          return _context13.abrupt("break", 859);
+        case 473:
+          return _context13.abrupt("break", 864);
 
-        case 469:
+        case 474:
           if (!(args.length == 0)) {
-            _context13.next = 471;
+            _context13.next = 476;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari lirik dari sebuah lagu\bketik: ".concat(prefix, "lirik [judul_lagu]"), id));
 
-        case 471:
+        case 476:
           rugaapi.lirik(body.slice(7)).then(function _callee8(res) {
             return regeneratorRuntime.async(function _callee8$(_context8) {
               while (1) {
@@ -1517,62 +1524,62 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 473:
+        case 478:
           if (!(args.length == 0)) {
-            _context13.next = 475;
+            _context13.next = 480;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari lirik dan chord dari sebuah lagu\bketik: ".concat(prefix, "chord [judul_lagu]"), id));
 
-        case 475:
+        case 480:
           chordq = body.slice(7);
-          _context13.next = 478;
+          _context13.next = 483;
           return regeneratorRuntime.awrap(rugaapi.chord(chordq));
 
-        case 478:
+        case 483:
           chordp = _context13.sent;
-          _context13.next = 481;
+          _context13.next = 486;
           return regeneratorRuntime.awrap(RBot.reply(from, chordp, id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 481:
-          return _context13.abrupt("break", 859);
+        case 486:
+          return _context13.abrupt("break", 864);
 
-        case 482:
+        case 487:
           if (!(args.length == 0)) {
-            _context13.next = 484;
+            _context13.next = 489;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Membuat bot men-screenshot sebuah web\n\nPemakaian: ".concat(prefix, "ss [url]\n\ncontoh: ").concat(prefix, "ss http://google.com"), id));
 
-        case 484:
-          _context13.next = 486;
+        case 489:
+          _context13.next = 491;
           return regeneratorRuntime.awrap(meme.ss(args[0]));
 
-        case 486:
+        case 491:
           scrinshit = _context13.sent;
-          _context13.next = 489;
+          _context13.next = 494;
           return regeneratorRuntime.awrap(RBot.sendFile(from, scrinshit, 'ss.jpg', 'cekrek', id)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 489:
-          return _context13.abrupt("break", 859);
+        case 494:
+          return _context13.abrupt("break", 864);
 
-        case 490:
+        case 495:
           if (!(args.length == 0)) {
-            _context13.next = 492;
+            _context13.next = 497;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mencari lagu dari youtube\n\nPenggunaan: ".concat(prefix, "play judul lagu"), id));
 
-        case 492:
+        case 497:
           axios.get("https://arugaytdl.herokuapp.com/search?q=".concat(body.slice(6))).then(function _callee10(res) {
             return regeneratorRuntime.async(function _callee10$(_context10) {
               while (1) {
@@ -1617,35 +1624,35 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           })["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 494:
+        case 499:
           if (!(isMedia && type === 'image' || quotedMsg && quotedMsg.type === 'image')) {
-            _context13.next = 510;
+            _context13.next = 515;
             break;
           }
 
           if (!isMedia) {
-            _context13.next = 501;
+            _context13.next = 506;
             break;
           }
 
-          _context13.next = 498;
-          return regeneratorRuntime.awrap(decryptMedia(message, uaOverride));
-
-        case 498:
-          mediaData = _context13.sent;
-          _context13.next = 504;
-          break;
-
-        case 501:
           _context13.next = 503;
-          return regeneratorRuntime.awrap(decryptMedia(quotedMsg, uaOverride));
+          return regeneratorRuntime.awrap(decryptMedia(message, uaOverride));
 
         case 503:
           mediaData = _context13.sent;
+          _context13.next = 509;
+          break;
 
-        case 504:
+        case 506:
+          _context13.next = 508;
+          return regeneratorRuntime.awrap(decryptMedia(quotedMsg, uaOverride));
+
+        case 508:
+          mediaData = _context13.sent;
+
+        case 509:
           _fetch = require('node-fetch');
           imgBS4 = "data:".concat(mimetype, ";base64,").concat(mediaData.toString('base64'));
           RBot.reply(from, 'Searching....', id);
@@ -1695,60 +1702,60 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           });
 
-          _context13.next = 511;
+          _context13.next = 516;
           break;
 
-        case 510:
+        case 515:
           RBot.reply(from, "Maaf format salah\n\nSilahkan kirim foto dengan caption ".concat(prefix, "whatanime\n\nAtau reply foto dengan caption ").concat(prefix, "whatanime"), id);
 
-        case 511:
-          return _context13.abrupt("break", 859);
+        case 516:
+          return _context13.abrupt("break", 864);
 
-        case 512:
+        case 517:
           if (!(args.length !== 2)) {
-            _context13.next = 514;
+            _context13.next = 519;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah.\nSilahkan ketik pesan dengan ".concat(prefix, "resi <kurir> <no_resi>\n\nKurir yang tersedia:\njne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex"), id));
 
-        case 514:
+        case 519:
           kurirs = ['jne', 'pos', 'tiki', 'wahana', 'jnt', 'rpx', 'sap', 'sicepat', 'pcp', 'jet', 'dse', 'first', 'ninja', 'lion', 'idl', 'rex'];
 
           if (kurirs.includes(args[0])) {
-            _context13.next = 517;
+            _context13.next = 522;
             break;
           }
 
           return _context13.abrupt("return", RBot.sendText(from, "Maaf, jenis ekspedisi pengiriman tidak didukung layanan ini hanya mendukung ekspedisi pengiriman ".concat(kurirs.join(', '), " Tolong periksa kembali.")));
 
-        case 517:
+        case 522:
           console.log('Memeriksa No Resi', args[1], 'dengan ekspedisi', args[0]);
           cekResi(args[0], args[1]).then(function (result) {
             return RBot.sendText(from, result);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 520:
+        case 525:
           if (!(args.length == 0)) {
-            _context13.next = 522;
+            _context13.next = 527;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Mengubah teks menjadi sound (google voice)\nketik: ".concat(prefix, "tts <kode_bahasa> <teks>\ncontoh : ").concat(prefix, "tts id halo\nuntuk kode bahasa cek disini : https://anotepad.com/note/read/5xqahdy8")));
 
-        case 522:
+        case 527:
           ttsGB = require('node-gtts')(args[0]);
           dataText = body.slice(8);
 
           if (!(dataText === '')) {
-            _context13.next = 526;
+            _context13.next = 531;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'apa teksnya syg..', id));
 
-        case 526:
+        case 531:
           try {
             ttsGB.save('./media/tts.mp3', dataText, function () {
               RBot.sendPtt(from, './media/tts.mp3', id);
@@ -1757,34 +1764,34 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, err, id);
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 528:
+        case 533:
           if (!(args.length != 1)) {
-            _context13.next = 530;
+            _context13.next = 535;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
 
-        case 530:
+        case 535:
           if (quotedMsg) {
-            _context13.next = 532;
+            _context13.next = 537;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ".concat(prefix, "translate <kode_bahasa>\ncontoh ").concat(prefix, "translate id"), id));
 
-        case 532:
+        case 537:
           quoteText = quotedMsg.type == 'chat' ? quotedMsg.body : quotedMsg.type == 'image' ? quotedMsg.caption : '';
           translate(quoteText, args[0]).then(function (result) {
             return RBot.sendText(from, result);
           })["catch"](function () {
             return RBot.sendText(from, 'Error, Kode bahasa salah.');
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 535:
+        case 540:
           rugaapi.covidindo().then(function _callee11(res) {
             return regeneratorRuntime.async(function _callee11$(_context11) {
               while (1) {
@@ -1800,22 +1807,22 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 537:
+        case 542:
           if (!(quotedMsg.type !== 'location')) {
-            _context13.next = 539;
+            _context13.next = 544;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah.\nKirimkan lokasi dan reply dengan caption ".concat(prefix, "ceklokasi"), id));
 
-        case 539:
+        case 544:
           console.log("Request Status Zona Penyebaran Covid-19 (".concat(quotedMsg.lat, ", ").concat(quotedMsg.lng, ")."));
-          _context13.next = 542;
+          _context13.next = 547;
           return regeneratorRuntime.awrap(getLocationData(quotedMsg.lat, quotedMsg.lng));
 
-        case 542:
+        case 547:
           zoneStatus = _context13.sent;
           if (zoneStatus.kode !== 200) RBot.sendText(from, 'Maaf, Terjadi error ketika memeriksa lokasi yang anda kirim.');
           datax = '';
@@ -1828,47 +1835,47 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
 
           text = "*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *".concat(zoneStatus.status, "* ").concat(zoneStatus.optional, "\n\nInformasi lokasi terdampak disekitar anda:\n").concat(datax);
           RBot.sendText(from, text);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 549:
+        case 554:
           if (!(args.length == 0)) {
-            _context13.next = 551;
+            _context13.next = 556;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "ketik ".concat(prefix, "shortlink <url>"), id));
 
-        case 551:
+        case 556:
           if (isUrl(args[0])) {
-            _context13.next = 553;
+            _context13.next = 558;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, url yang kamu kirim tidak valid.', id));
 
-        case 553:
-          _context13.next = 555;
+        case 558:
+          _context13.next = 560;
           return regeneratorRuntime.awrap(urlShortener(args[0]));
 
-        case 555:
+        case 560:
           shortlink = _context13.sent;
-          _context13.next = 558;
+          _context13.next = 563;
           return regeneratorRuntime.awrap(RBot.sendText(from, shortlink)["catch"](function () {
             RBot.reply(from, "[\u2718] Maaf, ada yang error! Silahkan hubungi owner ".concat(prefix, "botowner"), id);
           }));
 
-        case 558:
-          return _context13.abrupt("break", 859);
+        case 563:
+          return _context13.abrupt("break", 864);
 
-        case 559:
+        case 564:
           if (!(args.length == 0)) {
-            _context13.next = 561;
+            _context13.next = 566;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Mengubah kalimat menjadi alayyyyy\n\nketik ".concat(prefix, "bapakfont kalimat"), id));
 
-        case 561:
+        case 566:
           rugaapi.bapakfont(body.slice(11)).then(function _callee12(res) {
             return regeneratorRuntime.async(function _callee12$(_context12) {
               while (1) {
@@ -1884,17 +1891,17 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               }
             });
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 563:
+        case 568:
           if (isGroupMsg) {
-            _context13.next = 565;
+            _context13.next = 570;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 565:
+        case 570:
           klasemen = db.get('group').filter({
             id: groupId
           }).map('members').value()[0];
@@ -1915,348 +1922,348 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             textKlas += i + ". @" + klsmn.id.replace('@c.us', '') + " ➤ Rp" + formatin(klsmn.denda) + "\n";
             i++;
           });
-          _context13.next = 572;
+          _context13.next = 577;
           return regeneratorRuntime.awrap(RBot.sendTextWithMentions(from, textKlas));
 
-        case 572:
-          return _context13.abrupt("break", 859);
+        case 577:
+          return _context13.abrupt("break", 864);
 
-        case 573:
+        case 578:
           if (isGroupMsg) {
-            _context13.next = 575;
+            _context13.next = 580;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 575:
+        case 580:
           if (isGroupAdmins) {
-            _context13.next = 577;
+            _context13.next = 582;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 577:
+        case 582:
           if (isBotGroupAdmins) {
-            _context13.next = 579;
+            _context13.next = 584;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
-        case 579:
+        case 584:
           if (!(args.length !== 1)) {
-            _context13.next = 581;
+            _context13.next = 586;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk menggunakan ".concat(prefix, "add\nPenggunaan: ").concat(prefix, "add <nomor>\ncontoh: ").concat(prefix, "add 628xxx"), id));
 
-        case 581:
-          _context13.prev = 581;
-          _context13.next = 584;
-          return regeneratorRuntime.awrap(RBot.addParticipant(from, "".concat(args[0], "@c.us")));
-
-        case 584:
-          _context13.next = 589;
-          break;
-
         case 586:
           _context13.prev = 586;
-          _context13.t5 = _context13["catch"](581);
-          RBot.reply(from, 'Tidak dapat menambahkan target', id);
+          _context13.next = 589;
+          return regeneratorRuntime.awrap(RBot.addParticipant(from, "".concat(args[0], "@c.us")));
 
         case 589:
-          return _context13.abrupt("break", 859);
+          _context13.next = 594;
+          break;
 
-        case 590:
+        case 591:
+          _context13.prev = 591;
+          _context13.t5 = _context13["catch"](586);
+          RBot.reply(from, 'Tidak dapat menambahkan target', id);
+
+        case 594:
+          return _context13.abrupt("break", 864);
+
+        case 595:
           if (isGroupMsg) {
-            _context13.next = 592;
+            _context13.next = 597;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 592:
+        case 597:
           if (isGroupAdmins) {
-            _context13.next = 594;
+            _context13.next = 599;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 594:
+        case 599:
           if (isBotGroupAdmins) {
-            _context13.next = 596;
+            _context13.next = 601;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
-        case 596:
+        case 601:
           if (!(mentionedJidList.length === 0)) {
-            _context13.next = 598;
+            _context13.next = 603;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, format pesan salah.\nSilahkan tag satu atau lebih orang yang akan dikeluarkan', id));
 
-        case 598:
+        case 603:
           if (!(mentionedJidList[0] === botNumber)) {
-            _context13.next = 602;
+            _context13.next = 607;
             break;
           }
 
-          _context13.next = 601;
+          _context13.next = 606;
           return regeneratorRuntime.awrap(RBot.reply(from, 'Maaf, format pesan salah.\nTidak dapat mengeluarkan akun bot sendiri', id));
 
-        case 601:
+        case 606:
           return _context13.abrupt("return", _context13.sent);
 
-        case 602:
-          _context13.next = 604;
+        case 607:
+          _context13.next = 609;
           return regeneratorRuntime.awrap(RBot.sendTextWithMentions(from, "Request diterima, mengeluarkan:\n".concat(mentionedJidList.map(function (x) {
             return "@".concat(x.replace('@c.us', ''));
           }).join('\n'))));
 
-        case 604:
+        case 609:
           _i4 = 0;
 
-        case 605:
+        case 610:
           if (!(_i4 < mentionedJidList.length)) {
-            _context13.next = 615;
+            _context13.next = 620;
             break;
           }
 
           if (!groupAdmins.includes(mentionedJidList[_i4])) {
-            _context13.next = 610;
+            _context13.next = 615;
             break;
           }
 
-          _context13.next = 609;
+          _context13.next = 614;
           return regeneratorRuntime.awrap(RBot.sendText(from, 'Gagal, kamu tidak bisa mengeluarkan admin grup.'));
 
-        case 609:
+        case 614:
           return _context13.abrupt("return", _context13.sent);
 
-        case 610:
-          _context13.next = 612;
+        case 615:
+          _context13.next = 617;
           return regeneratorRuntime.awrap(RBot.removeParticipant(groupId, mentionedJidList[_i4]));
 
-        case 612:
+        case 617:
           _i4++;
-          _context13.next = 605;
+          _context13.next = 610;
           break;
 
-        case 615:
-          return _context13.abrupt("break", 859);
+        case 620:
+          return _context13.abrupt("break", 864);
 
-        case 616:
+        case 621:
           if (isGroupMsg) {
-            _context13.next = 618;
+            _context13.next = 623;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 618:
+        case 623:
           if (isGroupAdmins) {
-            _context13.next = 620;
+            _context13.next = 625;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 620:
+        case 625:
           if (isBotGroupAdmins) {
-            _context13.next = 622;
+            _context13.next = 627;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
-        case 622:
+        case 627:
           if (!(mentionedJidList.length !== 1)) {
-            _context13.next = 624;
+            _context13.next = 629;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, hanya bisa mempromote 1 user', id));
 
-        case 624:
+        case 629:
           if (!groupAdmins.includes(mentionedJidList[0])) {
-            _context13.next = 628;
+            _context13.next = 633;
             break;
           }
 
-          _context13.next = 627;
+          _context13.next = 632;
           return regeneratorRuntime.awrap(RBot.reply(from, 'Maaf, user tersebut sudah menjadi admin.', id));
 
-        case 627:
+        case 632:
           return _context13.abrupt("return", _context13.sent);
 
-        case 628:
+        case 633:
           if (!(mentionedJidList[0] === botNumber)) {
-            _context13.next = 632;
+            _context13.next = 637;
             break;
           }
 
-          _context13.next = 631;
+          _context13.next = 636;
           return regeneratorRuntime.awrap(RBot.reply(from, 'Maaf, format pesan salah.\nTidak dapat mempromote akun bot sendiri', id));
 
-        case 631:
+        case 636:
           return _context13.abrupt("return", _context13.sent);
 
-        case 632:
-          _context13.next = 634;
+        case 637:
+          _context13.next = 639;
           return regeneratorRuntime.awrap(RBot.promoteParticipant(groupId, mentionedJidList[0]));
 
-        case 634:
-          _context13.next = 636;
+        case 639:
+          _context13.next = 641;
           return regeneratorRuntime.awrap(RBot.sendTextWithMentions(from, "Request diterima, menambahkan @".concat(mentionedJidList[0].replace('@c.us', ''), " sebagai admin.")));
 
-        case 636:
-          return _context13.abrupt("break", 859);
+        case 641:
+          return _context13.abrupt("break", 864);
 
-        case 637:
+        case 642:
           if (isGroupMsg) {
-            _context13.next = 639;
+            _context13.next = 644;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 639:
+        case 644:
           if (isGroupAdmins) {
-            _context13.next = 641;
+            _context13.next = 646;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 641:
+        case 646:
           if (isBotGroupAdmins) {
-            _context13.next = 643;
+            _context13.next = 648;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
-        case 643:
+        case 648:
           if (!(mentionedJidList.length !== 1)) {
-            _context13.next = 645;
+            _context13.next = 650;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, hanya bisa mendemote 1 user', id));
 
-        case 645:
+        case 650:
           if (groupAdmins.includes(mentionedJidList[0])) {
-            _context13.next = 649;
+            _context13.next = 654;
             break;
           }
 
-          _context13.next = 648;
+          _context13.next = 653;
           return regeneratorRuntime.awrap(RBot.reply(from, 'Maaf, user tersebut belum menjadi admin.', id));
 
-        case 648:
+        case 653:
           return _context13.abrupt("return", _context13.sent);
 
-        case 649:
+        case 654:
           if (!(mentionedJidList[0] === botNumber)) {
-            _context13.next = 653;
+            _context13.next = 658;
             break;
           }
 
-          _context13.next = 652;
+          _context13.next = 657;
           return regeneratorRuntime.awrap(RBot.reply(from, 'Maaf, format pesan salah.\nTidak dapat mendemote akun bot sendiri', id));
 
-        case 652:
+        case 657:
           return _context13.abrupt("return", _context13.sent);
 
-        case 653:
-          _context13.next = 655;
+        case 658:
+          _context13.next = 660;
           return regeneratorRuntime.awrap(RBot.demoteParticipant(groupId, mentionedJidList[0]));
 
-        case 655:
-          _context13.next = 657;
+        case 660:
+          _context13.next = 662;
           return regeneratorRuntime.awrap(RBot.sendTextWithMentions(from, "Request diterima, menghapus jabatan @".concat(mentionedJidList[0].replace('@c.us', ''), ".")));
 
-        case 657:
-          return _context13.abrupt("break", 859);
+        case 662:
+          return _context13.abrupt("break", 864);
 
-        case 658:
+        case 663:
           if (isGroupMsg) {
-            _context13.next = 660;
+            _context13.next = 665;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 660:
+        case 665:
           if (isGroupAdmins) {
-            _context13.next = 662;
+            _context13.next = 667;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 662:
+        case 667:
           RBot.sendText(from, 'Good bye... ( ⇀‸↼‶ )').then(function () {
             return RBot.leaveGroup(groupId);
           });
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 664:
+        case 669:
           if (isGroupAdmins) {
-            _context13.next = 666;
+            _context13.next = 671;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 666:
+        case 671:
           if (quotedMsg) {
-            _context13.next = 668;
+            _context13.next = 673;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
 
-        case 668:
+        case 673:
           if (quotedMsgObj.fromMe) {
-            _context13.next = 670;
+            _context13.next = 675;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Maaf, format pesan salah silahkan.\nReply pesan bot dengan caption ".concat(prefix, "del"), id));
 
-        case 670:
+        case 675:
           RBot.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 672:
+        case 677:
           if (isGroupMsg) {
-            _context13.next = 674;
+            _context13.next = 679;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 674:
+        case 679:
           if (isGroupAdmins) {
-            _context13.next = 676;
+            _context13.next = 681;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 676:
-          _context13.next = 678;
+        case 681:
+          _context13.next = 683;
           return regeneratorRuntime.awrap(RBot.getGroupMembers(groupId));
 
-        case 678:
+        case 683:
           groupMem = _context13.sent;
           hehex = '╔══✪〘 Mention All 〙✪══\n';
 
@@ -2266,49 +2273,49 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           }
 
           hehex += '╚═〘 *A R U G A  B O T* 〙';
-          _context13.next = 684;
+          _context13.next = 689;
           return regeneratorRuntime.awrap(RBot.sendTextWithMentions(from, hehex));
 
-        case 684:
-          return _context13.abrupt("break", 859);
-
-        case 685:
-          if (isGroupMsg) {
-            _context13.next = 687;
-            break;
-          }
-
-          return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
-
-        case 687:
-          RBot.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
-          return _context13.abrupt("break", 859);
-
         case 689:
+          return _context13.abrupt("break", 864);
+
+        case 690:
           if (isGroupMsg) {
-            _context13.next = 691;
+            _context13.next = 692;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 691:
+        case 692:
+          RBot.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
+          return _context13.abrupt("break", 864);
+
+        case 694:
+          if (isGroupMsg) {
+            _context13.next = 696;
+            break;
+          }
+
+          return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
+
+        case 696:
           if (isGroupAdmins) {
-            _context13.next = 693;
+            _context13.next = 698;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 693:
+        case 698:
           if (!(args.length !== 1)) {
-            _context13.next = 695;
+            _context13.next = 700;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id));
 
-        case 695:
+        case 700:
           if (args[0] == 'on') {
             simi.push(chatId);
             fs.writeFileSync('./settings/simi.json', JSON.stringify(simi));
@@ -2322,45 +2329,45 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, "Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n".concat(prefix, "simi on --mengaktifkan\n").concat(prefix, "simi off --nonaktifkan\n"), id);
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 697:
+        case 702:
           if (isGroupMsg) {
-            _context13.next = 699;
+            _context13.next = 704;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 699:
+        case 704:
           RBot.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 701:
+        case 706:
           if (isGroupMsg) {
-            _context13.next = 703;
+            _context13.next = 708;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 703:
+        case 708:
           if (isGroupAdmins) {
-            _context13.next = 705;
+            _context13.next = 710;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 705:
+        case 710:
           if (!(args.length !== 1)) {
-            _context13.next = 707;
+            _context13.next = 712;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id));
 
-        case 707:
+        case 712:
           if (args[0] == 'on') {
             ngegas.push(chatId);
             fs.writeFileSync('./settings/ngegas.json', JSON.stringify(ngegas));
@@ -2374,25 +2381,25 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             RBot.reply(from, "Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\napasih itu? fitur apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n".concat(prefix, "kasar on --mengaktifkan\n").concat(prefix, "kasar off --nonaktifkan\n\n").concat(prefix, "reset --reset jumlah denda"), id);
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 709:
+        case 714:
           if (isGroupMsg) {
-            _context13.next = 711;
+            _context13.next = 716;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 711:
+        case 716:
           if (isGroupAdmins) {
-            _context13.next = 713;
+            _context13.next = 718;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id));
 
-        case 713:
+        case 718:
           reset = db.get('group').find({
             id: groupId
           }).assign({
@@ -2400,94 +2407,94 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           }).write();
 
           if (!reset) {
-            _context13.next = 717;
+            _context13.next = 722;
             break;
           }
 
-          _context13.next = 717;
+          _context13.next = 722;
           return regeneratorRuntime.awrap(RBot.sendText(from, "Klasemen telah direset."));
 
-        case 717:
-          return _context13.abrupt("break", 859);
+        case 722:
+          return _context13.abrupt("break", 864);
 
-        case 718:
+        case 723:
           if (isGroupMsg) {
-            _context13.next = 720;
+            _context13.next = 725;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id));
 
-        case 720:
+        case 725:
           isOwner = chat.groupMetadata.owner == pengirim;
 
           if (isOwner) {
-            _context13.next = 723;
+            _context13.next = 728;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai oleh owner grup!', id));
 
-        case 723:
+        case 728:
           if (isBotGroupAdmins) {
-            _context13.next = 725;
+            _context13.next = 730;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id));
 
-        case 725:
-          _context13.next = 727;
+        case 730:
+          _context13.next = 732;
           return regeneratorRuntime.awrap(RBot.getGroupMembers(groupId));
 
-        case 727:
+        case 732:
           allMem = _context13.sent;
           _i6 = 0;
 
-        case 729:
+        case 734:
           if (!(_i6 < allMem.length)) {
-            _context13.next = 738;
+            _context13.next = 743;
             break;
           }
 
           if (!groupAdmins.includes(allMem[_i6].id)) {
-            _context13.next = 733;
+            _context13.next = 738;
             break;
           }
 
-          _context13.next = 735;
-          break;
-
-        case 733:
-          _context13.next = 735;
-          return regeneratorRuntime.awrap(RBot.removeParticipant(groupId, allMem[_i6].id));
-
-        case 735:
-          _i6++;
-          _context13.next = 729;
+          _context13.next = 740;
           break;
 
         case 738:
-          RBot.reply(from, 'Success kick all member', id);
-          return _context13.abrupt("break", 859);
+          _context13.next = 740;
+          return regeneratorRuntime.awrap(RBot.removeParticipant(groupId, allMem[_i6].id));
 
         case 740:
+          _i6++;
+          _context13.next = 734;
+          break;
+
+        case 743:
+          RBot.reply(from, 'Success kick all member', id);
+          return _context13.abrupt("break", 864);
+
+        case 745:
           if (isOwnerBot) {
-            _context13.next = 742;
+            _context13.next = 747;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Perintah untuk R-Dev', id));
 
-        case 742:
+        case 747:
           if (!(args.length == 0)) {
-            _context13.next = 744;
+            _context13.next = 749;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Format : ban @tag +1 (GROUP), ban numTarget (Personal)", id));
 
-        case 744:
+        case 749:
           if (args[0] == 'add') {
             banned.push(args[1] + '@c.us');
             fs.writeFileSync('./settings/banned.json', JSON.stringify(banned));
@@ -2505,258 +2512,258 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             }
           }
 
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 746:
+        case 751:
           if (isOwnerBot) {
-            _context13.next = 748;
+            _context13.next = 753;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Perintah untuk R-Dev!', id));
 
-        case 748:
+        case 753:
           if (!(args.length == 0)) {
-            _context13.next = 750;
+            _context13.next = 755;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, "Untuk broadcast ke semua chat ketik:\n".concat(prefix, "bc [isi chat]")));
 
-        case 750:
+        case 755:
           msg = body.slice(4);
-          _context13.next = 753;
+          _context13.next = 758;
           return regeneratorRuntime.awrap(RBot.getAllChatIds());
 
-        case 753:
+        case 758:
           chatz = _context13.sent;
           _iteratorNormalCompletion = true;
           _didIteratorError = false;
           _iteratorError = undefined;
-          _context13.prev = 757;
+          _context13.prev = 762;
           _iterator = chatz[Symbol.iterator]();
 
-        case 759:
+        case 764:
           if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-            _context13.next = 769;
+            _context13.next = 774;
             break;
           }
 
           idk = _step.value;
-          _context13.next = 763;
+          _context13.next = 768;
           return regeneratorRuntime.awrap(RBot.getChatById(idk));
 
-        case 763:
+        case 768:
           cvk = _context13.sent;
           if (!cvk.isReadOnly) RBot.sendText(idk, "[ *R - BOT* ]\n\n".concat(msg));
           if (cvk.isReadOnly) RBot.sendText(idk, "\u3018 *R - DEV \u3019\n\n".concat(msg));
 
-        case 766:
-          _iteratorNormalCompletion = true;
-          _context13.next = 759;
-          break;
-
-        case 769:
-          _context13.next = 775;
-          break;
-
         case 771:
-          _context13.prev = 771;
-          _context13.t6 = _context13["catch"](757);
+          _iteratorNormalCompletion = true;
+          _context13.next = 764;
+          break;
+
+        case 774:
+          _context13.next = 780;
+          break;
+
+        case 776:
+          _context13.prev = 776;
+          _context13.t6 = _context13["catch"](762);
           _didIteratorError = true;
           _iteratorError = _context13.t6;
 
-        case 775:
-          _context13.prev = 775;
-          _context13.prev = 776;
+        case 780:
+          _context13.prev = 780;
+          _context13.prev = 781;
 
           if (!_iteratorNormalCompletion && _iterator["return"] != null) {
             _iterator["return"]();
           }
 
-        case 778:
-          _context13.prev = 778;
+        case 783:
+          _context13.prev = 783;
 
           if (!_didIteratorError) {
-            _context13.next = 781;
+            _context13.next = 786;
             break;
           }
 
           throw _iteratorError;
 
-        case 781:
-          return _context13.finish(778);
+        case 786:
+          return _context13.finish(783);
 
-        case 782:
-          return _context13.finish(775);
+        case 787:
+          return _context13.finish(780);
 
-        case 783:
+        case 788:
           RBot.reply(from, '✅ Broadcast Success!', id);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 785:
+        case 790:
           if (isOwnerBot) {
-            _context13.next = 787;
+            _context13.next = 792;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Perintah untuk R-Dev', id));
 
-        case 787:
-          _context13.next = 789;
+        case 792:
+          _context13.next = 794;
           return regeneratorRuntime.awrap(RBot.getAllChatIds());
 
-        case 789:
+        case 794:
           allChatz = _context13.sent;
-          _context13.next = 792;
+          _context13.next = 797;
           return regeneratorRuntime.awrap(RBot.getAllGroups());
 
-        case 792:
+        case 797:
           allGroupz = _context13.sent;
           _iteratorNormalCompletion2 = true;
           _didIteratorError2 = false;
           _iteratorError2 = undefined;
-          _context13.prev = 796;
+          _context13.prev = 801;
           _iterator2 = allGroupz[Symbol.iterator]();
 
-        case 798:
+        case 803:
           if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-            _context13.next = 809;
+            _context13.next = 814;
             break;
           }
 
           gclist = _step2.value;
-          _context13.next = 802;
+          _context13.next = 807;
           return regeneratorRuntime.awrap(RBot.sendText(gclist.contact.id, "Maaf bot sedang pembersihan, total chat aktif : ".concat(allChatz.length)));
 
-        case 802:
-          _context13.next = 804;
+        case 807:
+          _context13.next = 809;
           return regeneratorRuntime.awrap(RBot.leaveGroup(gclist.contact.id));
 
-        case 804:
-          _context13.next = 806;
+        case 809:
+          _context13.next = 811;
           return regeneratorRuntime.awrap(RBot.deleteChat(gclist.contact.id));
 
-        case 806:
-          _iteratorNormalCompletion2 = true;
-          _context13.next = 798;
-          break;
-
-        case 809:
-          _context13.next = 815;
-          break;
-
         case 811:
-          _context13.prev = 811;
-          _context13.t7 = _context13["catch"](796);
+          _iteratorNormalCompletion2 = true;
+          _context13.next = 803;
+          break;
+
+        case 814:
+          _context13.next = 820;
+          break;
+
+        case 816:
+          _context13.prev = 816;
+          _context13.t7 = _context13["catch"](801);
           _didIteratorError2 = true;
           _iteratorError2 = _context13.t7;
 
-        case 815:
-          _context13.prev = 815;
-          _context13.prev = 816;
+        case 820:
+          _context13.prev = 820;
+          _context13.prev = 821;
 
           if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
             _iterator2["return"]();
           }
 
-        case 818:
-          _context13.prev = 818;
+        case 823:
+          _context13.prev = 823;
 
           if (!_didIteratorError2) {
-            _context13.next = 821;
+            _context13.next = 826;
             break;
           }
 
           throw _iteratorError2;
 
-        case 821:
-          return _context13.finish(818);
+        case 826:
+          return _context13.finish(823);
 
-        case 822:
-          return _context13.finish(815);
+        case 827:
+          return _context13.finish(820);
 
-        case 823:
+        case 828:
           RBot.reply(from, '✅ Leave all group, Success!', id);
-          return _context13.abrupt("break", 859);
+          return _context13.abrupt("break", 864);
 
-        case 825:
+        case 830:
           if (isOwnerBot) {
-            _context13.next = 827;
+            _context13.next = 832;
             break;
           }
 
           return _context13.abrupt("return", RBot.reply(from, '[✘] Perintah untuk R-Dev', id));
 
-        case 827:
-          _context13.next = 829;
+        case 832:
+          _context13.next = 834;
           return regeneratorRuntime.awrap(RBot.getAllChats());
 
-        case 829:
+        case 834:
           allChatx = _context13.sent;
           _iteratorNormalCompletion3 = true;
           _didIteratorError3 = false;
           _iteratorError3 = undefined;
-          _context13.prev = 833;
+          _context13.prev = 838;
           _iterator3 = allChatx[Symbol.iterator]();
 
-        case 835:
+        case 840:
           if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-            _context13.next = 842;
+            _context13.next = 847;
             break;
           }
 
           dchat = _step3.value;
-          _context13.next = 839;
+          _context13.next = 844;
           return regeneratorRuntime.awrap(RBot.deleteChat(dchat.id));
 
-        case 839:
-          _iteratorNormalCompletion3 = true;
-          _context13.next = 835;
-          break;
-
-        case 842:
-          _context13.next = 848;
-          break;
-
         case 844:
-          _context13.prev = 844;
-          _context13.t8 = _context13["catch"](833);
+          _iteratorNormalCompletion3 = true;
+          _context13.next = 840;
+          break;
+
+        case 847:
+          _context13.next = 853;
+          break;
+
+        case 849:
+          _context13.prev = 849;
+          _context13.t8 = _context13["catch"](838);
           _didIteratorError3 = true;
           _iteratorError3 = _context13.t8;
 
-        case 848:
-          _context13.prev = 848;
-          _context13.prev = 849;
+        case 853:
+          _context13.prev = 853;
+          _context13.prev = 854;
 
           if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
             _iterator3["return"]();
           }
 
-        case 851:
-          _context13.prev = 851;
+        case 856:
+          _context13.prev = 856;
 
           if (!_didIteratorError3) {
-            _context13.next = 854;
+            _context13.next = 859;
             break;
           }
 
           throw _iteratorError3;
 
-        case 854:
-          return _context13.finish(851);
-
-        case 855:
-          return _context13.finish(848);
-
-        case 856:
-          RBot.reply(from, '✅ Clear all chat, Success!', id);
-          return _context13.abrupt("break", 859);
-
-        case 858:
-          return _context13.abrupt("break", 859);
-
         case 859:
+          return _context13.finish(856);
+
+        case 860:
+          return _context13.finish(853);
+
+        case 861:
+          RBot.reply(from, '✅ Clear all chat, Success!', id);
+          return _context13.abrupt("break", 864);
+
+        case 863:
+          return _context13.abrupt("break", 864);
+
+        case 864:
           // Simi-simi function
           if (!isCmd && isGroupMsg && isSimi && message.type === 'chat') {
             axios.get("https://arugaz.herokuapp.com/api/simisimi?kata=".concat(encodeURIComponent(message.body), "&apikey=").concat(apiSimi)).then(function (res) {
@@ -2769,7 +2776,7 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
 
 
           if (!(!isCmd && isGroupMsg && isNgegas)) {
-            _context13.next = 896;
+            _context13.next = 901;
             break;
           }
 
@@ -2778,7 +2785,7 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           }).value();
 
           if (!(find && find.id === groupId)) {
-            _context13.next = 889;
+            _context13.next = 894;
             break;
           }
 
@@ -2788,12 +2795,12 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           isIn = inArray(pengirim, cekuser);
 
           if (!(cekuser && isIn !== false)) {
-            _context13.next = 873;
+            _context13.next = 878;
             break;
           }
 
           if (!isKasar) {
-            _context13.next = 871;
+            _context13.next = 876;
             break;
           }
 
@@ -2806,24 +2813,24 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
           }).write();
 
           if (!denda) {
-            _context13.next = 871;
+            _context13.next = 876;
             break;
           }
 
-          _context13.next = 871;
+          _context13.next = 876;
           return regeneratorRuntime.awrap(RBot.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp" + formatin(denda.denda), id));
 
-        case 871:
-          _context13.next = 887;
+        case 876:
+          _context13.next = 892;
           break;
 
-        case 873:
+        case 878:
           cekMember = db.get('group').filter({
             id: groupId
           }).map('members').value()[0];
 
           if (!(cekMember.length === 0)) {
-            _context13.next = 878;
+            _context13.next = 883;
             break;
           }
 
@@ -2843,16 +2850,16 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             }]).write();
           }
 
-          _context13.next = 887;
+          _context13.next = 892;
           break;
 
-        case 878:
+        case 883:
           _cekuser = db.get('group').filter({
             id: groupId
           }).map('members').value()[0];
 
           if (!isKasar) {
-            _context13.next = 885;
+            _context13.next = 890;
             break;
           }
 
@@ -2861,31 +2868,31 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             denda: 5000
           });
 
-          _context13.next = 883;
+          _context13.next = 888;
           return regeneratorRuntime.awrap(RBot.reply(from, "Jangan badword bodoh\nDenda +5.000", id));
 
-        case 883:
-          _context13.next = 886;
+        case 888:
+          _context13.next = 891;
           break;
 
-        case 885:
+        case 890:
           _cekuser.push({
             id: pengirim,
             denda: 0
           });
 
-        case 886:
+        case 891:
           db.get('group').find({
             id: groupId
           }).set('members', _cekuser).write();
 
-        case 887:
-          _context13.next = 896;
+        case 892:
+          _context13.next = 901;
           break;
 
-        case 889:
+        case 894:
           if (!isKasar) {
-            _context13.next = 895;
+            _context13.next = 900;
             break;
           }
 
@@ -2896,14 +2903,14 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
               denda: 5000
             }]
           }).write();
-          _context13.next = 893;
+          _context13.next = 898;
           return regeneratorRuntime.awrap(RBot.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp5.000", id));
 
-        case 893:
-          _context13.next = 896;
+        case 898:
+          _context13.next = 901;
           break;
 
-        case 895:
+        case 900:
           db.get('group').push({
             id: groupId,
             members: [{
@@ -2912,19 +2919,19 @@ module.exports = HandleMsg = function HandleMsg(RBot, message) {
             }]
           }).write();
 
-        case 896:
-          _context13.next = 901;
+        case 901:
+          _context13.next = 906;
           break;
 
-        case 898:
-          _context13.prev = 898;
+        case 903:
+          _context13.prev = 903;
           _context13.t9 = _context13["catch"](0);
           console.log(color('[EROR]', 'red'), _context13.t9);
 
-        case 901:
+        case 906:
         case "end":
           return _context13.stop();
       }
     }
-  }, null, null, [[0, 898], [130, 146], [230, 237], [581, 586], [757, 771, 775, 783], [776,, 778, 782], [796, 811, 815, 823], [816,, 818, 822], [833, 844, 848, 856], [849,, 851, 855]]);
+  }, null, null, [[0, 903], [135, 151], [235, 242], [586, 591], [762, 776, 780, 788], [781,, 783, 787], [801, 816, 820, 828], [821,, 823, 827], [838, 849, 853, 861], [854,, 856, 860]]);
 };

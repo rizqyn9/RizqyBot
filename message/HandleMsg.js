@@ -33,16 +33,16 @@ const {
     rugapoi,
     rugaapi,
     cariKasar
-} = require('./lib')
+} = require('../lib')
 
 const { 
     msgFilter, 
     color, 
     processTime, 
     isUrl
-} = require('./utils')
+} = require('../utils')
 
-const { uploadImages } = require('./utils/fetcher')
+const { uploadImages } = require('../utils/fetcher')
 
 const fs = require('fs-extra')
 const banned = JSON.parse(fs.readFileSync('./settings/banned.json'))
@@ -56,21 +56,17 @@ const {botName,
     memberLimit,
     groupLimit,
     prefix,
-    waFeed,} = require('./bot-setting.json')
-const style = require('./custom/console')
+    waFeed,} = require('../bot-setting.json')
+const style = require('../custom/console')
     
-// const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
-// let { 
-//     ownerNumber, 
-//     groupLimit, 
-//     memberLimit,
-//     prefix
-// } = setting
 
 const {
     apiNoBg,
 	apiSimi
 } = JSON.parse(fs.readFileSync('./settings/api.json'))
+
+//! Requre Handle MSG for Owner
+const rDev = require('./OnwerMsg')
 
 function formatin(duit){
     let	reverse = duit.toString().split('').reverse().join('');
@@ -86,6 +82,7 @@ const inArray = (needle, haystack) => {
     }
     return false;
 }
+
 
 
 module.exports = HandleMsg = async (RBot, message) => {
@@ -124,42 +121,66 @@ module.exports = HandleMsg = async (RBot, message) => {
 
         //! Custom Grup
         const isGroupList = groupList.includes(groupId)
-
         const groupName = (name || formattedTitle)
         const formatTime = moment(t * 1000).format('DD/MM/YY HH:mm:ss')
         const formatCommand = `${command} [${args.length}]`
 
-        // ! Owner Adding Group
+
+        //! Group Admin Request Activation Bot
+        if (command == 'reqbot' && isGroupAdmins){
+            RBot.reply(from,"Permintaan akan di Acc 1 x 24 jam.",id)
+            await RBot.sendText(ownerNumber, groupId)
+            return style.bot(`REQ : ${groupId}`)
+        }
+
+        //! Owner Acc Req 
+        if (command == "acc" && isOwnerBot){
+            const check = groupList.includes(args[0])
+            if(args.length === 1){
+                if(!check){
+                    groupList.push(args[0])
+                    fs.writeFileSync('./feature/groupList.json', JSON.stringify(groupList))
+                    await RBot.sendText(args[0],"[BOT] R-Bot sudah aktif")
+                    await RBot.sendText(args[0],menuId.textMenu("members"))
+                    return style.botAct('[☑] Success activated RBot')
+                } else {
+                    return RBot.reply(from,"[☑] RBot already running")
+                }
+            } else {
+                await RBot.reply(from,"[✘] Wrong format text")
+                return null
+            }
+        }
+
+        // ! Owner Adding Group (Manual)
         if (command == 'addgrup' && isOwnerBot){
-            let check = groupList.includes(groupId)
-            if(check){
+            if(isGroupList){
                 RBot.sendText(from,"[BOT] R-Bot sudah aktif")
-                style.botAct('Activated in',groupName)
+                return style.botAct('Activated in',groupName)
             } else {
                 groupList.push(groupId)
                 fs.writeFileSync('./feature/groupList.json', JSON.stringify(groupList))
                 RBot.sendText(from,"[BOT] R-Bot berhasil di Aktifkan")
-                style.botAct('Started in', groupName)
+                return style.botAct('Started in', groupName)
             }
         }
         if (command == 'delgrup' && isOwnerBot){
-            let check = groupList.includes(groupId)
-            if(!check){
+            if(!isGroupList){
                 RBot.sendText(from,"[BOT] R-Bot sudah tidak aktif")
-                style.botNonAct('No Bot Active in', groupName)
+                return style.botNonAct('No Bot Active in', groupName)
             } else {
-                groupList.splice(groupId)
+                let index = groupList.indexOf(groupId)
+                groupList.splice(index,1)
                 fs.writeFileSync('./feature/groupList.json', JSON.stringify(groupList))
                 RBot.sendText(from,"[BOT] R-Bot berhasil di Non-Aktifkan")
-                style.botNonAct('NonActive in', groupName)
+                return style.botNonAct('NonActive in', groupName)
             }
         }
 
         //! MSG from not Regist Group
         if (!isGroupList && isGroupMsg && isCmd) {
-            return style.nonRegist(pushname,groupName,groupId)
+            return null
         }
-
 
             //! [BETA] Avoid Spam Message
         if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) { 
@@ -180,7 +201,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             style.exeGroup(formatTime, formatCommand,'from' , pushname, 'in', groupName)
         }
 
-        // [BETA] Avoid Spam Message
+        //! [BETA] Avoid Spam Message
         msgFilter.addFilter(from)
 
 	//! Filter Banned People
@@ -227,8 +248,9 @@ module.exports = HandleMsg = async (RBot, message) => {
             if (!islink) return RBot.reply(from, '✘ Format link salah', id)
             if (isOwnerBot) {
                 await RBot.joinGroupViaLink(linkgrup)
-                    .then(async () => {
-                        await RBot.sendText(from, `☑ Berhasil menambahkan ${botName}`)
+                .then(async () => {
+                    await RBot.sendText(from, `☑ Berhasil menambahkan ${botName}`)
+                    console.log(chekgrup.id);
                         await RBot.sendText(chekgrup.id, `Hai members ${groupName}, untuk menggunakan fitur ${botName} silahkan ketik ${prefix}menu`)
                     })
             } else {
@@ -296,7 +318,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             if (isMedia || isQuotedVideo) {
                 if (mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10) {
                     var mediaData = await decryptMedia(message, uaOverride)
-                    RBot.reply(from, '⏳ Sticker di proses', id)
+                    RBot.reply(from, '[⏳] Sticker di proses', id)
                     var filename = `./media/stickergif.${mimetype.split('/')[1]}`
                     await fs.writeFileSync(filename, mediaData)
                     await exec(`gify ${filename} ./media/stickergf.gif --fps=30 --scale=240:240`, async function (error, stdout, stderr) {
@@ -394,7 +416,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 
         //Islam Command
         //! Thanks to ARUGA API
-        case 'listsurah':
+        case 'daftarsurah':
             try {
                 axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah.json')
                 .then((response) => {

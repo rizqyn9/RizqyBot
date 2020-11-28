@@ -16,7 +16,7 @@ var _require2 = require("./utils"),
     color = _require2.color,
     messageLog = _require2.messageLog;
 
-var HandleMsg = require("./HandleMsg");
+var HandleMsg = require("./message/HandleMsg");
 
 var _require3 = require("./bot-setting.json"),
     cacheMessage = _require3.cacheMessage,
@@ -30,9 +30,10 @@ var _require4 = require('./msg/msg-temp'),
     infoProblem = _require4.infoProblem; //! Massage Template
 
 
-var fs = require('fs-extra');
+var fs = require('fs-extra'); //! ACCESS TO FILE SYSTEM
 
-var groupList = JSON.parse(fs.readFileSync('./feature/groupList.json'));
+
+var groupList = JSON.parse(fs.readFileSync('./feature/groupList.json')); //! groupList : REGIST
 
 var start = function start() {
   var RBot = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Client();
@@ -47,7 +48,7 @@ var start = function start() {
   RBot.onStateChanged(function (state) {
     console.log(style.warn(state));
     if (state === "CONFLICT" || state === "UNLAUNCHED") RBot.forceRefocus();
-  }); // ketika bot diinvite ke dalam group
+  }); //! Invited RBot in Group
 
   RBot.onAddedToGroup(function _callee2(chat) {
     var groups, groupName;
@@ -60,8 +61,8 @@ var start = function start() {
 
           case 2:
             groups = _context2.sent;
-            groupName = chat.contact.id; //! Get Group Name
-            // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
+            groupName = chat.contact.name; //! Get Group ID
+            //! Group Limit Setting
 
             if (!(groups.length > groupLimit)) {
               _context2.next = 9;
@@ -102,9 +103,12 @@ var start = function start() {
                   switch (_context.prev = _context.next) {
                     case 0:
                       _context.next = 2;
-                      return regeneratorRuntime.awrap(RBot.sendText(chat.id, "Hai member ".concat(groupName, ",  perkenalkan aku *").concat(botName, "*\nUntuk melihat perintah pada ketik ").concat(prefix, "menu \uD83D\uDE18")));
+                      return regeneratorRuntime.awrap(RBot.sendText(chat.id, "Hai member ".concat(groupName, ",  perkenalkan aku *").concat(botName, "*\nUntuk mengaktifkan ").concat(botName, " silahkan Admin Grup ketik\n\n\t#daftar <nama_grup>|<nama_perwakilan>\n\nGrup akan di Acc 1x24jam.")));
 
                     case 2:
+                      style.bot("Invited to ".concat(groupName));
+
+                    case 3:
                     case "end":
                       return _context.stop();
                   }
@@ -118,10 +122,10 @@ var start = function start() {
         }
       }
     });
-  }); // ketika seseorang masuk/keluar dari group
+  }); //! Group Event (Members Kicked / Invited)
 
   RBot.onGlobalParicipantsChanged(function _callee3(event) {
-    var host;
+    var host, groupName, check;
     return regeneratorRuntime.async(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -132,25 +136,37 @@ var start = function start() {
           case 2:
             _context3.t0 = _context3.sent;
             host = _context3.t0 + "@c.us";
+            //! Bot NOT REGIST == Turn OFF command
+            groupName = event.chat; //! Get Group ID
 
-            if (!(event.action === "add" && event.who !== host)) {
-              _context3.next = 7;
+            check = groupList.includes(groupName);
+
+            if (check) {
+              _context3.next = 8;
               break;
             }
 
-            _context3.next = 7;
+            return _context3.abrupt("return", null);
+
+          case 8:
+            if (!(event.action === "add" && event.who !== host)) {
+              _context3.next = 11;
+              break;
+            }
+
+            _context3.next = 11;
             return regeneratorRuntime.awrap(RBot.sendTextWithMentions(event.chat, "Hai ".concat(event.who.replace("@c.us", ""), ", Selamat datang digrup.\n Semoga nyaman \uD83E\uDD70 \n*-").concat(botName, "*")));
 
-          case 7:
+          case 11:
             if (!(event.action === "remove" && event.who !== host)) {
-              _context3.next = 10;
+              _context3.next = 14;
               break;
             }
 
-            _context3.next = 10;
+            _context3.next = 14;
             return regeneratorRuntime.awrap(RBot.sendTextWithMentions(event.chat, "Jangan rindu @".concat(event.who.replace("@c.us", ""), ", Semoga tenang")));
 
-          case 10:
+          case 14:
           case "end":
             return _context3.stop();
         }
@@ -185,15 +201,15 @@ var start = function start() {
         }
       }
     });
-  }); // ketika seseorang mengirim pesan
+  }); //! Message Handler
 
   RBot.onMessage(function _callee6(message) {
     return regeneratorRuntime.async(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            RBot.getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
-            .then(function (msg) {
+            RBot //! DELETING MESSAGE CACHE
+            .getAmountOfLoadedMessages().then(function (msg) {
               if (msg >= cacheMessage) {
                 console.log(style.bot("Loaded Message reach ".concat(msg, ", deleting message cache...")));
                 RBot.cutMsgCache();
@@ -212,7 +228,7 @@ var start = function start() {
   RBot.onAnyMessage(function (anal) {
     messageLog(anal.fromMe, anal.type);
   });
-}; //create session
+}; //! Stat Session
 
 
 create(options(true, start)).then(function (RBot) {

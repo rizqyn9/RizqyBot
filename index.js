@@ -4,11 +4,11 @@ const gradient = require("gradient-string");
 const style = require("./custom/console");
 const options = require("./utils/options");
 const { color, messageLog } = require("./utils");
-const HandleMsg = require("./HandleMsg"); 
+const HandleMsg = require("./message/HandleMsg"); 
 const { cacheMessage, groupLimit, botName,memberLimit} = require("./bot-setting.json"); //! Bot Setting
 const {infoFeedback,infoProblem} = require('./msg/msg-temp') //! Massage Template
-const fs = require('fs-extra')
-const groupList = JSON.parse(fs.readFileSync('./feature/groupList.json'))
+const fs = require('fs-extra') //! ACCESS TO FILE SYSTEM
+const groupList = JSON.parse(fs.readFileSync('./feature/groupList.json')) //! groupList : REGIST
 
 const start = (RBot = new Client()) => {
   console.log(
@@ -30,12 +30,12 @@ const start = (RBot = new Client()) => {
       RBot.forceRefocus();
   });
 
-  // ketika bot diinvite ke dalam group
+  //! Invited RBot in Group
   RBot.onAddedToGroup(async (chat) => {
     const groups = await RBot.getAllGroups();
-    const groupName = chat.contact.id //! Get Group Name
+    const groupName = chat.contact.name //! Get Group ID
 
-    // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
+    //! Group Limit Setting
     if (groups.length > groupLimit) {
       await RBot
         .sendText(
@@ -47,7 +47,7 @@ const start = (RBot = new Client()) => {
           RBot.deleteChat(chat.id);
         });
     } else {
-      // kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
+      //! Minimum Member Setting
       if (chat.groupMetadata.participants.length < memberLimit) {
         await RBot
           .sendText(
@@ -62,18 +62,26 @@ const start = (RBot = new Client()) => {
         await RBot.simulateTyping(chat.id, true).then(async () => {
           await RBot.sendText(
             chat.id,
-            `Hai member ${groupName},  perkenalkan aku *${botName}*\nUntuk melihat perintah pada ketik ${prefix}menu 😘`
+            `Hai member ${groupName},  perkenalkan aku *${botName}*\nUntuk mengaktifkan ${botName} silahkan Admin Grup ketik\n\n\t#daftar <nama_grup>|<nama_perwakilan>\n\nGrup akan di Acc 1x24jam.`
           );
+          style.bot(`Invited to ${groupName}`)
         });
       }
     }
   });
 
 
-  // ketika seseorang masuk/keluar dari group
+  //! Group Event (Members Kicked / Invited)
   RBot.onGlobalParicipantsChanged(async (event) => {
     const host = (await RBot.getHostNumber()) + "@c.us";
-    // kondisi ketika seseorang diinvite/join group lewat link
+    //! Bot NOT REGIST == Turn OFF command
+    const groupName = event.chat //! Get Group ID
+    let check = groupList.includes(groupName)
+    if (!check){
+      return null
+    }
+
+    //! Invited or New Member
     if (event.action === "add" && event.who !== host) {
       await RBot.sendTextWithMentions(
         event.chat,
@@ -83,7 +91,7 @@ const start = (RBot = new Client()) => {
         )}, Selamat datang digrup.\n Semoga nyaman 🥰 \n*-${botName}*`
       );
     }
-    // kondisi ketika seseorang dikick/keluar dari group
+    //! Kicked Member
     if (event.action === "remove" && event.who !== host) {
       await RBot.sendTextWithMentions(
         event.chat,
@@ -93,22 +101,23 @@ const start = (RBot = new Client()) => {
   });
 
   RBot.onIncomingCall(async (callData) => {
-    // ketika seseorang menelpon nomor bot akan mengirim pesan
+    //! DONT CALL ME :(
     await RBot
       .sendText(
         callData.peerJid,
         `Dilarang Keras Menelepon hukuman block.` + infoProblem
       )
       .then(async () => {
-        // bot akan memblock nomor itu
+        //! Blocked this number
         await RBot.contactBlock(callData.peerJid);
       });
   });
 
-  // ketika seseorang mengirim pesan
+  //! Message Handler
   RBot.onMessage(async (message) => {
     RBot
-      .getAmountOfLoadedMessages() // menghapus pesan cache jika sudah 3000 pesan.
+      //! DELETING MESSAGE CACHE
+      .getAmountOfLoadedMessages() 
       .then((msg) => {
         if (msg >= cacheMessage) {
           console.log(
@@ -126,7 +135,7 @@ const start = (RBot = new Client()) => {
   });
 };
 
-//create session
+//! Stat Session
 create(options(true, start))
   .then((RBot) => start(RBot))
   .catch((err) => new Error(err));
