@@ -67,6 +67,7 @@ const {
 
 //! Requre Handle MSG for Owner
 const rDev = require('./OnwerMsg')
+const { textMenu } = require('../lib/menu')
 
 function formatin(duit){
     let	reverse = duit.toString().split('').reverse().join('');
@@ -216,6 +217,10 @@ module.exports = HandleMsg = async (RBot, message) => {
         case 'ping':
         case 'tes':
             await RBot.sendText(from, `Respon ${botName}: ${processTime(t, moment())} Second`)
+            break
+        case 'changelog' :
+        case 'update' :
+            await RBot.reply(from, menuId.textChangeLog(),id)
             break
         case 'tnc':
         case 'peraturan' :
